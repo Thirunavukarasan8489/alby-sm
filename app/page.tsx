@@ -463,8 +463,8 @@ export default function HomePage() {
       {/* ---------- TESTIMONIALS SECTION ---------- */}
       <Testimonial />
 
-      {/* ---------- PIANO KEY DIVIDER (DARK) ---------- */}
-      <PianoKeyDivider variant="dark" />
+      {/* ---------- PIANO KEY DIVIDER (TEAL) ---------- */}
+      <PianoKeyDivider variant="teal" />
 
       {/* ---------- CONTACT SECTION ---------- */}
       <section

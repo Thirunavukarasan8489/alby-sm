@@ -8,7 +8,10 @@ import { SectionHeading } from "../ui/SectionHeading";
 
 export const Testimonial: React.FC = () => {
   return (
-    <section id="testimonials" className="py-16 md:py-24 bg-[#211126] text-[#F8F3E7] relative overflow-hidden">
+    <section
+      id="testimonials"
+      className="py-16 md:py-24 bg-[#211126] text-[#F8F3E7] relative overflow-hidden"
+    >
       <div className="max-w-[1140px] mx-auto px-6">
         <SectionHeading
           badge="Student & Parent Voices"
@@ -42,7 +45,7 @@ export const Testimonial: React.FC = () => {
               </div>
 
               <div className="border-t border-[#F8F3E7]/12 pt-3.5 mt-auto">
-                <h4 className="font-serif text-base font-semibold text-[#F8F3E7]">
+                <h4 className="font-sans text-sm font-semibold text-[#F8F3E7]">
                   {item.author}
                 </h4>
                 <p className="text-[12px] text-[#E8A33D] font-medium mt-0.5">

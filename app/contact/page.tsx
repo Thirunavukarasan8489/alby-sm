@@ -75,8 +75,8 @@ export default function ContactPage() {
         </ScrollReveal>
       </section>
 
-      {/* ---------- PIANO KEY DIVIDER (DARK) ---------- */}
-      <PianoKeyDivider variant="dark" />
+      {/* ---------- PIANO KEY DIVIDER (TEAL) ---------- */}
+      <PianoKeyDivider variant="teal" />
 
       {/* ---------- MAIN CONTACT SECTION ---------- */}
       <section className="relative overflow-hidden bg-[#17514E] text-[#F8F3E7] py-[70px] sm:py-[90px] px-6">

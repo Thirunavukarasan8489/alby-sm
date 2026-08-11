@@ -1,7 +1,7 @@
 import React from "react";
 
 interface PianoKeyDividerProps {
-  variant?: "dark" | "light";
+  variant?: "dark" | "light" | "teal" | "teal-ink";
   className?: string;
 }
 

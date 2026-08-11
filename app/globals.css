@@ -96,6 +96,22 @@ h1, h2, h3 {
   background: var(--ivory);
 }
 
+.keys.teal span:nth-child(odd) {
+  background: var(--ivory);
+}
+
+.keys.teal span:nth-child(even) {
+  background: var(--teal);
+}
+
+.keys.teal-ink span:nth-child(odd) {
+  background: var(--ink);
+}
+
+.keys.teal-ink span:nth-child(even) {
+  background: var(--teal);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
