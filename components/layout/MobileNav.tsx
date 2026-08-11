@@ -55,7 +55,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             onClick={onClose}
-            className="fixed inset-0 bg-[#211126]/80 backdrop-blur-sm z-50 md:hidden"
+            className="fixed inset-0 bg-[#211126]/80 backdrop-blur-sm z-[9998] md:hidden"
             aria-hidden="true"
           />
 
@@ -65,7 +65,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 28, stiffness: 300 }}
-            className="fixed top-0 right-0 bottom-0 w-[85vw] max-w-[340px] bg-[#211126] border-l border-[#F8F3E7]/15 p-6 z-50 md:hidden flex flex-col justify-between shadow-2xl overflow-y-auto"
+            className="fixed top-0 right-0 bottom-0 h-full w-[85vw] max-w-[340px] bg-[#211126] border-l border-[#F8F3E7]/15 p-6 z-[9999] md:hidden flex flex-col justify-between shadow-2xl overflow-y-auto"
           >
             <div>
               {/* Top Drawer Header */}

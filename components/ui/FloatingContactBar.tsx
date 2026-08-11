@@ -103,7 +103,7 @@ export const FloatingContactBar: React.FC = () => {
   return (
     <aside
       aria-label="Floating Quick Contact & Social Links"
-      className="fixed right-3 sm:right-5 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2.5 pointer-events-auto"
+      className="fixed right-3 sm:right-5 top-1/2 -translate-y-1/2 z-40 flex flex-col gap-2.5 pointer-events-auto"
     >
       {actionItems.map((item) => (
         <div
