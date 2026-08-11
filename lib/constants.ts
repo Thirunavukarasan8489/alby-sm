@@ -158,13 +158,13 @@ export const TESTIMONIALS = [
     quote:
       "Alby.sm Music Academy transformed my daughter's piano playing within 6 months. The ear-first approach made her confident on stage during the annual recital!",
     author: "S. Meenakshi",
-    role: "Parent of Piano Student",
+    role: "Parent of Piano Student (Age 9)",
     rating: 5,
   },
   {
     id: 2,
     quote:
-      "The guitar faculty break down complex chord transitions into simple daily drills. Best music institute in Coimbatore for both kids and adults.",
+      "The guitar faculty break down complex chord transitions into simple daily drills. Best music institute in Coimbatore for both kids and working adults like me.",
     author: "Arun Kumar",
     role: "Adult Guitar Student",
     rating: 5,
@@ -172,9 +172,17 @@ export const TESTIMONIALS = [
   {
     id: 3,
     quote:
-      "Studying electronic keyboard at Alby.sm gave me the foundation to compose my own tracks. The batch sizes are small and instructors give personal attention.",
+      "Studying electronic keyboard at Alby.sm gave me the foundation to compose my own tracks. The batch sizes are small and instructors give individual attention.",
     author: "K. Nithya",
-    role: "Keyboard Student",
+    role: "Keyboard Student (Age 14)",
+    rating: 5,
+  },
+  {
+    id: 4,
+    quote:
+      "Enrolling both my sons for Piano & Keyboard was the best decision. The teachers are incredibly patient, encouraging, and foster a genuine love for music.",
+    author: "R. Rajeshwari",
+    role: "Parent of Music Academy Students",
     rating: 5,
   },
 ];
