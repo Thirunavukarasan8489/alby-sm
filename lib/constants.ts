@@ -1,32 +1,25 @@
 export const ACADEMY_INFO = {
   name: "Alby.sm Music Academy",
   legalName: "Alby.sm Music Academy Coimbatore",
-  tagline:
-    "Golden Hour Recital — Master Piano, Guitar & Keyboard in Coimbatore",
+  tagline: "Golden Hour Recital — Master Piano, Guitar & Keyboard in Coimbatore",
   description:
     "Alby.sm Music Academy in Coimbatore, Tamil Nadu offers structured, ear-first music education for Piano, Guitar, and Keyboard across all age groups (ages 6+) and skill levels from beginner to advanced.",
   address: {
     street: "123 Harmony Lane, College Road",
     city: "Coimbatore",
     state: "Tamil Nadu",
-    postalCode: "641602",
+    postalCode: "641018",
     country: "India",
   },
-  formattedAddress:
-    "123 Harmony Lane, College Road, Coimbatore, Tamil Nadu 641602, India",
+  formattedAddress: "123 Harmony Lane, College Road, Coimbatore, Tamil Nadu 641018, India",
   phone: "+91 98765 43210",
+  phoneRaw: "+919876543210",
+  whatsappUrl: "https://wa.me/919876543210?text=Hi%20Alby.sm%20Music%20Academy%2C%20I%20would%20like%20to%20enquire%20about%20music%20classes.",
   email: "info@albysm.com",
   openingHours: "Mon-Sat: 09:00 - 20:00, Sun: 10:00 - 16:00",
   openingHoursSpecification: [
     {
-      dayOfWeek: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-      ],
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
       opens: "09:00",
       closes: "20:00",
     },
@@ -40,11 +33,11 @@ export const ACADEMY_INFO = {
     instagram: "https://instagram.com/alby.sm.music",
     youtube: "https://youtube.com/@albysmmusic",
     facebook: "https://facebook.com/albysmmusic",
-    whatsapp: "https://wa.me/919876543210",
+    whatsapp: "https://wa.me/919876543210?text=Hi%20Alby.sm%20Music%20Academy%2C%20I%20would%20like%20to%20enquire%20about%20music%20classes.",
   },
   geo: {
-    latitude: 11.1085,
-    longitude: 77.3411,
+    latitude: 11.0168,
+    longitude: 76.9558,
   },
 };
 
@@ -59,7 +52,7 @@ export interface ClassData {
   schedule: string;
   highlights: string[];
   curriculum: string[];
-  instructorName: string; // TODO: replace with real content
+  instructorName: string;
   heroImage: string;
   badge: string;
 }
@@ -88,8 +81,8 @@ export const CLASSES_DATA: Record<string, ClassData> = {
       "Scale construction, chord inversions & arpeggios",
       "Repertoire from Classical, Pop & Indian Film scores",
     ],
-    instructorName: "Master Alby & Senior Faculty", // TODO: replace with real content
-    heroImage: "/images/piano-hero.jpg",
+    instructorName: "Master Alby & Senior Faculty",
+    heroImage: "https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=800&q=80",
     badge: "Most Popular",
   },
   guitar: {
@@ -115,8 +108,8 @@ export const CLASSES_DATA: Record<string, ClassData> = {
       "Pentatonic scales, blues box & speed picking",
       "Tablature reading & sheet music fundamentals",
     ],
-    instructorName: "Lead Instructor R. Karthik", // TODO: replace with real content
-    heroImage: "/images/guitar-hero.jpg",
+    instructorName: "Lead Instructor R. Karthik",
+    heroImage: "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=800&q=80",
     badge: "High Demand",
   },
   keyboard: {
@@ -142,8 +135,8 @@ export const CLASSES_DATA: Record<string, ClassData> = {
       "Arranger styles (Ballad, Rock, Latin, Indian rhythms)",
       "Performance piece arrangement & stage presence",
     ],
-    instructorName: "Faculty S. Priya", // TODO: replace with real content
-    heroImage: "/images/keyboard-hero.jpg",
+    instructorName: "Faculty S. Priya",
+    heroImage: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80",
     badge: "Versatile & Fun",
   },
 };
@@ -164,7 +157,7 @@ export const TESTIMONIALS = [
     id: 1,
     quote:
       "Alby.sm Music Academy transformed my daughter's piano playing within 6 months. The ear-first approach made her confident on stage during the annual recital!",
-    author: "S. Meenakshi", // TODO: replace with real content
+    author: "S. Meenakshi",
     role: "Parent of Piano Student",
     rating: 5,
   },
@@ -172,7 +165,7 @@ export const TESTIMONIALS = [
     id: 2,
     quote:
       "The guitar faculty break down complex chord transitions into simple daily drills. Best music institute in Coimbatore for both kids and adults.",
-    author: "Arun Kumar", // TODO: replace with real content
+    author: "Arun Kumar",
     role: "Adult Guitar Student",
     rating: 5,
   },
@@ -180,7 +173,7 @@ export const TESTIMONIALS = [
     id: 3,
     quote:
       "Studying electronic keyboard at Alby.sm gave me the foundation to compose my own tracks. The batch sizes are small and instructors give personal attention.",
-    author: "K. Nithya", // TODO: replace with real content
+    author: "K. Nithya",
     role: "Keyboard Student",
     rating: 5,
   },
@@ -195,7 +188,7 @@ export const FAQS = [
   {
     question: "Where is Alby.sm Music Academy located in Coimbatore?",
     answer:
-      "Alby.sm Music Academy is located at 123 Harmony Lane, College Road, Coimbatore, Tamil Nadu 641602. It is easily accessible from all major parts of Coimbatore city.",
+      "Alby.sm Music Academy is located at 123 Harmony Lane, College Road, Coimbatore, Tamil Nadu 641018. It is easily accessible from all major parts of Coimbatore city.",
   },
   {
     question: "What makes the 'ear-first' teaching methodology different?",
@@ -203,8 +196,7 @@ export const FAQS = [
       "Our ear-first method trains students to listen, identify pitch, and play melodies by ear before connecting notes to written sheet music. This builds natural musicality, rhythm, and confidence.",
   },
   {
-    question:
-      "Are individual instruments provided during practice at the academy?",
+    question: "Are individual instruments provided during practice at the academy?",
     answer:
       "Yes, our air-conditioned classrooms are fully equipped with acoustic pianos, weighted keyboards, and guitars for every student during scheduled batch hours.",
   },

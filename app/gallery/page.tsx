@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { constructMetadata } from "@/lib/seo";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 const GALLERY_ITEMS = [
   {
@@ -11,7 +11,7 @@ const GALLERY_ITEMS = [
     title: "Recital Night",
     cat: "events",
     tag: "Events",
-    src: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=700&q=80",
+    src: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80",
     size: "col-span-2 row-span-2",
   },
   {
@@ -19,7 +19,7 @@ const GALLERY_ITEMS = [
     title: "Guitar Lesson",
     cat: "guitar",
     tag: "Guitar",
-    src: "https://images.unsplash.com/photo-1552422535-c45813c61732?w=400&q=80",
+    src: "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=800&q=80",
     size: "",
   },
   {
@@ -27,7 +27,7 @@ const GALLERY_ITEMS = [
     title: "Keyboard Class",
     cat: "keyboard",
     tag: "Keyboard",
-    src: "https://images.unsplash.com/photo-1571327073757-af4231c85f4e?w=400&q=80",
+    src: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80",
     size: "",
   },
   {
@@ -35,7 +35,7 @@ const GALLERY_ITEMS = [
     title: "Students Together",
     cat: "events",
     tag: "Events",
-    src: "https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=700&q=80",
+    src: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&q=80",
     size: "col-span-2",
   },
   {
@@ -43,7 +43,7 @@ const GALLERY_ITEMS = [
     title: "Piano Keys",
     cat: "piano",
     tag: "Piano",
-    src: "https://images.unsplash.com/photo-1466493067616-a2295e69bcf2?w=400&q=80",
+    src: "https://images.unsplash.com/photo-1513883049090-d0b7439799bf?w=800&q=80",
     size: "",
   },
   {
@@ -51,7 +51,7 @@ const GALLERY_ITEMS = [
     title: "Piano Lesson",
     cat: "piano",
     tag: "Piano",
-    src: "https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=400&q=80",
+    src: "https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=800&q=80",
     size: "",
   },
   {
@@ -59,7 +59,7 @@ const GALLERY_ITEMS = [
     title: "Guitar Close Up",
     cat: "guitar",
     tag: "Guitar",
-    src: "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=400&q=80",
+    src: "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=800&q=80",
     size: "",
   },
   {
@@ -67,7 +67,7 @@ const GALLERY_ITEMS = [
     title: "Keyboard Performance",
     cat: "keyboard",
     tag: "Keyboard",
-    src: "https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=700&q=80",
+    src: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80",
     size: "col-span-2",
   },
   {
@@ -75,7 +75,7 @@ const GALLERY_ITEMS = [
     title: "Instructor Teaching",
     cat: "events",
     tag: "Events",
-    src: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80",
+    src: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&q=80",
     size: "",
   },
 ];
@@ -92,8 +92,21 @@ export default function GalleryPage() {
   return (
     <main className="min-h-screen bg-[#F8F3E7] text-[#2B2420]">
       {/* ---------- PAGE HERO ---------- */}
-      <section className="bg-[radial-gradient(ellipse_at_75%_20%,rgba(232,163,61,0.18),transparent_55%),linear-gradient(180deg,#211126_0%,#2c1732_100%)] text-[#F8F3E7] pt-[70px] pb-[50px] px-6 text-center">
-        <div className="max-w-[1140px] mx-auto">
+      <section className="relative overflow-hidden bg-[#211126] text-[#F8F3E7] pt-[70px] pb-[50px] px-6 text-center">
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-15 mix-blend-overlay pointer-events-none"
+          style={{
+            backgroundImage:
+              "url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1600&q=80')",
+          }}
+          aria-hidden="true"
+        />
+        <div
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_75%_20%,rgba(232,163,61,0.22),transparent_55%),linear-gradient(180deg,#211126_0%,#2c1732_100%)] pointer-events-none"
+          aria-hidden="true"
+        />
+
+        <ScrollReveal direction="up" delay={0.05} className="relative z-10 max-w-[1140px] mx-auto">
           <p className="text-[13px] text-[#b7aa9c] mb-2">
             <Link href="/" className="text-[#E8A33D] hover:underline">
               Home
@@ -104,7 +117,7 @@ export default function GalleryPage() {
           <h1 className="text-3xl sm:text-5xl lg:text-[58px] font-serif tracking-normal mt-3.5 mb-2 leading-[1.05]">
             Moments, <i className="italic text-[#E8A33D] not-italic">captured</i>
           </h1>
-        </div>
+        </ScrollReveal>
       </section>
 
       {/* ---------- FILTERS BAR ---------- */}
@@ -133,23 +146,24 @@ export default function GalleryPage() {
       {/* ---------- GALLERY GRID ---------- */}
       <div className="max-w-[1180px] mx-auto px-6 pt-7.5 pb-[90px]">
         <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[140px] sm:auto-rows-[180px] gap-3.5">
-          {filteredItems.map((item) => (
-            <div
-              key={item.id}
-              onClick={() => setActiveLightboxSrc(item.src)}
-              className={`relative overflow-hidden rounded-[3px] cursor-pointer group ${item.size}`}
-            >
-              <Image
-                src={item.src}
-                alt={item.title}
-                width={700}
-                height={400}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
-              />
-              <span className="absolute bottom-2.5 left-2.5 bg-[#211126]/75 text-[#F8F3E7] text-[11px] px-2.5 py-1 rounded-[12px] tracking-wide">
-                {item.tag}
-              </span>
-            </div>
+          {filteredItems.map((item, idx) => (
+            <ScrollReveal key={item.id} direction="up" delay={0.05 + idx * 0.05} className={item.size}>
+              <div
+                onClick={() => setActiveLightboxSrc(item.src)}
+                className="relative overflow-hidden rounded-[3px] cursor-pointer group h-full"
+              >
+                <Image
+                  src={item.src}
+                  alt={item.title}
+                  width={700}
+                  height={400}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
+                />
+                <span className="absolute bottom-2.5 left-2.5 bg-[#211126]/75 text-[#F8F3E7] text-[11px] px-2.5 py-1 rounded-[12px] tracking-wide">
+                  {item.tag}
+                </span>
+              </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>
@@ -178,18 +192,18 @@ export default function GalleryPage() {
 
       {/* ---------- CTA STRIP ---------- */}
       <section className="bg-[#17514E] text-[#F8F3E7] text-center py-[70px] px-6">
-        <div className="max-w-[1140px] mx-auto">
+        <ScrollReveal direction="up" delay={0.05} className="max-w-[1140px] mx-auto">
           <h2 className="text-3xl sm:text-[38px] font-serif">Want to be in the next batch?</h2>
           <p className="mt-3.5 mb-6.5 max-w-[460px] mx-auto text-[#d7e4e2] text-base">
             Book a free trial class and start your own Alby.sm story.
           </p>
           <Link
             href="/contact"
-            className="bg-[#E8A33D] text-[#211126] font-semibold text-[15px] px-7 py-3.5 rounded-[2px] transition-all hover:bg-white hover:-translate-y-0.5 inline-block"
+            className="bg-[#E8A33D] text-[#211126] font-semibold text-[15px] px-7 py-3.5 rounded-[2px] transition-all hover:bg-white hover:-translate-y-0.5 inline-block shadow-md"
           >
             Book a Trial Class
           </Link>
-        </div>
+        </ScrollReveal>
       </section>
     </main>
   );

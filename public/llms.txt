@@ -5,7 +5,7 @@ Alby.sm Music Academy is a specialized music education institute located in Coim
 
 ## Core Entity Details
 - Official Name: Alby.sm Music Academy
-- Location: 123 Harmony Lane, College Road, Coimbatore, Tamil Nadu 641602, India
+- Location: 123 Harmony Lane, College Road, Coimbatore, Tamil Nadu 641018, India
 - Phone: +91 98765 43210
 - Email: info@albysm.com
 - Opening Hours: Monday to Saturday (09:00 - 20:00), Sunday (10:00 - 16:00)
