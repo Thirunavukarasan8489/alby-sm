@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery — Alby.sm Music Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#211126; --ink-2:#2c1732; --ivory:#F8F3E7; --amber:#E8A33D; --teal:#17514E;
+    --rose:#C97B84; --charcoal:#2B2420; --serif:'Instrument Serif', serif; --sans:'Inter', sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--sans); color:var(--charcoal); background:var(--ivory); overflow-x:hidden;}
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  h1,h2,h3{font-family:var(--serif); font-weight:400; line-height:1.05;}
+  .eyebrow{font-family:var(--sans); font-size:12px; letter-spacing:.18em; text-transform:uppercase; font-weight:600; color:var(--amber);}
+  .keys{ display:flex; width:100%; height:14px; }
+  .keys span{ flex:1; }
+  .keys.dark span:nth-child(odd){ background:var(--ivory); }
+  .keys.dark span:nth-child(even){ background:var(--ink); }
+
+  header{ position:sticky; top:0; z-index:50; background:rgba(33,17,38,.92); backdrop-filter:blur(8px);}
+  nav{ display:flex; align-items:center; justify-content:space-between; padding:18px 24px; max-width:1140px; margin:0 auto;}
+  .logo{ font-family:var(--serif); font-size:26px; color:var(--ivory);}
+  .logo em{ font-style:italic; color:var(--amber);}
+  .nav-links{ display:flex; gap:34px; list-style:none;}
+  .nav-links a{ color:var(--ivory); font-size:14px; font-weight:500; opacity:.85; transition:opacity .2s, color .2s;}
+  .nav-links a.active, .nav-links a:hover{ opacity:1; color:var(--amber);}
+  .nav-cta{ background:var(--amber); color:var(--ink); font-weight:600; font-size:14px; padding:10px 20px; border-radius:2px; transition:background .2s, transform .2s;}
+  .nav-cta:hover{ background:#fff; transform:translateY(-1px);}
+  .burger{ display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer;}
+  .burger span{ width:24px; height:2px; background:var(--ivory);}
+
+  .page-hero{
+    background: radial-gradient(ellipse at 75% 20%, rgba(232,163,61,.18), transparent 55%), linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+    color:var(--ivory); padding:70px 24px 50px; text-align:center;
+  }
+  .page-hero h1{ font-size:clamp(38px,5.5vw,58px); margin-top:14px;}
+  .page-hero h1 i{ color:var(--amber); font-style:italic;}
+  .crumb{ font-size:13px; color:#b7aa9c;}
+  .crumb a{ color:var(--amber);}
+
+  .filters{ display:flex; justify-content:center; gap:10px; flex-wrap:wrap; padding:40px 24px 10px;}
+  .filters button{
+    font-family:var(--sans); font-size:13.5px; font-weight:600; padding:9px 20px; border-radius:20px;
+    border:1px solid rgba(23,81,78,.3); background:transparent; color:var(--teal); cursor:pointer; transition:background .2s, color .2s;
+  }
+  .filters button.active, .filters button:hover{ background:var(--teal); color:var(--ivory); border-color:var(--teal);}
+
+  .gallery-wrap{ max-width:1180px; margin:0 auto; padding:30px 24px 90px;}
+  .gallery-grid{ display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:180px; gap:14px;}
+  .gitem{ position:relative; overflow:hidden; border-radius:3px; cursor:pointer;}
+  .gitem img{ width:100%; height:100%; object-fit:cover; transition:transform .5s;}
+  .gitem:hover img{ transform:scale(1.08);}
+  .gitem .tag{
+    position:absolute; bottom:10px; left:10px; background:rgba(33,17,38,.75); color:var(--ivory);
+    font-size:11px; padding:5px 10px; border-radius:12px; letter-spacing:.03em;
+  }
+  .gitem.big{ grid-column:span 2; grid-row:span 2;}
+  .gitem.wide{ grid-column:span 2;}
+
+  /* Lightbox */
+  .lightbox{ position:fixed; inset:0; background:rgba(33,17,38,.92); display:none; align-items:center; justify-content:center; z-index:100; padding:30px;}
+  .lightbox.open{ display:flex;}
+  .lightbox img{ max-width:90vw; max-height:85vh; border-radius:4px; box-shadow:0 30px 60px rgba(0,0,0,.5);}
+  .lightbox .close{ position:absolute; top:24px; right:32px; color:var(--ivory); font-size:32px; cursor:pointer; font-family:var(--sans); background:none; border:none;}
+
+  .cta-strip{ background:var(--teal); color:var(--ivory); text-align:center; padding:70px 24px;}
+  .cta-strip h2{ font-size:clamp(28px,4vw,38px);}
+  .cta-strip p{ margin:14px auto 26px; max-width:460px; color:#d7e4e2;}
+  .btn-primary{ background:var(--amber); color:var(--ink); font-weight:600; font-size:15px; padding:14px 28px; border-radius:2px; display:inline-block; transition:transform .2s, background .2s;}
+  .btn-primary:hover{ background:#fff; transform:translateY(-2px);}
+
+  footer{ background:var(--ink); color:#a89b8c; padding:34px 24px; text-align:center; font-size:13px;}
+  footer .logo{ margin-bottom:10px; font-size:20px;}
+
+  @media (max-width:860px){
+    .nav-links, .nav-cta{ display:none;}
+    .burger{ display:flex;}
+    .gallery-grid{ grid-template-columns:repeat(2,1fr); grid-auto-rows:140px;}
+    .gitem.big{ grid-column:span 2; grid-row:span 1;}
+    .gitem.wide{ grid-column:span 2;}
+  }
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{transition:none !important;} }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">Alby<em>.sm</em></div>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="classes.html">Classes</a></li>
+      <li><a href="gallery.html" class="active">Gallery</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Book a Trial</a>
+    <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <p class="crumb"><a href="index.html">Home</a> / Gallery</p>
+  <p class="eyebrow">Life at the Academy</p>
+  <h1>Moments, <i>captured</i></h1>
+</section>
+
+<div class="filters">
+  <button class="active" data-filter="all">All</button>
+  <button data-filter="piano">Piano</button>
+  <button data-filter="guitar">Guitar</button>
+  <button data-filter="keyboard">Keyboard</button>
+  <button data-filter="events">Events</button>
+</div>
+
+<div class="gallery-wrap">
+  <div class="gallery-grid" id="grid">
+    <div class="gitem big" data-cat="events"><img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=700&q=80" alt="Recital night"><span class="tag">Events</span></div>
+    <div class="gitem" data-cat="guitar"><img src="https://images.unsplash.com/photo-1552422535-c45813c61732?w=400&q=80" alt="Guitar lesson"><span class="tag">Guitar</span></div>
+    <div class="gitem" data-cat="keyboard"><img src="https://images.unsplash.com/photo-1571327073757-af4231c85f4e?w=400&q=80" alt="Keyboard class"><span class="tag">Keyboard</span></div>
+    <div class="gitem wide" data-cat="events"><img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=700&q=80" alt="Students together"><span class="tag">Events</span></div>
+    <div class="gitem" data-cat="piano"><img src="https://images.unsplash.com/photo-1466493067616-a2295e69bcf2?w=400&q=80" alt="Piano keys"><span class="tag">Piano</span></div>
+    <div class="gitem" data-cat="piano"><img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=400&q=80" alt="Piano lesson"><span class="tag">Piano</span></div>
+    <div class="gitem" data-cat="guitar"><img src="https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=400&q=80" alt="Guitar close up"><span class="tag">Guitar</span></div>
+    <div class="gitem wide" data-cat="keyboard"><img src="https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=700&q=80" alt="Keyboard performance"><span class="tag">Keyboard</span></div>
+    <div class="gitem" data-cat="events"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80" alt="Instructor teaching"><span class="tag">Events</span></div>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox">
+  <button class="close" id="lbClose">&times;</button>
+  <img id="lbImg" src="" alt="">
+</div>
+
+<section class="cta-strip">
+  <h2>Want to be in the next batch?</h2>
+  <p>Book a free trial class and start your own Alby.sm story.</p>
+  <a href="contact.html" class="btn-primary">Book a Trial Class</a>
+</section>
+
+<footer>
+  <div class="logo">Alby<em style="color:var(--amber); font-style:italic;">.sm</em></div>
+  <div>© 2026 Alby.sm Music Academy. All rights reserved.</div>
+</footer>
+
+<script>
+  document.querySelector('.burger').addEventListener('click', () => {
+    const links = document.querySelector('.nav-links');
+    const cta = document.querySelector('.nav-cta');
+    const showing = links.style.display === 'flex';
+    links.style.display = showing ? 'none' : 'flex';
+    cta.style.display = showing ? 'none' : 'inline-block';
+    links.style.flexDirection = 'column';
+    links.style.position = 'absolute';
+    links.style.top = '64px'; links.style.left='0'; links.style.right='0';
+    links.style.background = '#211126'; links.style.padding='20px 24px'; links.style.gap='18px';
+  });
+
+  const buttons = document.querySelectorAll('.filters button');
+  const items = document.querySelectorAll('.gitem');
+  buttons.forEach(btn => btn.addEventListener('click', () => {
+    buttons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    items.forEach(it => {
+      it.style.display = (f === 'all' || it.dataset.cat === f) ? '' : 'none';
+    });
+  }));
+
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  items.forEach(it => it.addEventListener('click', () => {
+    lbImg.src = it.querySelector('img').src;
+    lightbox.classList.add('open');
+  }));
+  document.getElementById('lbClose').addEventListener('click', () => lightbox.classList.remove('open'));
+  lightbox.addEventListener('click', (e) => { if(e.target === lightbox) lightbox.classList.remove('open'); });
+</script>
+</body>
+</html>

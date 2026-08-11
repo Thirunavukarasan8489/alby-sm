@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Classes — Alby.sm Music Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#211126; --ink-2:#2c1732; --ivory:#F8F3E7; --amber:#E8A33D; --teal:#17514E;
+    --rose:#C97B84; --charcoal:#2B2420; --serif:'Instrument Serif', serif; --sans:'Inter', sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--sans); color:var(--charcoal); background:var(--ivory); overflow-x:hidden;}
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  h1,h2,h3{font-family:var(--serif); font-weight:400; line-height:1.05;}
+  .eyebrow{font-family:var(--sans); font-size:12px; letter-spacing:.18em; text-transform:uppercase; font-weight:600; color:var(--amber);}
+  .keys{ display:flex; width:100%; height:14px; }
+  .keys span{ flex:1; }
+  .keys.dark span:nth-child(odd){ background:var(--ivory); }
+  .keys.dark span:nth-child(even){ background:var(--ink); }
+  .keys.light span:nth-child(odd){ background:var(--ink); }
+  .keys.light span:nth-child(even){ background:var(--ivory); }
+
+  header{ position:sticky; top:0; z-index:50; background:rgba(33,17,38,.92); backdrop-filter:blur(8px);}
+  nav{ display:flex; align-items:center; justify-content:space-between; padding:18px 24px; max-width:1140px; margin:0 auto;}
+  .logo{ font-family:var(--serif); font-size:26px; color:var(--ivory);}
+  .logo em{ font-style:italic; color:var(--amber);}
+  .nav-links{ display:flex; gap:34px; list-style:none;}
+  .nav-links a{ color:var(--ivory); font-size:14px; font-weight:500; opacity:.85; transition:opacity .2s, color .2s;}
+  .nav-links a.active, .nav-links a:hover{ opacity:1; color:var(--amber);}
+  .nav-cta{ background:var(--amber); color:var(--ink); font-weight:600; font-size:14px; padding:10px 20px; border-radius:2px; transition:background .2s, transform .2s;}
+  .nav-cta:hover{ background:#fff; transform:translateY(-1px);}
+  .burger{ display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer;}
+  .burger span{ width:24px; height:2px; background:var(--ivory);}
+
+  .page-hero{
+    background: radial-gradient(ellipse at 75% 20%, rgba(232,163,61,.18), transparent 55%), linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+    color:var(--ivory); padding:70px 24px 60px; text-align:center;
+  }
+  .page-hero h1{ font-size:clamp(38px,5.5vw,58px); margin-top:14px;}
+  .page-hero h1 i{ color:var(--amber); font-style:italic;}
+  .page-hero p{ max-width:520px; margin:16px auto 0; color:#e6dcd0; line-height:1.6;}
+  .crumb{ font-size:13px; color:#b7aa9c;}
+  .crumb a{ color:var(--amber);}
+
+  /* Jump nav */
+  .jumpnav{ background:var(--ivory); border-bottom:1px solid rgba(23,81,78,.15); position:sticky; top:64px; z-index:40;}
+  .jumpnav-inner{ max-width:1140px; margin:0 auto; display:flex; gap:8px; padding:14px 24px; overflow-x:auto;}
+  .jumpnav a{ font-size:13.5px; font-weight:600; padding:8px 16px; border-radius:20px; border:1px solid rgba(23,81,78,.25); color:var(--teal); white-space:nowrap; transition:background .2s, color .2s;}
+  .jumpnav a:hover{ background:var(--teal); color:var(--ivory);}
+
+  .wrap{max-width:1140px; margin:0 auto; padding:0 24px;}
+  section{ padding:90px 24px;}
+  .class-block{ padding:90px 24px;}
+  .cb-grid{ max-width:1140px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;}
+  .cb-grid.reverse .cb-photo{ order:2;}
+  .cb-photo{ position:relative;}
+  .cb-photo img{ width:100%; height:400px; object-fit:cover; border-radius:4px;}
+  .cb-photo::before{ content:''; position:absolute; inset:18px -18px -18px 18px; border:2px solid var(--amber); z-index:-1; border-radius:4px;}
+  .cb-grid.reverse .cb-photo::before{ inset:18px 18px -18px -18px;}
+  .cb-text h2{ font-size:clamp(30px,4vw,44px); color:var(--ink); margin:14px 0 16px;}
+  .cb-text > p{ color:#5c5147; line-height:1.75; font-size:16px; margin-bottom:22px;}
+  .curriculum{ list-style:none; margin-bottom:26px;}
+  .curriculum li{ display:flex; gap:10px; align-items:flex-start; padding:8px 0; font-size:14.5px; color:#3d352c; border-bottom:1px dashed rgba(43,36,32,.12);}
+  .curriculum li:last-child{ border-bottom:none;}
+  .curriculum li::before{ content:'♪'; color:var(--amber); font-size:15px; flex:none;}
+  .batch-box{ background:#efe7d5; border-radius:4px; padding:18px 20px; display:flex; gap:26px; flex-wrap:wrap; margin-bottom:22px;}
+  .batch-box div strong{ display:block; font-size:13px; color:var(--teal); margin-bottom:2px;}
+  .batch-box div span{ font-size:13.5px; color:#5c5147;}
+  .btn-primary{ background:var(--amber); color:var(--ink); font-weight:600; font-size:15px; padding:14px 28px; border-radius:2px; display:inline-block; transition:transform .2s, background .2s;}
+  .btn-primary:hover{ background:#fff; transform:translateY(-2px);}
+
+  .cta-strip{ background:var(--teal); color:var(--ivory); text-align:center; padding:70px 24px;}
+  .cta-strip h2{ font-size:clamp(28px,4vw,38px);}
+  .cta-strip p{ margin:14px auto 26px; max-width:460px; color:#d7e4e2;}
+
+  footer{ background:var(--ink); color:#a89b8c; padding:34px 24px; text-align:center; font-size:13px;}
+  footer .logo{ margin-bottom:10px; font-size:20px;}
+
+  @media (max-width:860px){
+    .nav-links, .nav-cta{ display:none;}
+    .burger{ display:flex;}
+    .cb-grid, .cb-grid.reverse{ grid-template-columns:1fr;}
+    .cb-grid .cb-photo, .cb-grid.reverse .cb-photo{ order:2;}
+    .cb-photo::before{ display:none;}
+    .class-block{ padding:60px 20px;}
+    .jumpnav{ top:0;}
+  }
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{transition:none !important;} }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">Alby<em>.sm</em></div>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="classes.html" class="active">Classes</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Book a Trial</a>
+    <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<section class="page-hero" style="padding-bottom:50px;">
+  <p class="crumb"><a href="index.html">Home</a> / Classes</p>
+  <p class="eyebrow">Our Programs</p>
+  <h1>Choose your <i>instrument</i></h1>
+  <p>Structured beginner-to-advanced tracks in Piano, Guitar and Keyboard — taught in small batches, at your own pace.</p>
+</section>
+
+<div class="jumpnav">
+  <div class="jumpnav-inner">
+    <a href="#piano">🎹 Piano Class</a>
+    <a href="#guitar">🎸 Guitar Class</a>
+    <a href="#keyboard">🎛 Keyboard Class</a>
+  </div>
+</div>
+
+<div class="keys dark">
+  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<!-- PIANO -->
+<section class="class-block" id="piano">
+  <div class="cb-grid">
+    <div class="cb-photo">
+      <img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=600&q=80" alt="Piano class">
+    </div>
+    <div class="cb-text">
+      <p class="eyebrow" style="color:var(--teal)">Piano Class</p>
+      <h2>From first scales to full performance</h2>
+      <p>Our piano program builds classical and contemporary technique side by side — ear training and sight-reading are part of every lesson, not a separate track.</p>
+      <ul class="curriculum">
+        <li>Posture, hand position and note reading fundamentals</li>
+        <li>Scales, chords and basic music theory</li>
+        <li>Classical repertoire alongside film and contemporary pieces</li>
+        <li>Sight-reading and ear training built into every level</li>
+        <li>Performance prep for recitals and exams</li>
+      </ul>
+      <div class="batch-box">
+        <div><strong>Age group</strong><span>6 years and up</span></div>
+        <div><strong>Level</strong><span>Beginner → Advanced</span></div>
+        <div><strong>Batch size</strong><span>Small groups / 1-on-1</span></div>
+      </div>
+      <a href="contact.html" class="btn-primary">Enroll in Piano Class</a>
+    </div>
+  </div>
+</section>
+
+<div class="keys light">
+  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<!-- GUITAR -->
+<section class="class-block" id="guitar">
+  <div class="cb-grid reverse">
+    <div class="cb-text">
+      <p class="eyebrow" style="color:var(--teal)">Guitar Class</p>
+      <h2>Song-first, so progress always feels real</h2>
+      <p>Acoustic and electric fundamentals taught through actual songs from lesson one — chords and strumming build naturally into fingerstyle and improvisation.</p>
+      <ul class="curriculum">
+        <li>Open chords, strumming patterns and rhythm technique</li>
+        <li>Fingerstyle and basic fretboard theory</li>
+        <li>Acoustic and electric guitar technique</li>
+        <li>Improvisation and simple soloing</li>
+        <li>Band-style ensemble playing at intermediate level</li>
+      </ul>
+      <div class="batch-box">
+        <div><strong>Age group</strong><span>8 years and up</span></div>
+        <div><strong>Level</strong><span>Beginner → Advanced</span></div>
+        <div><strong>Batch size</strong><span>Small groups / 1-on-1</span></div>
+      </div>
+      <a href="contact.html" class="btn-primary">Enroll in Guitar Class</a>
+    </div>
+    <div class="cb-photo">
+      <img src="https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=600&q=80" alt="Guitar class">
+    </div>
+  </div>
+</section>
+
+<div class="keys dark">
+  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<!-- KEYBOARD -->
+<section class="class-block" id="keyboard">
+  <div class="cb-grid">
+    <div class="cb-photo">
+      <img src="https://images.unsplash.com/photo-1571327073757-af4231c85f4e?w=600&q=80" alt="Keyboard class">
+    </div>
+    <div class="cb-text">
+      <p class="eyebrow" style="color:var(--teal)">Keyboard Class</p>
+      <h2>Modern sound, performance-ready fast</h2>
+      <p>A great fit for students who want to play modern music quickly — layered sounds, arrangement and performance technique, with the theory explained as it's used.</p>
+      <ul class="curriculum">
+        <li>Keyboard-specific technique and voicing</li>
+        <li>Sound layering, patches and arrangement basics</li>
+        <li>Chord-based playing for film, pop and devotional music</li>
+        <li>Backing-track and live performance practice</li>
+        <li>Music theory taught in context, not in isolation</li>
+      </ul>
+      <div class="batch-box">
+        <div><strong>Age group</strong><span>6 years and up</span></div>
+        <div><strong>Level</strong><span>Beginner → Advanced</span></div>
+        <div><strong>Batch size</strong><span>Small groups / 1-on-1</span></div>
+      </div>
+      <a href="contact.html" class="btn-primary">Enroll in Keyboard Class</a>
+    </div>
+  </div>
+</section>
+
+<section class="cta-strip">
+  <h2>Not sure which instrument is right?</h2>
+  <p>Book a free trial across any class and decide after you've tried it.</p>
+  <a href="contact.html" class="btn-primary">Book a Trial Class</a>
+</section>
+
+<footer>
+  <div class="logo">Alby<em style="color:var(--amber); font-style:italic;">.sm</em></div>
+  <div>© 2026 Alby.sm Music Academy. All rights reserved.</div>
+</footer>
+
+<script>
+  document.querySelector('.burger').addEventListener('click', () => {
+    const links = document.querySelector('.nav-links');
+    const cta = document.querySelector('.nav-cta');
+    const showing = links.style.display === 'flex';
+    links.style.display = showing ? 'none' : 'flex';
+    cta.style.display = showing ? 'none' : 'inline-block';
+    links.style.flexDirection = 'column';
+    links.style.position = 'absolute';
+    links.style.top = '64px'; links.style.left='0'; links.style.right='0';
+    links.style.background = '#211126'; links.style.padding='20px 24px'; links.style.gap='18px';
+  });
+</script>
+</body>
+</html>

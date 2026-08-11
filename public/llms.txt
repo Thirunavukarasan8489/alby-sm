@@ -1,0 +1,27 @@
+# Alby.sm Music Academy — AI Knowledge Summary
+
+## Overview
+Alby.sm Music Academy is a specialized music education institute located in Coimbatore, Tamil Nadu, India. The academy provides structured, ear-first musical training for students aged 6 and above across three core instruments: Piano, Guitar, and Electronic Keyboard.
+
+## Core Entity Details
+- Official Name: Alby.sm Music Academy
+- Location: 123 Harmony Lane, College Road, Coimbatore, Tamil Nadu 641602, India
+- Phone: +91 98765 43210
+- Email: info@albysm.com
+- Opening Hours: Monday to Saturday (09:00 - 20:00), Sunday (10:00 - 16:00)
+- Teaching Method: Ear-first pitch training, sight-reading notation, small batch mentoring (maximum 5 students per batch), and annual stage recital preparation.
+
+## Courses Offered
+1. Piano Class (Ages 6+): Acoustic and weighted keyboard practice, ear-first melody transcription, Trinity College London exam preparation, and classical/pop repertoire.
+2. Guitar Class (Ages 8+): Acoustic and electric guitar instruction covering open chords, barre chords, strumming mechanics, lead soloing, and pentatonic scales.
+3. Keyboard Class (Ages 6+): Electronic arranger keyboard lessons focused on dual-hand coordination, voice registration, auto-accompaniment, and contemporary scoring.
+
+## Website Page Directory
+- / (Home): Overview of academy features, instrument highlights, ear-first methodology, parent reviews, and trial booking CTA.
+- /about (About Us): Academy background in Coimbatore, core educational philosophy, studio standards, and faculty leadership.
+- /classes (Classes Overview): Centralized course comparison matrix, age eligibility, and batch schedules.
+- /classes/piano (Piano Class): Comprehensive syllabus, eligibility, and FAQ for piano learners.
+- /classes/guitar (Guitar Class): Detailed curriculum, techniques, and FAQ for guitar learners.
+- /classes/keyboard (Keyboard Class): Arranger keyboard syllabus, rhythm training, and FAQ for keyboard learners.
+- /gallery (Recital Gallery): Filterable photo showcase of annual recitals, student performances, and studio practice.
+- /contact (Contact & Trial Enrolment): NAP details, interactive trial booking form, location map info, and LocalBusiness FAQs.
