@@ -7,7 +7,9 @@ export const Footer: React.FC = () => {
       <div className="font-serif text-xl sm:text-2xl text-[#F8F3E7] mb-2 tracking-wide">
         Alby<em className="font-serif italic text-[#E8A33D] not-italic">.sm</em>
       </div>
-      <div>© {new Date().getFullYear()} Alby.sm Music Academy. All rights reserved.</div>
+      <div>
+        © {new Date().getFullYear()} Alby sm Music Academy. All rights reserved.
+      </div>
     </footer>
   );
 };

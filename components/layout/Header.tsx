@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { MobileNav } from "./MobileNav";
 import PianoIcon from "../icons/PianoIcon";
+import Image from "next/image";
 
 export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -55,12 +56,21 @@ export const Header: React.FC = () => {
       <header className="sticky top-0 z-50 bg-[#211126]/95 backdrop-blur-md border-b border-white/8">
         <nav className="flex items-center justify-between px-6 py-4 max-w-[1140px] mx-auto">
           {/* Logo */}
-          <Link
+          {/* <Link
             href="/"
             className="font-serif text-2xl sm:text-3xl text-[#F8F3E7] tracking-wide"
           >
             Alby
             <em className="font-serif italic text-[#E8A33D] not-italic">.sm</em>
+          </Link> */}
+          <Link href="/" className="h-14 w-14 rounded-full flex items-center justify-center">
+            <Image
+              src={"/logo.jpeg"}
+              width={1280}
+              height={854}
+              alt="Alby sm logo"
+              className="h-12 w-12 rounded-full"
+            />
           </Link>
 
           {/* Desktop Links */}

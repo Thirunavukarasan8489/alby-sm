@@ -10,14 +10,26 @@ export const Testimonial: React.FC = () => {
   return (
     <section
       id="testimonials"
-      className="py-16 md:py-24 bg-[#211126] text-[#F8F3E7] relative overflow-hidden"
+      className="py-16 md:py-24 bg-[#F8F3E7] text-[#211126] relative overflow-hidden"
     >
       <div className="max-w-[1140px] mx-auto px-6">
-        <SectionHeading
+        <div className="mb-12 max-w-[600px] mx-auto">
+          <p className="eyebrow text-center !text-[#17514E]">
+            Student & Parent Voices
+          </p>
+          <h2 className="text-3xl text-center sm:text-[44px] font-serif mt-3 text-[#211126]">
+            Loved by Music Learners Across Coimbatore
+          </h2>
+          <p className="text-base md:text-lg text-center mt-4">
+            Real experiences from students mastering Piano, Guitar, and Keyboard
+            at Alby.sm Music Academy.
+          </p>
+        </div>
+        {/* <SectionHeading
           badge="Student & Parent Voices"
           title="Loved by Music Learners Across Coimbatore"
           subtitle="Real experiences from students mastering Piano, Guitar, and Keyboard at Alby.sm Music Academy."
-        />
+        /> */}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {TESTIMONIALS.map((item, index) => (

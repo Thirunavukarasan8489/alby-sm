@@ -8,81 +8,107 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 const GALLERY_ITEMS = [
   {
     id: 1,
-    title: "Recital Night",
-    cat: "events",
-    tag: "Events",
-    src: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80",
+    title: "Live Stage Synthesizer Performance",
+    cat: "keyboard",
+    tag: "Keyboard",
+    src: "/images/alby-keyboard-stage.jpg",
     size: "col-span-2 row-span-2",
   },
   {
     id: 2,
-    title: "Guitar Lesson",
-    cat: "guitar",
-    tag: "Guitar",
-    src: "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=800&q=80",
+    title: "Master Alby — Founder & Lead Instructor",
+    cat: "faculty",
+    tag: "Faculty",
+    src: "/images/alby-founder.jpg",
     size: "",
   },
   {
     id: 3,
-    title: "Keyboard Class",
-    cat: "keyboard",
-    tag: "Keyboard",
-    src: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80",
+    title: "Upright Piano Lesson",
+    cat: "piano",
+    tag: "Piano",
+    src: "/images/alby-piano-playing.jpg",
     size: "",
   },
   {
     id: 4,
-    title: "Students Together",
-    cat: "events",
-    tag: "Events",
-    src: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&q=80",
+    title: "Grand Piano Studio Session",
+    cat: "piano",
+    tag: "Piano",
+    src: "/images/alby-grand-piano.jpg",
     size: "col-span-2",
   },
   {
     id: 5,
-    title: "Piano Keys",
-    cat: "piano",
-    tag: "Piano",
-    src: "https://images.unsplash.com/photo-1513883049090-d0b7439799bf?w=800&q=80",
+    title: "Arranger Keyboard Practice",
+    cat: "keyboard",
+    tag: "Keyboard",
+    src: "/images/student-keyboard-yamaha.jpg",
     size: "",
   },
   {
     id: 6,
-    title: "Piano Lesson",
+    title: "Digital Piano Lesson",
     cat: "piano",
     tag: "Piano",
-    src: "https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=800&q=80",
+    src: "/images/student-digital-piano.jpg",
     size: "",
   },
   {
     id: 7,
-    title: "Guitar Close Up",
-    cat: "guitar",
-    tag: "Guitar",
-    src: "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=800&q=80",
+    title: "Teenage Piano & Theory",
+    cat: "piano",
+    tag: "Piano",
+    src: "/images/student-piano-practice.jpg",
     size: "",
   },
   {
     id: 8,
-    title: "Keyboard Performance",
-    cat: "keyboard",
-    tag: "Keyboard",
-    src: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80",
+    title: "Piano Hand Technique",
+    cat: "piano",
+    tag: "Piano",
+    src: "/images/student-piano-hands.jpg",
     size: "col-span-2",
   },
   {
     id: 9,
-    title: "Instructor Teaching",
-    cat: "events",
-    tag: "Events",
-    src: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&q=80",
+    title: "Keyboard Sheet Music Class",
+    cat: "keyboard",
+    tag: "Keyboard",
+    src: "/images/student-keyboard-lesson.jpg",
+    size: "",
+  },
+  {
+    id: 10,
+    title: "PSR Synthesizer Control",
+    cat: "keyboard",
+    tag: "Keyboard",
+    src: "/images/student-arranger-keyboard.jpg",
+    size: "",
+  },
+  {
+    id: 11,
+    title: "Workstation Keyboard Studio",
+    cat: "keyboard",
+    tag: "Keyboard",
+    src: "/images/student-keyboard-smiling.jpg",
+    size: "",
+  },
+  {
+    id: 12,
+    title: "Home Practice Session",
+    cat: "keyboard",
+    tag: "Keyboard",
+    src: "/images/student-home-practice.jpg",
     size: "",
   },
 ];
 
 export default function GalleryPage() {
   const [activeFilter, setActiveFilter] = useState("all");
-  const [activeLightboxSrc, setActiveLightboxSrc] = useState<string | null>(null);
+  const [activeLightboxSrc, setActiveLightboxSrc] = useState<string | null>(
+    null,
+  );
 
   const filteredItems =
     activeFilter === "all"
@@ -106,7 +132,11 @@ export default function GalleryPage() {
           aria-hidden="true"
         />
 
-        <ScrollReveal direction="up" delay={0.05} className="relative z-10 max-w-[1140px] mx-auto">
+        <ScrollReveal
+          direction="up"
+          delay={0.05}
+          className="relative z-10 max-w-[1140px] mx-auto"
+        >
           <p className="text-[13px] text-[#b7aa9c] mb-2">
             <Link href="/" className="text-[#E8A33D] hover:underline">
               Home
@@ -115,7 +145,8 @@ export default function GalleryPage() {
           </p>
           <p className="eyebrow">Life at the Academy</p>
           <h1 className="text-3xl sm:text-5xl lg:text-[58px] font-serif tracking-normal mt-3.5 mb-2 leading-[1.05]">
-            Moments, <i className="italic text-[#E8A33D] not-italic">captured</i>
+            Moments,{" "}
+            <i className="italic text-[#E8A33D] not-italic">captured</i>
           </h1>
         </ScrollReveal>
       </section>
@@ -147,7 +178,12 @@ export default function GalleryPage() {
       <div className="max-w-[1180px] mx-auto px-6 pt-7.5 pb-[90px]">
         <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[140px] sm:auto-rows-[180px] gap-3.5">
           {filteredItems.map((item, idx) => (
-            <ScrollReveal key={item.id} direction="up" delay={0.05 + idx * 0.05} className={item.size}>
+            <ScrollReveal
+              key={item.id}
+              direction="up"
+              delay={0.05 + idx * 0.05}
+              className={item.size}
+            >
               <div
                 onClick={() => setActiveLightboxSrc(item.src)}
                 className="relative overflow-hidden rounded-[3px] cursor-pointer group h-full"
@@ -192,8 +228,14 @@ export default function GalleryPage() {
 
       {/* ---------- CTA STRIP ---------- */}
       <section className="bg-[#17514E] text-[#F8F3E7] text-center py-[70px] px-6">
-        <ScrollReveal direction="up" delay={0.05} className="max-w-[1140px] mx-auto">
-          <h2 className="text-3xl sm:text-[38px] font-serif">Want to be in the next batch?</h2>
+        <ScrollReveal
+          direction="up"
+          delay={0.05}
+          className="max-w-[1140px] mx-auto"
+        >
+          <h2 className="text-3xl sm:text-[38px] font-serif">
+            Want to be in the next batch?
+          </h2>
           <p className="mt-3.5 mb-6.5 max-w-[460px] mx-auto text-[#d7e4e2] text-base">
             Book a free trial class and start your own Alby.sm story.
           </p>
@@ -201,7 +243,7 @@ export default function GalleryPage() {
             href="/contact"
             className="bg-[#E8A33D] text-[#211126] font-semibold text-[15px] px-7 py-3.5 rounded-[2px] transition-all hover:bg-white hover:-translate-y-0.5 inline-block shadow-md"
           >
-            Book a Trial Class
+            Book a Your Slots
           </Link>
         </ScrollReveal>
       </section>

@@ -64,13 +64,6 @@ export const FloatingContactBar: React.FC = () => {
 
   const actionItems = [
     {
-      id: "phone",
-      label: "Call Us",
-      href: `tel:${ACADEMY_INFO.phoneRaw}`,
-      icon: <PhoneIcon />,
-      target: "_self",
-    },
-    {
       id: "whatsapp",
       label: "WhatsApp",
       href: ACADEMY_INFO.whatsappUrl,
@@ -85,19 +78,26 @@ export const FloatingContactBar: React.FC = () => {
       target: "_self",
     },
     {
-      id: "facebook",
-      label: "Facebook",
-      href: ACADEMY_INFO.socials.facebook,
-      icon: <FacebookIcon />,
-      target: "_blank",
-    },
-    {
       id: "instagram",
       label: "Instagram",
       href: ACADEMY_INFO.socials.instagram,
       icon: <InstagramIcon />,
       target: "_blank",
     },
+    // {
+    //   id: "phone",
+    //   label: "Call Us",
+    //   href: `tel:${ACADEMY_INFO.phoneRaw}`,
+    //   icon: <PhoneIcon />,
+    //   target: "_self",
+    // },
+    // {
+    //   id: "facebook",
+    //   label: "Facebook",
+    //   href: ACADEMY_INFO.socials.facebook,
+    //   icon: <FacebookIcon />,
+    //   target: "_blank",
+    // },
   ];
 
   return (
@@ -129,7 +129,7 @@ export const FloatingContactBar: React.FC = () => {
             onMouseEnter={() => setHoveredLabel(item.id)}
             onMouseLeave={() => setHoveredLabel(null)}
             aria-label={item.label}
-            className="w-11 h-11 sm:w-12 sm:h-12 bg-white border border-black/10 shadow-[0_6px_16px_rgba(0,0,0,0.14)] flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-[0_8px_20px_rgba(0,0,0,0.22)] active:scale-95 group focus:outline-none focus:ring-2 focus:ring-[#E8A33D]"
+            className="w-11 h-11 sm:w-12 sm:h-12 rounded-[4px] bg-white border border-black/10 shadow-[0_6px_16px_rgba(0,0,0,0.14)] flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-[0_8px_20px_rgba(0,0,0,0.22)] active:scale-95 group focus:outline-none focus:ring-2 focus:ring-[#E8A33D]"
           >
             {item.icon}
           </a>

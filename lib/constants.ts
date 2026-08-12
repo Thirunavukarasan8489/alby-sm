@@ -1,7 +1,8 @@
 export const ACADEMY_INFO = {
   name: "Alby.sm Music Academy",
   legalName: "Alby.sm Music Academy Coimbatore",
-  tagline: "Golden Hour Recital — Master Piano, Guitar & Keyboard in Coimbatore",
+  tagline:
+    "Golden Hour Recital — Master Piano, Guitar & Keyboard in Coimbatore",
   description:
     "Alby.sm Music Academy in Coimbatore, Tamil Nadu offers structured, ear-first music education for Piano, Guitar, and Keyboard across all age groups (ages 6+) and skill levels from beginner to advanced.",
   address: {
@@ -11,17 +12,19 @@ export const ACADEMY_INFO = {
     postalCode: "641018",
     country: "India",
   },
-  formattedAddress: "123 Harmony Lane, College Road, Coimbatore, Tamil Nadu 641018, India",
-  phone: "+91 98765 43210",
-  phoneRaw: "+919876543210",
-  whatsappUrl: "https://wa.me/919876543210?text=Hi%20Alby.sm%20Music%20Academy%2C%20I%20would%20like%20to%20enquire%20about%20music%20classes.",
-  email: "info@albysm.com",
-  openingHours: "Mon-Sat: 09:00 - 20:00, Sun: 10:00 - 16:00",
+  formattedAddress:
+    "123 Harmony Lane, College Road, Coimbatore, Tamil Nadu 641018, India",
+  phone: "+91 90435 61694 ",
+  phoneRaw: "+919043561694 ",
+  whatsappUrl:
+    "https://wa.me/9043561694?text=Hi%20Alby.sm%20Music%20Academy%2C%20I%20would%20like%20to%20enquire%20about%20music%20classes.",
+  email: "albertebini455@gmail.com",
+  openingHours: "Mon-Fri: 3AM - 10PM, Sun: 4AM - 6AM and 1PM - 8PM",
   openingHoursSpecification: [
     {
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-      opens: "09:00",
-      closes: "20:00",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "03:00",
+      closes: "22:00",
     },
     {
       dayOfWeek: ["Sunday"],
@@ -30,10 +33,11 @@ export const ACADEMY_INFO = {
     },
   ],
   socials: {
-    instagram: "https://instagram.com/alby.sm.music",
-    youtube: "https://youtube.com/@albysmmusic",
-    facebook: "https://facebook.com/albysmmusic",
-    whatsapp: "https://wa.me/919876543210?text=Hi%20Alby.sm%20Music%20Academy%2C%20I%20would%20like%20to%20enquire%20about%20music%20classes.",
+    instagram: "https://www.instagram.com/alby_school_of_music",
+    youtube: "https://www.youtube.com/@albyschoolofmusic",
+    facebook: "",
+    whatsapp:
+      "https://wa.me/9043561694?text=Hi%20Alby.sm%20Music%20Academy%2C%20I%20would%20like%20to%20enquire%20about%20music%20classes.",
   },
   geo: {
     latitude: 11.0168,
@@ -82,7 +86,7 @@ export const CLASSES_DATA: Record<string, ClassData> = {
       "Repertoire from Classical, Pop & Indian Film scores",
     ],
     instructorName: "Master Alby & Senior Faculty",
-    heroImage: "https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=800&q=80",
+    heroImage: "/images/alby-piano-playing.jpg",
     badge: "Most Popular",
   },
   guitar: {
@@ -109,7 +113,8 @@ export const CLASSES_DATA: Record<string, ClassData> = {
       "Tablature reading & sheet music fundamentals",
     ],
     instructorName: "Lead Instructor R. Karthik",
-    heroImage: "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=800&q=80",
+    heroImage:
+      "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=800&q=80",
     badge: "High Demand",
   },
   keyboard: {
@@ -136,7 +141,7 @@ export const CLASSES_DATA: Record<string, ClassData> = {
       "Performance piece arrangement & stage presence",
     ],
     instructorName: "Faculty S. Priya",
-    heroImage: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80",
+    heroImage: "/images/alby-keyboard-stage.jpg",
     badge: "Versatile & Fun",
   },
 };
@@ -204,7 +209,8 @@ export const FAQS = [
       "Our ear-first method trains students to listen, identify pitch, and play melodies by ear before connecting notes to written sheet music. This builds natural musicality, rhythm, and confidence.",
   },
   {
-    question: "Are individual instruments provided during practice at the academy?",
+    question:
+      "Are individual instruments provided during practice at the academy?",
     answer:
       "Yes, our air-conditioned classrooms are fully equipped with acoustic pianos, weighted keyboards, and guitars for every student during scheduled batch hours.",
   },

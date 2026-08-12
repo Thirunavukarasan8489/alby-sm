@@ -34,18 +34,18 @@ export default function HomePage() {
 
         <div className="relative z-10 max-w-[1140px] mx-auto grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-[50px] items-center">
           <ScrollReveal direction="up" delay={0.05}>
-            <p className="eyebrow">
-              Alby.sm Music Academy · Piano · Guitar · Keyboard
-            </p>
+            <p className="eyebrow">Alby sm Music Academy</p>
             <h1 className="text-4xl sm:text-6xl lg:text-[72px] font-serif tracking-normal mt-4 mb-6 leading-[1.05]">
               Where music
               <br />
               finds its{" "}
-              <i className="italic text-[#E8A33D] not-italic">voice.</i>
+              <i className="italic text-[#E8A33D] not-italic underline underline-offset-8 decoration-wavy decoration-amber-50">
+                voice.
+              </i>
             </h1>
 
             {/* Soundwave SVG */}
-            <svg
+            {/* <svg
               className="mt-2 mb-6 opacity-85"
               width="220"
               height="30"
@@ -59,13 +59,13 @@ export default function HomePage() {
                 fill="none"
                 strokeLinecap="round"
               />
-            </svg>
+            </svg> */}
 
-            <p className="text-base sm:text-[17px] leading-[1.6] text-[#e6dcd0] max-w-[460px] mb-8">
+            {/* <p className="text-base sm:text-[17px] leading-[1.6] text-[#e6dcd0] max-w-[460px] mb-8">
               Personalised piano, guitar and keyboard lessons for every age and
               skill level — taught by working musicians in a space built for
               learning by ear, and by heart.
-            </p>
+            </p> */}
 
             {/* Direct GEO Factual statement for AI Answer Engines */}
             <p className="sr-only">
@@ -79,7 +79,7 @@ export default function HomePage() {
                 href="/contact"
                 className="bg-[#E8A33D] text-[#211126] font-semibold text-[15px] px-7 py-3.5 rounded-[2px] transition-all hover:bg-white hover:-translate-y-0.5 inline-block shadow-lg"
               >
-                Book a Trial Class
+                Book a Your Slots
               </Link>
               <Link
                 href="/classes"
@@ -93,12 +93,12 @@ export default function HomePage() {
           <ScrollReveal direction="left" delay={0.15} className="relative">
             <div className="rounded-[4px] overflow-hidden shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)] border border-[#E8A33D]/25">
               <Image
-                src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=800&q=80"
-                alt="Student playing piano at Alby.sm Music Academy"
+                src="/images/alby-piano-playing.jpg"
+                alt="Master Alby playing piano at Alby.sm Music Academy"
                 width={700}
                 height={420}
                 priority
-                className="w-full h-[320px] sm:h-[420px] object-cover transition-transform duration-700 hover:scale-105"
+                className="w-full h-[320px] sm:h-[500px] object-top object-cover transition-transform duration-700 hover:scale-105"
               />
             </div>
 
@@ -144,8 +144,8 @@ export default function HomePage() {
           >
             <div className="relative rounded-[4px] overflow-hidden">
               <Image
-                src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=800&q=80"
-                alt="Guitar close up at Alby.sm Music Academy"
+                src="/images/alby-founder.jpg"
+                alt="Master Alby - Founder & Lead Instructor of Alby.sm Music Academy"
                 width={600}
                 height={380}
                 className="w-full h-[320px] sm:h-[380px] object-cover transition-transform duration-700 hover:scale-105"
@@ -229,7 +229,7 @@ export default function HomePage() {
           delay={0.05}
           className="relative z-10 text-center max-w-[600px] mx-auto mb-14"
         >
-          <p className="eyebrow">Our Programs</p>
+          <p className="eyebrow">Our Exams</p>
           <h2 className="text-3xl sm:text-[44px] font-serif mt-3 text-[#F8F3E7]">
             Choose your instrument
           </h2>
@@ -356,7 +356,7 @@ export default function HomePage() {
       <PianoKeyDivider variant="light" />
 
       {/* ---------- GALLERY SECTION ---------- */}
-      <section
+      {/* <section
         className="py-[70px] sm:py-[90px] px-6 bg-[#F8F3E7]"
         id="gallery"
       >
@@ -382,8 +382,8 @@ export default function HomePage() {
               className="relative overflow-hidden rounded-[3px] block h-full group"
             >
               <Image
-                src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80"
-                alt="Recital at Alby.sm Music Academy"
+                src="/images/alby-keyboard-stage.jpg"
+                alt="Master Alby performing live stage keyboard at Alby.sm Music Academy"
                 width={700}
                 height={300}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
@@ -397,8 +397,8 @@ export default function HomePage() {
               className="relative overflow-hidden rounded-[3px] block h-full group"
             >
               <Image
-                src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=800&q=80"
-                alt="Guitar lesson"
+                src="/images/student-keyboard-yamaha.jpg"
+                alt="Arranger keyboard student practice"
                 width={400}
                 height={150}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
@@ -412,8 +412,8 @@ export default function HomePage() {
               className="relative overflow-hidden rounded-[3px] block h-full group"
             >
               <Image
-                src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80"
-                alt="Keyboard class"
+                src="/images/student-digital-piano.jpg"
+                alt="Piano lesson at Alby.sm Music Academy"
                 width={400}
                 height={150}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
@@ -427,8 +427,8 @@ export default function HomePage() {
               className="relative overflow-hidden rounded-[3px] block h-full group"
             >
               <Image
-                src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&q=80"
-                alt="Students together"
+                src="/images/alby-piano-playing.jpg"
+                alt="Piano instruction session"
                 width={700}
                 height={150}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
@@ -446,8 +446,8 @@ export default function HomePage() {
               className="relative overflow-hidden rounded-[3px] block h-full group"
             >
               <Image
-                src="https://images.unsplash.com/photo-1513883049090-d0b7439799bf?w=800&q=80"
-                alt="Piano keys close up"
+                src="/images/student-piano-practice.jpg"
+                alt="Piano practice close up"
                 width={400}
                 height={150}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
@@ -455,7 +455,7 @@ export default function HomePage() {
             </Link>
           </ScrollReveal>
         </div>
-      </section>
+      </section> */}
 
       {/* ---------- PIANO KEY DIVIDER (LIGHT) ---------- */}
       <PianoKeyDivider variant="light" />
@@ -485,7 +485,7 @@ export default function HomePage() {
           <ScrollReveal direction="up" delay={0.05}>
             <p className="eyebrow !text-[#a9d8d3]">Get in touch</p>
             <h2 className="text-3xl sm:text-[40px] font-serif text-[#F8F3E7] mt-3 mb-4">
-              Book your trial class
+              Book your Your Slots
             </h2>
             <p className="text-[#d7e4e2] text-base leading-[1.7] mb-6.5">
               Tell us which instrument you&apos;re interested in and a preferred
@@ -496,15 +496,17 @@ export default function HomePage() {
             <div className="flex flex-col gap-3.5 text-[14.5px]">
               <div className="flex gap-3 items-start">
                 <span>📍</span>
-                <span>Alby.sm Music Academy, Coimbatore, Tamil Nadu</span>
+                <span>Coimbatore, Tamil Nadu</span>
               </div>
-              <div className="flex gap-3 items-start">
+              {/* <div className="flex gap-3 items-start">
                 <span>📞</span>
                 <span>+91 98765 43210</span>
-              </div>
+              </div> */}
               <div className="flex gap-3 items-start">
                 <span>✉️</span>
-                <span>hello@albysm.com</span>
+                <a href="mailto:albertebini455@gmail.com">
+                  albertebini455@gmail.com
+                </a>
               </div>
             </div>
           </ScrollReveal>
