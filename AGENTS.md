@@ -73,6 +73,9 @@ alby-sm/
 │   ├── layout.tsx                 → Root layout: fonts, global SEO, JSON-LD Org schema, Header, FloatingBar, Footer
 │   ├── globals.css                → Tailwind v4 @theme, custom CSS properties, .keys piano strip, reduced-motion
 │   ├── page.tsx                   → Homepage: Hero, About snapshot, 3 Class cards, Testimonials, Quick contact
+│   ├── api/
+│   │   └── contact/
+│   │       └── route.ts           → POST API route: Server-side validation, MongoDB persistence via Mongoose
 │   ├── about/
 │   │   └── page.tsx               → About Us: Story, Philosophy pillars, Academy timeline, Faculty profiles, CTA
 │   ├── classes/
@@ -86,7 +89,7 @@ alby-sm/
 │   ├── gallery/
 │   │   └── page.tsx               → Gallery: Filterable photo grid (Piano, Keyboard, Faculty, Events) + Lightbox modal
 │   ├── contact/
-│   │   └── page.tsx               → Contact & Booking: NAP details, trial enrollment form, hours, LocalBusiness FAQ
+│   │   └── page.tsx               → Contact & Booking: Validated trial form with country code selector & DB submit
 │   ├── sitemap.ts                 → Dynamic Next.js sitemap listing all routes with priorities
 │   ├── robots.ts                  → Dynamic robots.txt explicitly allowing search engines and AI crawlers
 │   ├── manifest.ts                → Web App Manifest for PWA metadata & theme styling
@@ -118,6 +121,10 @@ alby-sm/
 │
 ├── lib/
 │   ├── constants.ts               → SINGLE SOURCE OF TRUTH: NAP, class definitions, testimonials, FAQs, social links
+│   ├── countries.ts               → Supported country codes, dial prefixes, and phone digit length constraints
+│   ├── db.ts                      → Cached MongoDB connection utility via Mongoose
+│   ├── models/
+│   │   └── ContactSubmission.ts   → Mongoose schema & model for trial class bookings
 │   └── seo.ts                     → SEO metadata helper (`constructMetadata`) and JSON-LD schema generators
 │
 ├── public/
@@ -155,6 +162,23 @@ All business data, addresses, course syllabi, testimonials, and FAQs **must rema
    - Verified parent and student reviews with author names, roles, quotes, and star ratings.
 4. `FAQS`:
    - Factual Q&A pairs covering age criteria, location, ear-first methodology, equipment, and Trinity exam guidance.
+
+### 5.2 Contact Form Validation & Database Persistence Architecture
+
+The contact booking pipeline in `app/contact/page.tsx` and `app/api/contact/route.ts` implements strict double-layer (client + server) validation:
+1. **Full Name**: Mandatory, letters and spaces only (`/^[a-zA-Z\s]+$/`), min 2, max 100 characters. Rejects numbers and special characters.
+2. **Country Code & Phone**: Small dropdown of international country codes with flags (`lib/countries.ts`). Dynamically validates and enforces exact digit counts (e.g., India `+91` requires exactly 10 digits; UAE `+971` requires 9 digits; Singapore `+65` requires 8 digits). Input restricted strictly to numeric digits.
+3. **Email**: Mandatory, strict email format regex (`/^[^\s@]+@[^\s@]+\.[^\s@]+$/`).
+4. **Interested in (Instrument)**: Mandatory select (`Piano`, `Guitar`, `Keyboard`, `Not sure yet`).
+5. **Preferred Time**: Mandatory, restricted exclusively to letters, numbers, hyphens (`-`), periods (`.`), commas (`,`), and spaces (`/^[a-zA-Z0-9\s\-.,]+$/`).
+6. **Message**: Optional, restricted exclusively to letters, numbers, hyphens (`-`), periods (`.`), commas (`,`), newlines, and spaces (`/^[a-zA-Z0-9\s\-.,\n\r]*$/`).
+7. **Database Storage (`lib/db.ts` & `lib/models/ContactSubmission.ts`)**:
+   - Persisted in MongoDB database (`MONGO_URL` / `MONGODB_URI` environment variable) using a global cached Mongoose connection.
+   - Saves document with `name`, `countryCode`, `phone`, `fullPhone`, `email`, `instrument`, `preferredTime`, `message`, `ipAddress`, `userAgent`, and `status: "new"`.
+8. **UI & UX Animations**:
+   - Submitting button with Framer Motion spinner.
+   - Animated success receipt banner with personalized greeting and option to submit another request.
+   - Inline field error messaging and fallback to WhatsApp if network error occurs.
 
 ---
 
