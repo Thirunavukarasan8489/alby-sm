@@ -22,25 +22,25 @@ export const Header: React.FC = () => {
       hasDropdown: true,
       subItems: [
         {
-          name: "Piano Class",
+          name: "Piano",
           href: "/classes/piano",
           desc: "Classical & contemporary technique, ear training",
           icon: <PianoIcon size={24} />,
         },
         {
-          name: "Guitar Class",
+          name: "Guitar",
           href: "/classes/guitar",
           desc: "Acoustic & electric, strumming & lead soloing",
           icon: "🎸",
         },
         {
-          name: "Keyboard Class",
+          name: "Keyboard",
           href: "/classes/keyboard",
           desc: "Synthesizers, arranger styles & tone layering",
           icon: "🎹",
         },
         {
-          name: "Theory of classes",
+          name: "Theory of Music",
           href: "/classes",
           desc: "Compare programs, levels & batch timings",
           icon: "🎼",
