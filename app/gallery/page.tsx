@@ -163,11 +163,10 @@ export default function GalleryPage() {
           <button
             key={btn.value}
             onClick={() => setActiveFilter(btn.value)}
-            className={`font-sans text-[13.5px] font-semibold px-5 py-2 rounded-full border transition-colors cursor-pointer ${
-              activeFilter === btn.value
+            className={`font-sans text-[13.5px] font-semibold px-5 py-2 rounded-full border transition-colors cursor-pointer ${activeFilter === btn.value
                 ? "bg-[#17514E] text-[#F8F3E7] border-[#17514E]"
                 : "bg-transparent text-[#17514E] border-[#17514E]/30 hover:bg-[#17514E] hover:text-[#F8F3E7]"
-            }`}
+              }`}
           >
             {btn.label}
           </button>
@@ -243,7 +242,7 @@ export default function GalleryPage() {
             href="/contact"
             className="bg-[#E8A33D] text-[#211126] font-semibold text-[15px] px-7 py-3.5 rounded-[2px] transition-all hover:bg-white hover:-translate-y-0.5 inline-block shadow-md"
           >
-            Book a Your Slots
+            Join Now
           </Link>
         </ScrollReveal>
       </section>

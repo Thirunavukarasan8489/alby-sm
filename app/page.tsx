@@ -79,7 +79,7 @@ export default function HomePage() {
                 href="/contact"
                 className="bg-[#E8A33D] text-[#211126] font-semibold text-[15px] px-7 py-3.5 rounded-[2px] transition-all hover:bg-white hover:-translate-y-0.5 inline-block shadow-lg"
               >
-                Book a Your Slots
+                Join Now
               </Link>
               <Link
                 href="/classes"
@@ -148,7 +148,7 @@ export default function HomePage() {
                 alt="Master Alby - Founder & Lead Instructor of Alby.sm Music Academy"
                 width={600}
                 height={380}
-                className="w-full h-[320px] sm:h-[380px] object-cover transition-transform duration-700 hover:scale-105"
+                className="w-full h-[320px] sm:h-[480px] object-cover transition-transform duration-700 hover:scale-105"
               />
             </div>
             {/* Offset Amber Border Box */}
@@ -458,7 +458,7 @@ export default function HomePage() {
       </section> */}
 
       {/* ---------- PIANO KEY DIVIDER (LIGHT) ---------- */}
-      <PianoKeyDivider variant="light" />
+      {/* <PianoKeyDivider variant="light" /> */}
 
       {/* ---------- TESTIMONIALS SECTION ---------- */}
       <Testimonial />

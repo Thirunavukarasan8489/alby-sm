@@ -351,7 +351,7 @@ export default function AboutPage() {
             href="/contact"
             className="bg-[#E8A33D] text-[#211126] font-semibold text-[15px] px-7 py-3.5 rounded-[2px] transition-all hover:bg-white hover:-translate-y-0.5 inline-block shadow-md"
           >
-            Book a Your Slots
+            Join Now
           </Link>
         </ScrollReveal>
       </section>
