@@ -1,185 +1,251 @@
 # AGENTS.md — Alby.sm Music Academy Website
 
-This file is instructions for the AI coding agent (Antigravity AI) building this project. Follow it exactly unless the user says otherwise. When something here is ambiguous, prefer the simplest solution that meets the performance, SEO and accessibility bars below.
+This document is the master specification and operational guide for AI coding assistants (Antigravity AI, Claude, Copilot, etc.) and human engineers working on the **Alby.sm Music Academy** codebase. Follow all architectural patterns, design guidelines, SEO standards, and performance rules defined here.
 
-## 1. Project Summary
+---
 
-Marketing website for **Alby.sm Music Academy** (Piano, Guitar, Keyboard classes), based in Coimbatore, Tamil Nadu. Goal: fast, animated, mobile-first site that ranks well in Google **and** shows up correctly when AI assistants (ChatGPT, Gemini, Perplexity, Claude) answer questions about the academy.
+## 1. Project Overview & Mission
 
-Design reference: "Golden Hour Recital" concept — deep plum + amber spotlight + piano-key motif. Approved mockups (7 pages: Home, About, Classes overview, Piano, Guitar, Keyboard, Contact, Gallery) exist as static HTML references — rebuild them as real Next.js components, don't just iframe the HTML.
+- **Client**: Alby.sm Music Academy (Founder: Master Alby)
+- **Location**: 123 Harmony Lane, College Road, Coimbatore, Tamil Nadu 641018, India
+- **Core Offerings**: Structured, ear-first music lessons for **Piano**, **Guitar**, and **Electronic Keyboard** for all ages (6+ to adults) and skill levels (Beginner to Advanced / Trinity College London grade exam prep).
+- **Core Goal**: A blazing-fast, mobile-first, animated marketing website that achieves top search rankings in Google, provides frictionless trial enrollment, and is highly optimized for AI answer engines (ChatGPT, Gemini, Perplexity, Claude) through structured JSON-LD and clean factual citation formatting.
+- **Design Theme**: *"Golden Hour Recital"* — deep plum/ink backgrounds, warm ivory contrasts, luminous amber accents, subtle teal sections, and the signature piano-key divider motif.
 
-## 2. Tech Stack
+---
 
-- **Next.js** — latest stable version, **App Router** (`app/` directory). No `pages/` directory.
-- **TypeScript** for all files.
-- **Tailwind CSS v4** — use the new CSS-first config (`@theme` in globals.css), not a `tailwind.config.js` v3-style file, unless the installed version requires it.
-- **Framer Motion** (`motion` package) for animation.
-- **next/font** for font loading (Instrument Serif + Inter via `next/font/google`) — never load fonts via a `<link>` tag.
-- **next/image** for every image — no raw `<img>` tags.
-- Deployment target: **Vercel**.
-- Package manager: npm (unless the user's existing repos use another one — check for a lockfile first).
+## 2. Tech Stack & Dependencies
 
-## 3. Design Tokens
+| Layer | Technology | Specification / Notes |
+|---|---|---|
+| **Framework** | Next.js 16 (App Router) | All routes inside `app/` directory (no `pages/` directory). Static generation (SSG) preferred. |
+| **Language** | TypeScript 5 | Strict type checking on all components, data objects, and helpers. |
+| **Styling** | Tailwind CSS v4 | CSS-first configuration via `@theme` in `app/globals.css`. PostCSS integration via `@tailwindcss/postcss`. |
+| **Animations** | Framer Motion (`framer-motion`) | GPU-accelerated (transform & opacity only) with `useReducedMotion()` accessibility fallback. |
+| **Icons** | Lucide React (`lucide-react`) + Custom SVG | `PianoIcon.tsx`, standard Lucide icons, custom vector social SVGs. |
+| **Typography** | `next/font/google` | `Instrument Serif` (headings) and `Inter` (body / UI) loaded via CSS variables with `display: swap`. |
+| **Images** | `next/image` | Mandatory for every image. Explicit dimensions or `fill` with relative parent. |
+| **Deployment** | Vercel | Production build target with Edge / Node.js runtime OG image support. |
+| **Package Manager** | npm | `package-lock.json` lockfile. |
 
-Define these as CSS variables in `app/globals.css` under `@theme`, and reference them everywhere — no hardcoded hex values in components.
+---
+
+## 3. Design System & Design Tokens
+
+Define tokens as CSS variables in `app/globals.css` under `@theme`. **Never use raw, arbitrary hex colors inside components** — use the semantic palette classes or CSS variables.
+
+### 3.1 Color Palette
 
 ```css
---color-ink: #211126;       /* primary dark bg */
---color-ink-2: #2c1732;     /* secondary dark bg */
---color-ivory: #F8F3E7;     /* light section bg */
---color-amber: #E8A33D;     /* primary accent / CTA */
---color-teal: #17514E;      /* secondary accent */
---color-rose: #C97B84;      /* sparing tertiary accent */
---color-charcoal: #2B2420;  /* body text on light bg */
+@theme {
+  --color-ink: #211126;       /* Primary dark background */
+  --color-ink-2: #2c1732;     /* Secondary dark background / Card fill */
+  --color-ivory: #F8F3E7;     /* Light background / Light high-contrast text */
+  --color-amber: #E8A33D;     /* Primary accent / CTA buttons / Highlights */
+  --color-amber-dark: #c9852a;/* Hover & active states for amber CTA */
+  --color-teal: #17514E;      /* Secondary dark accent / Teal feature panels */
+  --color-rose: #C97B84;      /* Tertiary soft accent */
+  --color-charcoal: #2B2420;  /* Body copy text on light ivory backgrounds */
 
---font-serif: "Instrument Serif", serif;  /* headings */
---font-sans: "Inter", sans-serif;         /* body/UI */
+  --font-serif: var(--font-instrument-serif), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+}
 ```
 
-Signature motif: a **piano-key strip divider** (alternating ivory/plum blocks, ~14px tall) used between major sections instead of a plain `<hr>`. Build it as a small reusable `<PianoKeyDivider variant="dark" | "light" />` component.
+### 3.2 Signature Design Elements
 
-## 4. Folder Structure (App Router)
+1. **Piano-Key Divider (`<PianoKeyDivider />`)**:
+   - Reusable alternating ivory/plum/teal blocks (`14px` tall) rendered between major page sections instead of plain horizontal rules.
+   - Variants: `"dark"`, `"light"`, `"teal"`, `"teal-ink"`.
+2. **Floating Quick Contact Bar (`<FloatingContactBar />`)**:
+   - Fixed on the middle-right viewport with quick links to WhatsApp, Email, Instagram, and Call.
+   - Equipped with desktop hover tooltip pills and accessible ARIA attributes.
+3. **Glassmorphic Sticky Header (`<Header />`)**:
+   - Backdrop blur (`bg-[#211126]/95 backdrop-blur-md`), interactive animated dropdown for Classes, and slide-in off-canvas drawer on mobile (`<MobileNav />`).
+
+---
+
+## 4. Complete Codebase Directory Map
 
 ```
-app/
-  layout.tsx                 → root layout, fonts, metadata defaults, JSON-LD org schema
-  globals.css
-  page.tsx                   → Home
-  about/
-    page.tsx
-  classes/
-    page.tsx                 → Classes overview (all 3 instruments)
-    piano/
-      page.tsx
-    guitar/
-      page.tsx
-    keyboard/
-      page.tsx
-  gallery/
-    page.tsx
-  contact/
-    page.tsx
-  sitemap.ts                 → dynamic sitemap
-  robots.ts                  → dynamic robots.txt
-  opengraph-image.tsx        → default OG image (per-route override where relevant)
-components/
-  layout/
-    Header.tsx
-    Footer.tsx
-    MobileNav.tsx
-  ui/
-    PianoKeyDivider.tsx
-    Button.tsx
-    SectionHeading.tsx
-  sections/
-    Hero.tsx
-    ClassCard.tsx
-    Testimonial.tsx
-    FAQAccordion.tsx
-    GalleryGrid.tsx
-    ContactForm.tsx
-lib/
-  seo.ts                     → shared metadata helpers, JSON-LD builders
-  constants.ts                → NAP (name/address/phone), class data, social links
-public/
-  llms.txt                   → see Section 7
-  og/                        → static OG fallback images
-  favicon, apple-touch-icon, manifest.json
+alby-sm/
+├── app/
+│   ├── layout.tsx                 → Root layout: fonts, global SEO, JSON-LD Org schema, Header, FloatingBar, Footer
+│   ├── globals.css                → Tailwind v4 @theme, custom CSS properties, .keys piano strip, reduced-motion
+│   ├── page.tsx                   → Homepage: Hero, About snapshot, 3 Class cards, Testimonials, Quick contact
+│   ├── about/
+│   │   └── page.tsx               → About Us: Story, Philosophy pillars, Academy timeline, Faculty profiles, CTA
+│   ├── classes/
+│   │   ├── page.tsx               → Classes Overview: Comparison matrix, sticky jumpnav, full course details
+│   │   ├── piano/
+│   │   │   └── page.tsx           → Piano Class: Uses <ClassPageTemplate>, syllabus levels, schedule, FAQ/schema
+│   │   ├── guitar/
+│   │   │   └── page.tsx           → Guitar Class: Uses <ClassPageTemplate>, syllabus levels, schedule, FAQ/schema
+│   │   └── keyboard/
+│   │       └── page.tsx           → Electronic Keyboard: Uses <ClassPageTemplate>, arranger styles, schedule
+│   ├── gallery/
+│   │   └── page.tsx               → Gallery: Filterable photo grid (Piano, Keyboard, Faculty, Events) + Lightbox modal
+│   ├── contact/
+│   │   └── page.tsx               → Contact & Booking: NAP details, trial enrollment form, hours, LocalBusiness FAQ
+│   ├── sitemap.ts                 → Dynamic Next.js sitemap listing all routes with priorities
+│   ├── robots.ts                  → Dynamic robots.txt explicitly allowing search engines and AI crawlers
+│   ├── manifest.ts                → Web App Manifest for PWA metadata & theme styling
+│   ├── opengraph-image.tsx        → Dynamic branded OpenGraph preview image generated via ImageResponse
+│   └── not-found.tsx              → Custom branded 404 error page with quick navigation back home
+│
+├── components/
+│   ├── layout/
+│   │   ├── Header.tsx             → Sticky header with dropdown submenu and mobile trigger
+│   │   ├── Footer.tsx             → Academy footer with copyright and brand mark
+│   │   └── MobileNav.tsx          → Off-canvas sliding mobile menu with accordion submenu & body scroll-lock
+│   ├── ui/
+│   │   ├── PianoKeyDivider.tsx    → Signature alternating piano key divider strip
+│   │   ├── FloatingContactBar.tsx → Fixed floating quick-contact icons (WhatsApp, Email, IG)
+│   │   ├── ScrollReveal.tsx       → Framer motion wrapper with viewport trigger and reduced-motion fallback
+│   │   ├── Button.tsx             → Reusable styled button supporting variants (primary, secondary, outline)
+│   │   └── SectionHeading.tsx     → Standardized section heading with eyebrow badge, title, and subtitle
+│   ├── sections/
+│   │   ├── Hero.tsx               → Alternative hero component with metrics and direct GEO answer
+│   │   ├── ClassCard.tsx          → Course preview card with badge, age limits, schedule, and curriculum points
+│   │   ├── Testimonial.tsx        → Responsive parent & student testimonial grid with 5-star ratings
+│   │   ├── FAQAccordion.tsx       → Accessible FAQ accordion with Framer Motion height animations
+│   │   ├── GalleryGrid.tsx        → Filterable gallery showcase with photo lightbox modal
+│   │   └── ContactForm.tsx        → Controlled interactive trial class booking form with feedback states
+│   ├── templates/
+│   │   └── ClassPageTemplate.tsx  → Shared reusable template for instrument pages (Hero, Levels, Why, Schedule, Schema)
+│   └── icons/
+│       └── PianoIcon.tsx          → Custom scalable vector Grand Piano SVG icon
+│
+├── lib/
+│   ├── constants.ts               → SINGLE SOURCE OF TRUTH: NAP, class definitions, testimonials, FAQs, social links
+│   └── seo.ts                     → SEO metadata helper (`constructMetadata`) and JSON-LD schema generators
+│
+├── public/
+│   ├── llms.txt                   → Clean plain-text knowledge summary for AI crawlers & answer engines
+│   ├── logo.jpeg                  → Official Alby.sm academy logo
+│   ├── favicon.ico                → Favicon icon
+│   └── images/                    → Curated high-res local image assets (founder, studio, student practice)
+│
+├── package.json                   → Dependencies and build scripts
+├── postcss.config.mjs             → Tailwind CSS PostCSS plugin config
+├── tsconfig.json                  → TypeScript path aliases (@/*) and compiler options
+└── AGENTS.md                      → Master instructions and architectural documentation (this file)
 ```
 
-Each class page (`piano`, `guitar`, `keyboard`) reuses one shared `<ClassPageTemplate>` component and passes instrument-specific content as props/data — don't triplicate the JSX.
+---
 
-## 5. Animation Guidelines
+## 5. Centralized Data Architecture (`lib/constants.ts`)
 
-- Use Framer Motion for: hero entrance (fade+slight rise), scroll-triggered reveals on section content, hover states on cards, and the mobile menu open/close.
-- Keep every animation to **transform and opacity only** — never animate `width`, `height`, `top/left`, or box-shadow directly (causes layout thrashing / jank on mobile).
-- Scroll reveals: use `whileInView` with `viewport={{ once: true, margin: "-80px" }}` so things animate in once, not on every scroll pass.
-- Respect `prefers-reduced-motion`: wrap the app in a check (Framer Motion's `useReducedMotion()` hook) and skip/shorten animations when true.
-- Keep hero and above-the-fold animations short (200–450ms) — don't make the user wait to read the headline.
-- No animation should block interactivity or delay Largest Contentful Paint. If a choice must be made, LCP wins over animation polish.
+All business data, addresses, course syllabi, testimonials, and FAQs **must remain centralized in `lib/constants.ts`**. Never hardcode addresses, phone numbers, or course data directly in page JSX.
 
-## 6. Performance Targets
+### Core Data Models in `lib/constants.ts`:
+1. `ACADEMY_INFO`:
+   - `name`: `"Alby.sm Music Academy"`
+   - `legalName`: `"Alby.sm Music Academy Coimbatore"`
+   - `formattedAddress`: `"123 Harmony Lane, College Road, Coimbatore, Tamil Nadu 641018, India"`
+   - `phone`: `"+91 90435 61694 "`
+   - `email`: `"albertebini455@gmail.com"`
+   - `whatsappUrl`: Direct WhatsApp API link with prefilled enquiry text.
+   - `openingHours`: `"Mon-Fri: 3AM - 10PM, Sun: 4AM - 6AM and 1PM - 8PM"`
+   - `geo`: Latitude `11.0168`, Longitude `76.9558` (Coimbatore coordinates).
+   - `socials`: Instagram (`@alby_school_of_music`), YouTube (`@albyschoolofmusic`).
+2. `CLASSES_DATA`:
+   - Typed dictionary for `piano`, `guitar`, and `keyboard` containing `name`, `slug`, `shortDescription`, `geoAnswer`, `ageRange`, `levels`, `schedule`, `highlights`, `curriculum`, `instructorName`, `heroImage`, and `badge`.
+3. `TESTIMONIALS`:
+   - Verified parent and student reviews with author names, roles, quotes, and star ratings.
+4. `FAQS`:
+   - Factual Q&A pairs covering age criteria, location, ear-first methodology, equipment, and Trinity exam guidance.
 
-Build for these Core Web Vitals (mobile, real-world 4G, not just desktop Lighthouse):
+---
 
-- **LCP** < 2.0s
-- **INP** < 200ms
-- **CLS** < 0.05
-- Lighthouse Performance score ≥ 90 on mobile.
+## 6. SEO, GEO & AI Answer Engine Optimization (AIO)
 
-How:
-- All images through `next/image` with explicit `width`/`height` (or `fill` with a sized parent) — this alone prevents most CLS.
-- Hero image: `priority` prop, served as AVIF/WebP.
-- Lazy-load below-the-fold images and the gallery grid (`loading="lazy"` is default with `next/image` for non-priority images — don't override it).
-- Fonts: `next/font` with `display: swap` and only the weights actually used (Inter 400/500/600/700; Instrument Serif 400 + italic).
-- No client-heavy libraries unless needed. Framer Motion is fine; avoid adding a second animation library, a heavy carousel library, or jQuery-era dependencies.
-- Static-generate every page (`generate.js`-free, plain SSG) — nothing here needs server-side data fetching at request time.
-- Split the contact form into a client component; keep everything else a server component by default.
+This site is engineered to rank in standard search engines and be directly cited by LLMs (ChatGPT, Gemini, Perplexity, Claude).
 
-## 7. SEO, GEO & LLM-Visibility Kit
+### 6.1 Technical SEO Standards
+- **Metadata API**: Every route exports unique `metadata` using `constructMetadata()` from `lib/seo.ts`. No duplicate titles or descriptions.
+- **Canonical URLs**: Automatically populated per route via `SITE_URL` and route path.
+- **Dynamic Sitemap**: `app/sitemap.ts` generates clean XML sitemaps with route priority weighting.
+- **Crawler Directives**: `app/robots.ts` allows general crawlers and explicitly permits AI agents: `GPTBot`, `Google-Extended`, `PerplexityBot`, `ClaudeBot`, `CCBot`, `ChatGPT-User`.
+- **OpenGraph & Twitter**: Configured in `app/layout.tsx` and dynamically rendered by `app/opengraph-image.tsx`.
 
-This project needs to rank in classic search **and** be quotable/citable by AI answer engines. Do all of the following — this is not optional polish, it's the deliverable.
+### 6.2 Structured Data (JSON-LD)
+All schemas are generated through helper builders in `lib/seo.ts` and injected via `<script type="application/ld+json">`:
+- **Root Layout (`app/layout.tsx`)**: `MusicSchool` / `EducationalOrganization` schema with NAP, geo coordinates, opening hours, and official social URLs.
+- **Class Routes (`app/classes/[slug]/page.tsx`)**: `Course` schema detailing provider, course prerequisites, age range, location, and syllabus timing.
+- **Contact Route (`app/contact/page.tsx`)**: `LocalBusiness` and `FAQPage` schemas matching visible page content exactly.
 
-### 7.1 Standard technical SEO
-- Use the **Metadata API** (`export const metadata` / `generateMetadata`) on every route — unique `title`, `description`, `alternates.canonical` per page. No duplicate titles/descriptions across pages.
-- `app/sitemap.ts` — dynamically list every route.
-- `app/robots.ts` — allow all standard crawlers; explicitly allow known AI crawlers too (GPTBot, Google-Extended, PerplexityBot, ClaudeBot, CCBot) unless the client later asks to block them.
-- Semantic HTML: one `<h1>` per page, logical `<h2>`/`<h3>` nesting, `<nav>`, `<main>`, `<footer>` landmarks, descriptive `alt` text on every image (not "image1.jpg" — describe what's actually in the photo).
-- Every internal link uses descriptive anchor text (not "click here").
-- 404 page with helpful navigation back into the site.
+### 6.3 GEO & LLM-Quotable Answer Guidelines
+- **Factual Declarative Statements**: Near the top of each page/template, include a 2–3 sentence direct answer summarizing the core offering (e.g. `geoAnswer` in `CLASSES_DATA`).
+- **Entity Consistency**: Always use the exact string **"Alby.sm Music Academy"** (not variations like "Alby SM" or "Alby Academy").
+- **LLM Summary File (`public/llms.txt`)**: A clean, concise markdown reference summarizing the academy's location, offerings, hours, contact info, and route directory. Keep this updated whenever academy details change.
 
-### 7.2 Structured data (JSON-LD)
-Add via a shared `lib/seo.ts` builder, rendered with `<script type="application/ld+json">` in each route's layout/page:
-- **Root layout**: `EducationalOrganization` (or `MusicSchool` if supported) schema with name, address, phone, `sameAs` (social links), `openingHours`.
-- **Each class page**: `Course` schema — name, description, provider (link back to the org), `coursePrerequisites` (age/level), `hasCourseInstance` with schedule if you have real batch data by launch.
-- **Contact page**: `LocalBusiness` schema with full NAP (name/address/phone), geo coordinates, opening hours.
-- **FAQ sections** (Contact page, and optionally each class page): `FAQPage` schema mirroring the visible accordion content exactly — never put facts in schema that aren't also visible on the page.
-- **Gallery**: `ImageObject` entries where practical.
+---
 
-### 7.3 GEO / LLM-answer optimization
-AI answer engines favor pages that state facts plainly and can be quoted in isolation. For every page:
-- Put a **direct, self-contained 2–3 sentence answer** near the top of the content (e.g. Piano page opens with "Alby.sm's Piano Class in Coimbatore teaches beginner to advanced students ages 6+, in small batches, using an ear-first method." rather than only a marketing headline). Headlines can stay stylistic; the *body copy right below* should be plain and factual.
-- Keep the **FAQ sections real and specific** (already in the design: Contact page + can extend to each class page) — FAQs are the single highest-value format for LLM citation. Answer each question completely in 1–3 sentences, no fluff.
-- Make sure key facts — address, phone, class ages, batch days, pricing if published — exist as **plain text in the HTML**, not only inside an image, a form placeholder, or client-side-rendered JS that a crawler might skip. Since we're using SSG, this is mostly automatic — just don't move factual content into client-only components.
-- Use consistent entity naming everywhere: always "Alby.sm Music Academy" (not "Alby SM", "Alby.sm Academy", "Alby Music" interchangeably) — LLMs and search engines both reward consistency when tying mentions to one entity.
-- Add `public/llms.txt` — a plain-text summary of the site for AI crawlers: what the academy is, what pages exist and what each covers, and the core facts (location, classes offered, contact). Keep it under ~1 page of text, in plain prose/bullets, no marketing tone.
-- Prefer clear declarative sentences over vague ones in body copy ("Guitar Class is open to ages 8 and up" beats "Guitar for all ages and levels!").
+## 7. Animation & Performance Rules
 
-### 7.4 Social / sharing
-- `opengraph-image.tsx` for a default OG image; consider per-page OG images for Home/Classes at minimum.
-- Twitter card metadata (`summary_large_image`) via the Metadata API.
-- `manifest.json` for PWA basics (name, icons, theme color = `--color-ink`, background color = `--color-ivory`).
+### 7.1 Framer Motion Rules
+- **GPU-Only Properties**: Animate **only `transform` (e.g. `x`, `y`, `scale`) and `opacity`**. Never animate `width`, `height`, `top/left`, or direct `box-shadow` properties to prevent layout recalculation and mobile jank.
+- **Scroll Triggers**: Use `whileInView` with `viewport={{ once: true, margin: "-60px" }}` so animations trigger smoothly once on scroll.
+- **Reduced Motion Support**: Always check `useReducedMotion()`. The shared `<ScrollReveal>` component automatically disables motion and falls back to instant opacity for users with `prefers-reduced-motion: reduce`.
+- **Above-The-Fold Speed**: Keep hero and initial header animations quick (200ms – 400ms) so text is immediately legible without delay.
 
-## 8. Mobile-First Responsive Rules
+### 7.2 Core Web Vitals Targets
+- **LCP (Largest Contentful Paint)**: < 2.0s (Hero images use `priority` and modern WebP/AVIF formats).
+- **INP (Interaction to Next Paint)**: < 200ms.
+- **CLS (Cumulative Layout Shift)**: < 0.05 (All images have explicit `width`/`height` or aspect-ratio locked parent containers).
+- **Server Components**: Pages and layout are React Server Components by default; only interactive components (`Header`, `MobileNav`, `ContactForm`, `FAQAccordion`, `GalleryGrid`, `FloatingContactBar`, `ScrollReveal`) declare `"use client"`.
 
-Majority of traffic will be mobile — design and build mobile-first, not "desktop then squeeze."
+---
 
-- Write base (unprefixed) Tailwind classes for mobile layout; add `md:`/`lg:` for larger breakpoints, never the reverse.
-- Tap targets ≥ 44×44px (nav links, buttons, accordion headers, filter pills).
-- Mobile nav: full-width slide-down or overlay menu (already prototyped in the HTML mockups) — must be reachable and closeable with one thumb.
-- No horizontal scroll at any breakpoint — test at 360px width minimum.
-- Forms (contact form): stack fields full-width on mobile, large touch-friendly inputs, correct `inputmode`/`type` (e.g. `type="tel"` for phone).
-- Test the piano-key divider and gallery grid specifically at small widths — they're the most layout-sensitive elements in the design.
+## 8. Mobile-First & Accessibility (a11y) Rules
 
-## 9. Accessibility
+- **Mobile-First Tailwind**: Write base classes for mobile (360px minimum width), then layer `sm:`, `md:`, `lg:` modifiers for desktop. Never build desktop layouts and shrink them down with negative margins.
+- **Tap Targets**: All buttons, links, accordion headers, dropdown toggles, and filter pills must have a minimum interactive target size of **44×44px**.
+- **Keyboard Navigation & ARIA**:
+  - Accordion triggers must have `aria-expanded`, `aria-controls`, and unique IDs.
+  - Lightbox modal supports backdrop click, escape, and close button with clear focus outlines.
+  - Mobile menu locks body scrolling on open (`document.body.style.overflow = 'hidden'`) and restores it on unmount.
+- **Forms**: All `<input>`, `<select>`, and `<textarea>` elements must have associated `<label>` elements with proper `htmlFor` bindings and appropriate `inputMode` attributes (`inputMode="tel"`, `inputMode="email"`).
+- **Color Contrast**: Body copy must satisfy WCAG AA contrast (≥ 4.5:1). Dark backgrounds (`--color-ink`, `--color-ink-2`, `--color-teal`) use ivory (`#F8F3E7`) or amber (`#E8A33D`) text. Light backgrounds use charcoal (`#2B2420`).
 
-- Color contrast: verify amber-on-ink and ivory-on-plum text combinations meet WCAG AA (4.5:1 for body text) — some amber/ivory combos in the mockup are decorative-only (badges, dividers) and don't need to pass text contrast, but any actual copy does.
-- All interactive elements reachable and operable by keyboard (nav, mobile menu toggle, FAQ accordion, gallery filters/lightbox).
-- Respect `prefers-reduced-motion` (see Section 5).
-- Form inputs have associated `<label>`s (visually hidden is fine if the design uses placeholder-only fields).
+---
 
-## 10. Content & Data
+## 9. Developer Recipes for Future Changes
 
-- Centralize class data (name, age range, level, curriculum bullets, batch schedule) in `lib/constants.ts` as typed objects — the three class pages and the classes overview page should all read from this single source, not duplicate copy.
-- All current photos/testimonials/faculty names in the mockups are **placeholders** — mark them clearly (e.g. a `// TODO: replace with real content` comment near each) so they're easy to find and swap before launch.
-- NAP (name, address, phone) must be identical everywhere it appears (footer, Contact page, JSON-LD) — copy-paste from `lib/constants.ts`, don't retype it.
+### Recipe 1: Updating Academy Details (Phone, Hours, Address)
+1. Open `lib/constants.ts`.
+2. Update the values in `ACADEMY_INFO`.
+3. Open `public/llms.txt` and ensure the summary matches the new information.
+4. *Result*: The Header, Footer, Floating Contact Bar, Contact Page, JSON-LD schemas, and LLM text will update automatically from this single source.
 
-## 11. Definition of Done
+### Recipe 2: Adding or Modifying a Class Program
+1. Open `lib/constants.ts` and add or edit the entry in `CLASSES_DATA`.
+2. If adding a new instrument (e.g. `drums`):
+   - Add the slug to `id: "piano" | "guitar" | "keyboard" | "drums"`.
+   - Create `app/classes/drums/page.tsx` importing `<ClassPageTemplate>` and passing `CLASSES_DATA.drums`.
+   - Add the route to `NAV_LINKS` in `lib/constants.ts` and `app/sitemap.ts`.
+   - Update `app/classes/page.tsx` with a jumpnav anchor and overview card.
 
-A page/feature is done when:
-1. It matches the approved design (colors, type, piano-key divider motif, spacing).
-2. It's fully responsive from 360px to desktop with no horizontal scroll.
-3. It has unique metadata + relevant JSON-LD.
-4. Images use `next/image`, animations use Framer Motion with transform/opacity only and respect reduced-motion.
-5. Lighthouse mobile Performance/SEO/Accessibility scores are all ≥ 90.
-6. No console errors/warnings in dev or build.
+### Recipe 3: Adding Images to the Gallery
+1. Place new optimized WebP or JPG files into `public/images/`.
+2. Open `components/sections/GalleryGrid.tsx` and `app/gallery/page.tsx`.
+3. Add a new item to `GALLERY_ITEMS` with `title`, `category`, `instrument`, `image`, and `caption`.
+
+### Recipe 4: Adding Testimonials or FAQs
+1. Open `lib/constants.ts`.
+2. Append new items to `TESTIMONIALS` or `FAQS`.
+3. *Result*: Visible UI cards on the Homepage and Contact page, as well as the structured `FAQPage` JSON-LD schema, will automatically include the new items.
+
+---
+
+## 10. Definition of Done (DoD) Checklist
+
+Before submitting or deploying any changes, verify:
+- [ ] **Type Check & Build**: `npm run build` completes with zero TypeScript or build errors.
+- [ ] **Lint**: `npm run lint` passes with zero warnings or errors.
+- [ ] **Mobile Responsiveness**: Verified from 360px up to 1440px with no horizontal overflow.
+- [ ] **Design Tokens**: All styles adhere to the *Golden Hour Recital* tokens without hardcoded arbitrary colors.
+- [ ] **Accessibility**: Tap targets ≥ 44px, keyboard navigable, labels bound to inputs, reduced-motion respected.
+- [ ] **SEO & JSON-LD**: Metadata defined, valid JSON-LD schema generated with no missing fields.
+- [ ] **Performance**: Images load via `next/image`, no layout thrashing, animations restricted to transform/opacity.

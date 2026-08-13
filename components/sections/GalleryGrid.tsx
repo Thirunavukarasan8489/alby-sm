@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Music, Eye, X } from "lucide-react";
+import { Eye, X } from "lucide-react";
 import { SectionHeading } from "../ui/SectionHeading";
 
 const GALLERY_ITEMS = [

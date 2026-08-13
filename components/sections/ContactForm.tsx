@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Send, CheckCircle2, AlertCircle } from "lucide-react";
-import { ACADEMY_INFO } from "@/lib/constants";
+import { Send, CheckCircle2 } from "lucide-react";
 
 export const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState({
