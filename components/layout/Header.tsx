@@ -40,7 +40,7 @@ export const Header: React.FC = () => {
           icon: "🎹",
         },
         {
-          name: "All Classes Overview",
+          name: "Theory of classes",
           href: "/classes",
           desc: "Compare programs, levels & batch timings",
           icon: "🎼",
@@ -95,7 +95,7 @@ export const Header: React.FC = () => {
                   >
                     <Link
                       href={link.href}
-                      className={`text-[14.5px] font-medium transition-all px-3 py-1.5 rounded-[4px] inline-flex items-center gap-1.5 relative ${
+                      className={`text-[14.5px] uppercase font-medium transition-all px-3 py-1.5 rounded-[4px] inline-flex items-center gap-1.5 relative ${
                         isActive
                           ? "text-[#E8A33D] font-semibold bg-white/6"
                           : "text-[#F8F3E7]/85 hover:text-[#E8A33D] hover:bg-white/4"
@@ -141,7 +141,7 @@ export const Header: React.FC = () => {
                               <Link
                                 key={sub.href}
                                 href={sub.href}
-                                className={`flex items-start gap-3 p-2.5 rounded-md transition-all ${
+                                className={`flex uppercase items-start gap-3 p-2.5 rounded-md transition-all ${
                                   isSubActive
                                     ? "bg-[#E8A33D] text-[#211126] font-semibold shadow-md"
                                     : "text-[#F8F3E7] hover:bg-[#E8A33D]/12 hover:text-[#E8A33D]"
@@ -178,7 +178,7 @@ export const Header: React.FC = () => {
                 <li key={link.href} className="relative py-2">
                   <Link
                     href={link.href}
-                    className={`text-[14.5px] font-medium transition-all px-3 py-1.5 rounded-[4px] relative ${
+                    className={`text-[14.5px] uppercase font-medium transition-all px-3 py-1.5 rounded-[4px] relative ${
                       isActive
                         ? "text-[#E8A33D] font-semibold bg-white/6"
                         : "text-[#F8F3E7]/85 hover:text-[#E8A33D] hover:bg-white/4"

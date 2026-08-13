@@ -37,7 +37,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
         { name: "🎹 Piano Class", href: "/classes/piano" },
         { name: "🎸 Guitar Class", href: "/classes/guitar" },
         { name: "🎛 Keyboard Class", href: "/classes/keyboard" },
-        { name: "🎼 All Classes Overview", href: "/classes" },
+        { name: "🎼 Theory of classes", href: "/classes" },
       ],
     },
     { name: "Gallery", href: "/gallery" },
@@ -75,7 +75,10 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
                   onClick={onClose}
                   className="font-serif text-2xl text-[#F8F3E7] tracking-wide"
                 >
-                  Alby<em className="font-serif italic text-[#E8A33D] not-italic">.sm</em>
+                  Alby
+                  <em className="font-serif italic text-[#E8A33D] not-italic">
+                    .sm
+                  </em>
                 </Link>
 
                 <button
@@ -93,7 +96,8 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
                   const isActive =
                     link.href === "/"
                       ? pathname === "/"
-                      : pathname === link.href || pathname.startsWith(`${link.href}/`);
+                      : pathname === link.href ||
+                        pathname.startsWith(`${link.href}/`);
 
                   if (link.hasSub) {
                     return (
@@ -108,7 +112,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
                           <Link
                             href={link.href}
                             onClick={onClose}
-                            className={`flex-1 text-[15px] font-medium transition-all px-4 py-3 rounded-[4px] flex items-center justify-between ${
+                            className={`flex-1 text-[15px] uppercase font-medium transition-all px-4 py-3 rounded-[4px] flex items-center justify-between ${
                               isActive
                                 ? "bg-[#E8A33D] text-[#211126] font-bold shadow-md"
                                 : "text-[#F8F3E7] hover:bg-white/8 hover:text-[#E8A33D]"
@@ -119,13 +123,17 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
                           </Link>
 
                           <button
-                            onClick={() => setMobileClassesExpanded(!mobileClassesExpanded)}
+                            onClick={() =>
+                              setMobileClassesExpanded(!mobileClassesExpanded)
+                            }
                             aria-label="Expand Classes Submenu"
                             className="p-3 text-[#F8F3E7]/70 hover:text-[#E8A33D] bg-transparent border-none cursor-pointer"
                           >
                             <svg
                               className={`w-4 h-4 transition-transform duration-200 ${
-                                mobileClassesExpanded ? "rotate-180 text-[#E8A33D]" : ""
+                                mobileClassesExpanded
+                                  ? "rotate-180 text-[#E8A33D]"
+                                  : ""
                               }`}
                               fill="none"
                               viewBox="0 0 24 24"
@@ -158,7 +166,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
                                     <Link
                                       href={sub.href}
                                       onClick={onClose}
-                                      className={`text-sm font-medium transition-all px-3 py-2 rounded-[4px] block ${
+                                      className={`text-sm uppercase font-medium transition-all px-3 py-2 rounded-[4px] block ${
                                         isSubActive
                                           ? "text-[#E8A33D] font-semibold bg-white/8"
                                           : "text-[#F8F3E7]/80 hover:text-[#E8A33D]"
@@ -186,7 +194,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
                       <Link
                         href={link.href}
                         onClick={onClose}
-                        className={`text-[15px] font-medium transition-all px-4 py-3 rounded-[4px] flex items-center justify-between ${
+                        className={`text-[15px] uppercase font-medium transition-all px-4 py-3 rounded-[4px] flex items-center justify-between ${
                           isActive
                             ? "bg-[#E8A33D] text-[#211126] font-bold shadow-md"
                             : "text-[#F8F3E7] hover:bg-white/8 hover:text-[#E8A33D]"
