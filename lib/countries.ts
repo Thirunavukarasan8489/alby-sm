@@ -16,7 +16,7 @@ export const COUNTRIES: CountryConfig[] = [
     flag: "🇮🇳",
     minLength: 10,
     maxLength: 10,
-    placeholder: "98765 43210",
+    placeholder: "XXXXX XXXXX",
   },
   {
     code: "GB",

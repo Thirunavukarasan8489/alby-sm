@@ -9,11 +9,10 @@ export const ACADEMY_INFO = {
     street: "123 Harmony Lane, College Road",
     city: "Coimbatore",
     state: "Tamil Nadu",
-    postalCode: "641018",
+    postalCode: "641030",
     country: "India",
   },
-  formattedAddress:
-    "123 Harmony Lane, College Road, Coimbatore, Tamil Nadu 641018, India",
+  formattedAddress: "Coimbatore, Tamil Nadu 641030, India",
   phone: "+91 90435 61694 ",
   phoneRaw: "+919043561694 ",
   whatsappUrl:
@@ -22,7 +21,14 @@ export const ACADEMY_INFO = {
   openingHours: "Mon-Fri: 3AM - 10PM, Sun: 4AM - 6AM and 1PM - 8PM",
   openingHoursSpecification: [
     {
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      dayOfWeek: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ],
       opens: "03:00",
       closes: "22:00",
     },
@@ -112,7 +118,7 @@ export const CLASSES_DATA: Record<string, ClassData> = {
       "Pentatonic scales, blues box & speed picking",
       "Tablature reading & sheet music fundamentals",
     ],
-    instructorName: "Lead Instructor R. Karthik",
+    instructorName: "Lead Instructor Sharmin",
     heroImage:
       "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=800&q=80",
     badge: "High Demand",
@@ -201,7 +207,7 @@ export const FAQS = [
   {
     question: "Where is Alby.sm Music Academy located in Coimbatore?",
     answer:
-      "Alby.sm Music Academy is located at 123 Harmony Lane, College Road, Coimbatore, Tamil Nadu 641018. It is easily accessible from all major parts of Coimbatore city.",
+      "Alby.sm Music Academy is located at 123 Harmony Lane, College Road, Coimbatore, Tamil Nadu 641030. It is easily accessible from all major parts of Coimbatore city.",
   },
   {
     question: "What makes the 'ear-first' teaching methodology different?",

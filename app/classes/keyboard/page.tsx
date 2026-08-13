@@ -93,8 +93,8 @@ export default function KeyboardClassPage() {
       ]}
       testimonial={{
         quote:
-          "The electronic keyboard class made music theory so intuitive. I can now layer instruments and perform backing arrangements effortlessly.",
-        cite: "— Keyboard Class student",
+          "",
+        cite: "",
       }}
       relatedClasses={[
         {

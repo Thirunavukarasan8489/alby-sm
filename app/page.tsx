@@ -34,7 +34,7 @@ export default function HomePage() {
 
         <div className="relative z-10 max-w-[1140px] mx-auto grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-[50px] items-center">
           <ScrollReveal direction="up" delay={0.05}>
-            <p className="eyebrow">Alby sm Music Academy</p>
+            <p className="eyebrow">Alby School of Music</p>
             <h1 className="text-4xl sm:text-6xl lg:text-[72px] font-serif tracking-normal mt-4 mb-6 leading-[1.05]">
               Where music
               <br />
@@ -161,25 +161,33 @@ export default function HomePage() {
             className="order-1 lg:order-2"
           >
             <p className="eyebrow !text-[#17514E]">About the Academy</p>
-            <h2 className="text-3xl sm:text-[40px] font-serif text-[#211126] mt-3.5 mb-4 leading-[1.05]">
+            {/* <h2 className="text-3xl sm:text-[40px] font-serif text-[#211126] mt-3.5 mb-4 leading-[1.05]">
               Two decades of teaching, one room full of sound
+            </h2> */}
+            <h2 className="text-3xl sm:text-[40px] font-serif text-[#211126] mt-3.5 mb-4 leading-[1.05]">
+              Founder & Director
             </h2>
             <p className="text-[#5c5147] text-base sm:text-[16px] leading-[1.75] mb-4">
-              Alby.sm began as a single piano and a handful of curious students.
-              Today it&apos;s a full academy where children and adults learn
-              piano, guitar and keyboard through structured, patient, one-on-one
-              attention — never rushed, never generic.
+              Here at Alby School of Music (ALBY SM) – one of the BEST Western
+              music schools in Coimbatore – you can give your loved ones the
+              gift of music. Mr. Albert Ebinraj , an accomplished musician and
+              Trinity-qualified educator , founded ALBY SM with a vision for
+              principled music education that builds a bright future for all.
+              Regardless of social, ethnic, or cultural background, ALBY SM
+              nurtures musically gifted children aged 3+ and adults through
+              personalised piano lessons, guitar classes, keyboard coaching and
+              music theory in Coimbatore. 
             </p>
-            <p className="text-[#5c5147] text-base sm:text-[16px] leading-[1.75] mb-7">
+            {/* <p className="text-[#5c5147] text-base sm:text-[16px] leading-[1.75] mb-7">
               Every batch is small by design, and every lesson is built around
               the student&apos;s ear, not just a syllabus.
-            </p>
+            </p> */}
 
             {/* Stats Row */}
             <div className="flex gap-9 pt-2">
               <div>
                 <strong className="font-serif text-[34px] text-[#17514E] block font-normal leading-none mb-1">
-                  18+
+                  9+
                 </strong>
                 <span className="text-[13px] text-[#6b6055]">
                   Years teaching
@@ -187,7 +195,7 @@ export default function HomePage() {
               </div>
               <div>
                 <strong className="font-serif text-[34px] text-[#17514E] block font-normal leading-none mb-1">
-                  500+
+                  100+
                 </strong>
                 <span className="text-[13px] text-[#6b6055]">
                   Students trained

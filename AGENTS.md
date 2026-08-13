@@ -7,26 +7,26 @@ This document is the master specification and operational guide for AI coding as
 ## 1. Project Overview & Mission
 
 - **Client**: Alby.sm Music Academy (Founder: Master Alby)
-- **Location**: 123 Harmony Lane, College Road, Coimbatore, Tamil Nadu 641018, India
+- **Location**: 123 Harmony Lane, College Road, Coimbatore, Tamil Nadu 641030, India
 - **Core Offerings**: Structured, ear-first music lessons for **Piano**, **Guitar**, and **Electronic Keyboard** for all ages (6+ to adults) and skill levels (Beginner to Advanced / Trinity College London grade exam prep).
 - **Core Goal**: A blazing-fast, mobile-first, animated marketing website that achieves top search rankings in Google, provides frictionless trial enrollment, and is highly optimized for AI answer engines (ChatGPT, Gemini, Perplexity, Claude) through structured JSON-LD and clean factual citation formatting.
-- **Design Theme**: *"Golden Hour Recital"* — deep plum/ink backgrounds, warm ivory contrasts, luminous amber accents, subtle teal sections, and the signature piano-key divider motif.
+- **Design Theme**: _"Golden Hour Recital"_ — deep plum/ink backgrounds, warm ivory contrasts, luminous amber accents, subtle teal sections, and the signature piano-key divider motif.
 
 ---
 
 ## 2. Tech Stack & Dependencies
 
-| Layer | Technology | Specification / Notes |
-|---|---|---|
-| **Framework** | Next.js 16 (App Router) | All routes inside `app/` directory (no `pages/` directory). Static generation (SSG) preferred. |
-| **Language** | TypeScript 5 | Strict type checking on all components, data objects, and helpers. |
-| **Styling** | Tailwind CSS v4 | CSS-first configuration via `@theme` in `app/globals.css`. PostCSS integration via `@tailwindcss/postcss`. |
-| **Animations** | Framer Motion (`framer-motion`) | GPU-accelerated (transform & opacity only) with `useReducedMotion()` accessibility fallback. |
-| **Icons** | Lucide React (`lucide-react`) + Custom SVG | `PianoIcon.tsx`, standard Lucide icons, custom vector social SVGs. |
-| **Typography** | `next/font/google` | `Instrument Serif` (headings) and `Inter` (body / UI) loaded via CSS variables with `display: swap`. |
-| **Images** | `next/image` | Mandatory for every image. Explicit dimensions or `fill` with relative parent. |
-| **Deployment** | Vercel | Production build target with Edge / Node.js runtime OG image support. |
-| **Package Manager** | npm | `package-lock.json` lockfile. |
+| Layer               | Technology                                 | Specification / Notes                                                                                      |
+| ------------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
+| **Framework**       | Next.js 16 (App Router)                    | All routes inside `app/` directory (no `pages/` directory). Static generation (SSG) preferred.             |
+| **Language**        | TypeScript 5                               | Strict type checking on all components, data objects, and helpers.                                         |
+| **Styling**         | Tailwind CSS v4                            | CSS-first configuration via `@theme` in `app/globals.css`. PostCSS integration via `@tailwindcss/postcss`. |
+| **Animations**      | Framer Motion (`framer-motion`)            | GPU-accelerated (transform & opacity only) with `useReducedMotion()` accessibility fallback.               |
+| **Icons**           | Lucide React (`lucide-react`) + Custom SVG | `PianoIcon.tsx`, standard Lucide icons, custom vector social SVGs.                                         |
+| **Typography**      | `next/font/google`                         | `Instrument Serif` (headings) and `Inter` (body / UI) loaded via CSS variables with `display: swap`.       |
+| **Images**          | `next/image`                               | Mandatory for every image. Explicit dimensions or `fill` with relative parent.                             |
+| **Deployment**      | Vercel                                     | Production build target with Edge / Node.js runtime OG image support.                                      |
+| **Package Manager** | npm                                        | `package-lock.json` lockfile.                                                                              |
 
 ---
 
@@ -38,14 +38,14 @@ Define tokens as CSS variables in `app/globals.css` under `@theme`. **Never use 
 
 ```css
 @theme {
-  --color-ink: #211126;       /* Primary dark background */
-  --color-ink-2: #2c1732;     /* Secondary dark background / Card fill */
-  --color-ivory: #F8F3E7;     /* Light background / Light high-contrast text */
-  --color-amber: #E8A33D;     /* Primary accent / CTA buttons / Highlights */
-  --color-amber-dark: #c9852a;/* Hover & active states for amber CTA */
-  --color-teal: #17514E;      /* Secondary dark accent / Teal feature panels */
-  --color-rose: #C97B84;      /* Tertiary soft accent */
-  --color-charcoal: #2B2420;  /* Body copy text on light ivory backgrounds */
+  --color-ink: #211126; /* Primary dark background */
+  --color-ink-2: #2c1732; /* Secondary dark background / Card fill */
+  --color-ivory: #f8f3e7; /* Light background / Light high-contrast text */
+  --color-amber: #e8a33d; /* Primary accent / CTA buttons / Highlights */
+  --color-amber-dark: #c9852a; /* Hover & active states for amber CTA */
+  --color-teal: #17514e; /* Secondary dark accent / Teal feature panels */
+  --color-rose: #c97b84; /* Tertiary soft accent */
+  --color-charcoal: #2b2420; /* Body copy text on light ivory backgrounds */
 
   --font-serif: var(--font-instrument-serif), Georgia, serif;
   --font-sans: var(--font-inter), system-ui, sans-serif;
@@ -146,10 +146,11 @@ alby-sm/
 All business data, addresses, course syllabi, testimonials, and FAQs **must remain centralized in `lib/constants.ts`**. Never hardcode addresses, phone numbers, or course data directly in page JSX.
 
 ### Core Data Models in `lib/constants.ts`:
+
 1. `ACADEMY_INFO`:
    - `name`: `"Alby.sm Music Academy"`
    - `legalName`: `"Alby.sm Music Academy Coimbatore"`
-   - `formattedAddress`: `"123 Harmony Lane, College Road, Coimbatore, Tamil Nadu 641018, India"`
+   - `formattedAddress`: `"123 Harmony Lane, College Road, Coimbatore, Tamil Nadu 641030, India"`
    - `phone`: `"+91 90435 61694 "`
    - `email`: `"albertebini455@gmail.com"`
    - `whatsappUrl`: Direct WhatsApp API link with prefilled enquiry text.
@@ -166,6 +167,7 @@ All business data, addresses, course syllabi, testimonials, and FAQs **must rema
 ### 5.2 Contact Form Validation & Database Persistence Architecture
 
 The contact booking pipeline in `app/contact/page.tsx` and `app/api/contact/route.ts` implements strict double-layer (client + server) validation:
+
 1. **Full Name**: Mandatory, letters and spaces only (`/^[a-zA-Z\s]+$/`), min 2, max 100 characters. Rejects numbers and special characters.
 2. **Country Code & Phone**: Small dropdown of international country codes with flags (`lib/countries.ts`). Dynamically validates and enforces exact digit counts (e.g., India `+91` requires exactly 10 digits; UAE `+971` requires 9 digits; Singapore `+65` requires 8 digits). Input restricted strictly to numeric digits.
 3. **Email**: Mandatory, strict email format regex (`/^[^\s@]+@[^\s@]+\.[^\s@]+$/`).
@@ -187,6 +189,7 @@ The contact booking pipeline in `app/contact/page.tsx` and `app/api/contact/rout
 This site is engineered to rank in standard search engines and be directly cited by LLMs (ChatGPT, Gemini, Perplexity, Claude).
 
 ### 6.1 Technical SEO Standards
+
 - **Metadata API**: Every route exports unique `metadata` using `constructMetadata()` from `lib/seo.ts`. No duplicate titles or descriptions.
 - **Canonical URLs**: Automatically populated per route via `SITE_URL` and route path.
 - **Dynamic Sitemap**: `app/sitemap.ts` generates clean XML sitemaps with route priority weighting.
@@ -194,12 +197,15 @@ This site is engineered to rank in standard search engines and be directly cited
 - **OpenGraph & Twitter**: Configured in `app/layout.tsx` and dynamically rendered by `app/opengraph-image.tsx`.
 
 ### 6.2 Structured Data (JSON-LD)
+
 All schemas are generated through helper builders in `lib/seo.ts` and injected via `<script type="application/ld+json">`:
+
 - **Root Layout (`app/layout.tsx`)**: `MusicSchool` / `EducationalOrganization` schema with NAP, geo coordinates, opening hours, and official social URLs.
 - **Class Routes (`app/classes/[slug]/page.tsx`)**: `Course` schema detailing provider, course prerequisites, age range, location, and syllabus timing.
 - **Contact Route (`app/contact/page.tsx`)**: `LocalBusiness` and `FAQPage` schemas matching visible page content exactly.
 
 ### 6.3 GEO & LLM-Quotable Answer Guidelines
+
 - **Factual Declarative Statements**: Near the top of each page/template, include a 2–3 sentence direct answer summarizing the core offering (e.g. `geoAnswer` in `CLASSES_DATA`).
 - **Entity Consistency**: Always use the exact string **"Alby.sm Music Academy"** (not variations like "Alby SM" or "Alby Academy").
 - **LLM Summary File (`public/llms.txt`)**: A clean, concise markdown reference summarizing the academy's location, offerings, hours, contact info, and route directory. Keep this updated whenever academy details change.
@@ -209,12 +215,14 @@ All schemas are generated through helper builders in `lib/seo.ts` and injected v
 ## 7. Animation & Performance Rules
 
 ### 7.1 Framer Motion Rules
+
 - **GPU-Only Properties**: Animate **only `transform` (e.g. `x`, `y`, `scale`) and `opacity`**. Never animate `width`, `height`, `top/left`, or direct `box-shadow` properties to prevent layout recalculation and mobile jank.
 - **Scroll Triggers**: Use `whileInView` with `viewport={{ once: true, margin: "-60px" }}` so animations trigger smoothly once on scroll.
 - **Reduced Motion Support**: Always check `useReducedMotion()`. The shared `<ScrollReveal>` component automatically disables motion and falls back to instant opacity for users with `prefers-reduced-motion: reduce`.
 - **Above-The-Fold Speed**: Keep hero and initial header animations quick (200ms – 400ms) so text is immediately legible without delay.
 
 ### 7.2 Core Web Vitals Targets
+
 - **LCP (Largest Contentful Paint)**: < 2.0s (Hero images use `priority` and modern WebP/AVIF formats).
 - **INP (Interaction to Next Paint)**: < 200ms.
 - **CLS (Cumulative Layout Shift)**: < 0.05 (All images have explicit `width`/`height` or aspect-ratio locked parent containers).
@@ -238,12 +246,14 @@ All schemas are generated through helper builders in `lib/seo.ts` and injected v
 ## 9. Developer Recipes for Future Changes
 
 ### Recipe 1: Updating Academy Details (Phone, Hours, Address)
+
 1. Open `lib/constants.ts`.
 2. Update the values in `ACADEMY_INFO`.
 3. Open `public/llms.txt` and ensure the summary matches the new information.
-4. *Result*: The Header, Footer, Floating Contact Bar, Contact Page, JSON-LD schemas, and LLM text will update automatically from this single source.
+4. _Result_: The Header, Footer, Floating Contact Bar, Contact Page, JSON-LD schemas, and LLM text will update automatically from this single source.
 
 ### Recipe 2: Adding or Modifying a Class Program
+
 1. Open `lib/constants.ts` and add or edit the entry in `CLASSES_DATA`.
 2. If adding a new instrument (e.g. `drums`):
    - Add the slug to `id: "piano" | "guitar" | "keyboard" | "drums"`.
@@ -252,24 +262,27 @@ All schemas are generated through helper builders in `lib/seo.ts` and injected v
    - Update `app/classes/page.tsx` with a jumpnav anchor and overview card.
 
 ### Recipe 3: Adding Images to the Gallery
+
 1. Place new optimized WebP or JPG files into `public/images/`.
 2. Open `components/sections/GalleryGrid.tsx` and `app/gallery/page.tsx`.
 3. Add a new item to `GALLERY_ITEMS` with `title`, `category`, `instrument`, `image`, and `caption`.
 
 ### Recipe 4: Adding Testimonials or FAQs
+
 1. Open `lib/constants.ts`.
 2. Append new items to `TESTIMONIALS` or `FAQS`.
-3. *Result*: Visible UI cards on the Homepage and Contact page, as well as the structured `FAQPage` JSON-LD schema, will automatically include the new items.
+3. _Result_: Visible UI cards on the Homepage and Contact page, as well as the structured `FAQPage` JSON-LD schema, will automatically include the new items.
 
 ---
 
 ## 10. Definition of Done (DoD) Checklist
 
 Before submitting or deploying any changes, verify:
+
 - [ ] **Type Check & Build**: `npm run build` completes with zero TypeScript or build errors.
 - [ ] **Lint**: `npm run lint` passes with zero warnings or errors.
 - [ ] **Mobile Responsiveness**: Verified from 360px up to 1440px with no horizontal overflow.
-- [ ] **Design Tokens**: All styles adhere to the *Golden Hour Recital* tokens without hardcoded arbitrary colors.
+- [ ] **Design Tokens**: All styles adhere to the _Golden Hour Recital_ tokens without hardcoded arbitrary colors.
 - [ ] **Accessibility**: Tap targets ≥ 44px, keyboard navigable, labels bound to inputs, reduced-motion respected.
 - [ ] **SEO & JSON-LD**: Metadata defined, valid JSON-LD schema generated with no missing fields.
 - [ ] **Performance**: Images load via `next/image`, no layout thrashing, animations restricted to transform/opacity.

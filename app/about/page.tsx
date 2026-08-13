@@ -70,11 +70,11 @@ export default function AboutPage() {
           >
             <div className="relative rounded-[4px] overflow-hidden">
               <Image
-                src="/images/alby-grand-piano.jpg"
+                src="/images/alby-grand-piano1.jpg"
                 alt="Piano lesson in progress at Alby.sm"
                 width={600}
                 height={400}
-                className="w-full h-[320px] sm:h-[400px] object-cover transition-transform duration-700 hover:scale-105"
+                className="w-full h-[320px] sm:h-[500px] object-top object-cover transition-transform duration-700 hover:scale-105"
               />
             </div>
             {/* Offset Amber Border Box */}
@@ -86,21 +86,29 @@ export default function AboutPage() {
             delay={0.15}
             className="order-1 lg:order-2"
           >
-            <p className="eyebrow !text-[#17514E]">How it started</p>
+            <p className="eyebrow !text-[#17514E]">DIRECTOR</p>
             <h2 className="text-3xl sm:text-[40px] font-serif text-[#211126] mt-3.5 mb-4 leading-[1.05]">
               Music, taught the way it&apos;s meant to be learned
             </h2>
             <p className="text-[#5c5147] text-base sm:text-[16px] leading-[1.75] mb-4">
-              Alby.sm was founded on a simple idea: that every student learns
-              music differently, and a good teacher listens before they
-              instruct. What started as informal piano lessons has grown into a
-              full academy for piano, guitar and keyboard — but the small-batch,
-              ear-first approach hasn&apos;t changed.
+              It gives me great pleasure to welcome you to ALBY SM! It’s a right
+              choice for the students to study in ALBY SM with passion,
+              dedication and enthusiasm, supported by an inspiring and committed
+              team of teachers and specialists. Our aim is to explore and expand
+              the student’s innate musicianship. We want our students to grow as
+              fine musicians but also becoming caring, receptive and considerate
+              young adults with a power to enrich other people’s lives through
+              their music and understanding.
             </p>
             <p className="text-[#5c5147] text-base sm:text-[16px] leading-[1.75]">
-              We don&apos;t chase big numbers. We keep every batch small enough
-              that the instructor knows exactly where each student is stuck, and
-              exactly what they&apos;re ready for next.
+              To achieve this, we provide students, comprehensive and inspiring
+              programs with innovative work covering all areas of the Music
+              Department, exciting challenges and experiences. I am sure ALBY SM
+              will soon emerge as the most outstanding and progressive
+              Specialist Music School in the City of Coimbatore. I wish the
+              students to avail quality of music education delivered by ALBY SM,
+              develop lifelong skills in music and gift the music to the loved
+              ones.
             </p>
           </ScrollReveal>
         </div>
@@ -295,7 +303,7 @@ export default function AboutPage() {
               />
               <div className="p-[22px]">
                 <h3 className="font-serif text-[21px] text-[#F8F3E7]">
-                  R. Karthik
+                  Sharmin
                 </h3>
                 <span className="block text-[#E8A33D] text-[13px] my-1.5 font-semibold">
                   Guitar · 9 yrs experience

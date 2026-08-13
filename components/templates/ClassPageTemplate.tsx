@@ -251,9 +251,9 @@ export const ClassPageTemplate: React.FC<ClassPageTemplateProps> = ({
                   <td className="p-4 sm:px-5 sm:py-3.5 font-medium">
                     {row.batch}
                   </td>
-                  <td className="p-4 sm:px-5 sm:py-3.5">{row.level}</td>
-                  <td className="p-4 sm:px-5 sm:py-3.5">{row.days}</td>
-                  <td className="p-4 sm:px-5 sm:py-3.5">{row.time}</td>
+                  {/* <td className="p-4 sm:px-5 sm:py-3.5">{row.level}</td> */}
+                  {/* <td className="p-4 sm:px-5 sm:py-3.5">{row.days}</td> */}
+                  {/* <td className="p-4 sm:px-5 sm:py-3.5">{row.time}</td> */}
                 </tr>
               ))}
             </tbody>
@@ -324,9 +324,9 @@ export const ClassPageTemplate: React.FC<ClassPageTemplateProps> = ({
           <h2 className="text-3xl sm:text-[38px] font-serif">
             Ready to start playing?
           </h2>
-          <p className="mt-3.5 mb-6.5 max-w-[460px] mx-auto text-[#cfc3b3] text-base">
+          {/* <p className="mt-3.5 mb-6.5 max-w-[460px] mx-auto text-[#cfc3b3] text-base">
             Book a free trial class and meet your instructor first.
-          </p>
+          </p> */}
           <Link
             href="/contact"
             className="bg-[#E8A33D] text-[#211126] font-semibold text-[15px] px-7 py-3.5 rounded-[2px] transition-all hover:bg-white hover:-translate-y-0.5 inline-block shadow-md"

@@ -631,7 +631,7 @@ export default function ContactPage() {
                           value={formData.name}
                           onChange={handleNameChange}
                           onBlur={() => handleBlur("name")}
-                          placeholder="e.g. Anand Kumar"
+                          placeholder="e.g. Albert Ebinraj"
                           className={`w-full bg-white/8 border text-[#F8F3E7] placeholder-[#b7cbc8] p-3 rounded-[3px] font-sans text-sm focus:outline-none transition-colors ${touched.name && errors.name
                             ? "border-rose-400 focus:border-rose-400 bg-rose-500/5"
                             : "border-white/20 focus:border-[#E8A33D]"
@@ -661,7 +661,7 @@ export default function ContactPage() {
                           value={formData.email}
                           onChange={handleEmailChange}
                           onBlur={() => handleBlur("email")}
-                          placeholder="e.g. anand@example.com"
+                          placeholder="e.g. albertebini455@gmail.com"
                           className={`w-full bg-white/8 border text-[#F8F3E7] placeholder-[#b7cbc8] p-3 rounded-[3px] font-sans text-sm focus:outline-none transition-colors ${touched.email && errors.email
                             ? "border-rose-400 focus:border-rose-400 bg-rose-500/5"
                             : "border-white/20 focus:border-[#E8A33D]"
