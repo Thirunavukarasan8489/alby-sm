@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/classes/keyboard",
     "/gallery",
     "/contact",
+    "/privacy-policy",
   ];
 
   return routes.map((route) => ({

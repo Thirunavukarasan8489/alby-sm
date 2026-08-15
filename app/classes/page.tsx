@@ -8,7 +8,7 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 export const metadata = constructMetadata({
   title: "Classes & Syllabi | Piano, Guitar, Keyboard in Coimbatore",
   description:
-    "Explore Piano, Guitar, and Keyboard classes at Alby.sm Music Academy in Coimbatore. Small batch sizes, ear-first training, and Trinity exam prep for ages 6+.",
+    "Explore Piano, Guitar, and Keyboard classes at Alby School of Music in Coimbatore. Small batch sizes, ear-first training, and Trinity exam prep for ages 6+.",
   path: "/classes",
 });
 

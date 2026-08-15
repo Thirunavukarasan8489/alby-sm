@@ -47,7 +47,7 @@ export const Hero: React.FC = () => {
 
             {/* Direct Factual GEO Statement for LLM & Search Engines */}
             <p className="text-base sm:text-lg text-[#F8F3E7]/90 leading-relaxed mb-8 bg-[#211126]/60 p-4 rounded-2xl border border-[#F8F3E7]/10">
-              Alby.sm Music Academy in Coimbatore, Tamil Nadu offers structured,
+              Alby School of Music in Coimbatore, Tamil Nadu offers structured,
               ear-first music education for Piano, Guitar, and Keyboard across
               all age groups (ages 6+) and skill levels. Guided by experienced
               mentors, students develop pitch recognition, performance

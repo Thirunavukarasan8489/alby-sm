@@ -1,12 +1,12 @@
-# AGENTS.md — Alby.sm Music Academy Website
+# AGENTS.md — Alby School of Music Website
 
-This document is the master specification and operational guide for AI coding assistants (Antigravity AI, Claude, Copilot, etc.) and human engineers working on the **Alby.sm Music Academy** codebase. Follow all architectural patterns, design guidelines, SEO standards, and performance rules defined here.
+This document is the master specification and operational guide for AI coding assistants (Antigravity AI, Claude, Copilot, etc.) and human engineers working on the **Alby School of Music** codebase. Follow all architectural patterns, design guidelines, SEO standards, and performance rules defined here.
 
 ---
 
 ## 1. Project Overview & Mission
 
-- **Client**: Alby.sm Music Academy (Founder: Master Alby)
+- **Client**: Alby School of Music (Founder: Master Alby)
 - **Location**: 123 Harmony Lane, College Road, Coimbatore, Tamil Nadu 641030, India
 - **Core Offerings**: Structured, ear-first music lessons for **Piano**, **Guitar**, and **Electronic Keyboard** for all ages (6+ to adults) and skill levels (Beginner to Advanced / Trinity College London grade exam prep).
 - **Core Goal**: A blazing-fast, mobile-first, animated marketing website that achieves top search rankings in Google, provides frictionless trial enrollment, and is highly optimized for AI answer engines (ChatGPT, Gemini, Perplexity, Claude) through structured JSON-LD and clean factual citation formatting.
@@ -148,8 +148,8 @@ All business data, addresses, course syllabi, testimonials, and FAQs **must rema
 ### Core Data Models in `lib/constants.ts`:
 
 1. `ACADEMY_INFO`:
-   - `name`: `"Alby.sm Music Academy"`
-   - `legalName`: `"Alby.sm Music Academy Coimbatore"`
+   - `name`: `"Alby School of Music"`
+   - `legalName`: `"Alby School of Music Coimbatore"`
    - `formattedAddress`: `"123 Harmony Lane, College Road, Coimbatore, Tamil Nadu 641030, India"`
    - `phone`: `"+91 90435 61694 "`
    - `email`: `"albertebini455@gmail.com"`
@@ -207,7 +207,7 @@ All schemas are generated through helper builders in `lib/seo.ts` and injected v
 ### 6.3 GEO & LLM-Quotable Answer Guidelines
 
 - **Factual Declarative Statements**: Near the top of each page/template, include a 2–3 sentence direct answer summarizing the core offering (e.g. `geoAnswer` in `CLASSES_DATA`).
-- **Entity Consistency**: Always use the exact string **"Alby.sm Music Academy"** (not variations like "Alby SM" or "Alby Academy").
+- **Entity Consistency**: Always use the exact string **"Alby School of Music"** (not variations like "Alby SM" or "Alby Academy").
 - **LLM Summary File (`public/llms.txt`)**: A clean, concise markdown reference summarizing the academy's location, offerings, hours, contact info, and route directory. Keep this updated whenever academy details change.
 
 ---

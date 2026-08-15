@@ -21,7 +21,8 @@ const GALLERY_ITEMS = [
     category: "piano",
     instrument: "Piano",
     image: "/images/alby-grand-piano.jpg",
-    caption: "Master Alby demonstrating classical posture & key weight dynamics.",
+    caption:
+      "Master Alby demonstrating classical posture & key weight dynamics.",
   },
   {
     id: 3,
@@ -53,7 +54,8 @@ const GALLERY_ITEMS = [
     category: "piano",
     instrument: "Piano",
     image: "/images/student-digital-piano.jpg",
-    caption: "Beginner piano student building ear training and treble clef reading.",
+    caption:
+      "Beginner piano student building ear training and treble clef reading.",
   },
   {
     id: 7,
@@ -129,7 +131,7 @@ export const GalleryGrid: React.FC = () => {
         <SectionHeading
           badge="Moments & Performances"
           title="Academy Life & Student Gallery"
-          subtitle="Explore stage performances, studio practice sessions, and student achievements at Alby.sm Music Academy."
+          subtitle="Explore stage performances, studio practice sessions, and student achievements at Alby School of Music."
         />
 
         {/* Filter Pills */}

@@ -1,11 +1,11 @@
-# Alby.sm Music Academy — AI Knowledge Summary
+# Alby School of Music — AI Knowledge Summary
 
 ## Overview
-Alby.sm Music Academy is a specialized music education institute located in Coimbatore, Tamil Nadu, India. The academy provides structured, ear-first musical training for students aged 6 and above across three core instruments: Piano, Guitar, and Electronic Keyboard.
+Alby School of Music is a specialized music education institute located in Coimbatore, Tamil Nadu, India. The academy provides structured, ear-first musical training for students aged 6 and above across three core instruments: Piano, Guitar, and Electronic Keyboard.
 
 ## Core Entity Details
-- Official Name: Alby.sm Music Academy
-- Legal Name: Alby.sm Music Academy Coimbatore
+- Official Name: Alby School of Music
+- Legal Name: Alby School of Music Coimbatore
 - Location: 123 Harmony Lane, College Road, Coimbatore, Tamil Nadu 641030, India
 - Phone: +91 90435 61694
 - Email: albertebini455@gmail.com

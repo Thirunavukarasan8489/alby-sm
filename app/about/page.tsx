@@ -6,9 +6,9 @@ import { PianoKeyDivider } from "@/components/ui/PianoKeyDivider";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 export const metadata = constructMetadata({
-  title: "About Us | Alby.sm Music Academy Coimbatore",
+  title: "About Us | Alby School of Music Coimbatore",
   description:
-    "Learn about Alby.sm Music Academy in Coimbatore, Tamil Nadu — our ear-first teaching philosophy, certified faculty, and state-of-the-art facilities for Piano, Guitar, and Keyboard.",
+    "Learn about Alby School of Music in Coimbatore, Tamil Nadu — our ear-first teaching philosophy, certified faculty, and state-of-the-art facilities for Piano, Guitar, and Keyboard.",
   path: "/about",
 });
 
@@ -275,11 +275,11 @@ export default function AboutPage() {
                 alt="Master Alby - Founder & Lead Instructor"
                 width={400}
                 height={260}
-                className="w-full h-[260px] object-cover"
+                className="w-full h-[300px] object-cover"
               />
               <div className="p-[22px]">
                 <h3 className="font-serif text-[21px] text-[#F8F3E7]">
-                  Master Alby
+                  Albert Ebinraj
                 </h3>
                 <span className="block text-[#E8A33D] text-[13px] my-1.5 font-semibold">
                   Piano · 12 yrs experience
@@ -292,14 +292,38 @@ export default function AboutPage() {
             </div>
           </ScrollReveal>
 
+          <ScrollReveal direction="up" delay={0.1}>
+            <div className="h-full bg-[#2c1732] rounded-[4px] overflow-hidden border border-[#E8A33D]/15 transition-all duration-300 hover:-translate-y-1.5">
+              <Image
+                src="/images/alby-founder.jpg"
+                alt="Master Alby - Founder & Lead Instructor"
+                width={400}
+                height={260}
+                className="w-full h-[300px] object-cover"
+              />
+              <div className="p-[22px]">
+                <h3 className="font-serif text-[21px] text-[#F8F3E7]">
+                  Albert Ebinraj
+                </h3>
+                <span className="block text-[#E8A33D] text-[13px] my-1.5 font-semibold">
+                  Keyboard · 7 yrs experience
+                </span>
+                <p className="text-[14px] text-[#cfc3b3] leading-[1.6]">
+                  Performance keyboardist teaching modern arrangement and
+                  layered sound.
+                </p>
+              </div>
+            </div>
+          </ScrollReveal>
+
           <ScrollReveal direction="up" delay={0.2}>
             <div className="h-full bg-[#2c1732] rounded-[4px] overflow-hidden border border-[#E8A33D]/15 transition-all duration-300 hover:-translate-y-1.5">
               <Image
-                src="https://images.unsplash.com/photo-1583407723467-9b0c6d2f2b8f?w=400&q=80"
+                src="/images/sharmin1.jpeg"
                 alt="Guitar instructor"
-                width={400}
-                height={260}
-                className="w-full h-[260px] object-cover"
+                width={760}
+                height={1245}
+                className="w-full h-[300px] object-cover"
               />
               <div className="p-[22px]">
                 <h3 className="font-serif text-[21px] text-[#F8F3E7]">
@@ -316,7 +340,7 @@ export default function AboutPage() {
             </div>
           </ScrollReveal>
 
-          <ScrollReveal direction="up" delay={0.3}>
+          {/* <ScrollReveal direction="up" delay={0.3}>
             <div className="h-full bg-[#2c1732] rounded-[4px] overflow-hidden border border-[#E8A33D]/15 transition-all duration-300 hover:-translate-y-1.5">
               <Image
                 src="https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400&q=80"
@@ -338,7 +362,7 @@ export default function AboutPage() {
                 </p>
               </div>
             </div>
-          </ScrollReveal>
+          </ScrollReveal> */}
         </div>
       </section>
 

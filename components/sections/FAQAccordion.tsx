@@ -17,7 +17,7 @@ interface FAQAccordionProps {
 export const FAQAccordion: React.FC<FAQAccordionProps> = ({
   items = FAQS,
   title = "Frequently Asked Questions",
-  subtitle = "Clear, direct answers about batch timings, age limits, location, and teaching methods at Alby.sm Music Academy.",
+  subtitle = "Clear, direct answers about batch timings, age limits, location, and teaching methods at Alby School of Music.",
   badge = "Got Questions?",
   className = "",
 }) => {
@@ -28,7 +28,9 @@ export const FAQAccordion: React.FC<FAQAccordionProps> = ({
   };
 
   return (
-    <section className={`py-16 md:py-24 bg-[#211126] text-[#F8F3E7] ${className}`}>
+    <section
+      className={`py-16 md:py-24 bg-[#211126] text-[#F8F3E7] ${className}`}
+    >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading badge={badge} title={title} subtitle={subtitle} />
 

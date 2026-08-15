@@ -1,10 +1,10 @@
 export const ACADEMY_INFO = {
-  name: "Alby.sm Music Academy",
-  legalName: "Alby.sm Music Academy Coimbatore",
+  name: "Alby School of Music",
+  legalName: "Alby School of Music Coimbatore",
   tagline:
     "Golden Hour Recital — Master Piano, Guitar & Keyboard in Coimbatore",
   description:
-    "Alby.sm Music Academy in Coimbatore, Tamil Nadu offers structured, ear-first music education for Piano, Guitar, and Keyboard across all age groups (ages 6+) and skill levels from beginner to advanced.",
+    "Alby School of Music in Coimbatore, Tamil Nadu offers structured, ear-first music education for Piano, Guitar, and Keyboard across all age groups (ages 6+) and skill levels from beginner to advanced.",
   address: {
     street: "123 Harmony Lane, College Road",
     city: "Coimbatore",
@@ -167,7 +167,7 @@ export const TESTIMONIALS = [
   {
     id: 1,
     quote:
-      "Alby.sm Music Academy transformed my daughter's piano playing within 6 months. The ear-first approach made her confident on stage during the annual recital!",
+      "Alby School of Music transformed my daughter's piano playing within 6 months. The ear-first approach made her confident on stage during the annual recital!",
     author: "S. Meenakshi",
     role: "Parent of Piano Student (Age 9)",
     rating: 5,
@@ -205,9 +205,9 @@ export const FAQS = [
       "Piano and Keyboard classes are open to children aged 6 and above as well as adults. Guitar classes start from age 8 and up. We welcome absolute beginners and intermediate players.",
   },
   {
-    question: "Where is Alby.sm Music Academy located in Coimbatore?",
+    question: "Where is Alby School of Music located in Coimbatore?",
     answer:
-      "Alby.sm Music Academy is located at 123 Harmony Lane, College Road, Coimbatore, Tamil Nadu 641030. It is easily accessible from all major parts of Coimbatore city.",
+      "Alby School of Music is located at 123 Harmony Lane, College Road, Coimbatore, Tamil Nadu 641030. It is easily accessible from all major parts of Coimbatore city.",
   },
   {
     question: "What makes the 'ear-first' teaching methodology different?",

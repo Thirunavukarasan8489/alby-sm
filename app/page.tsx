@@ -5,6 +5,7 @@ import { constructMetadata } from "@/lib/seo";
 import { PianoKeyDivider } from "@/components/ui/PianoKeyDivider";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { Testimonial } from "@/components/sections/Testimonial";
+import { ExamsSection } from "@/components/sections/ExamsSection";
 
 export const metadata = constructMetadata({
   title: "Alby.sm Music Academy | Piano, Guitar & Keyboard in Coimbatore",
@@ -471,12 +472,18 @@ export default function HomePage() {
       {/* ---------- TESTIMONIALS SECTION ---------- */}
       <Testimonial />
 
+      {/* ---------- PIANO KEY DIVIDER (LIGHT) ---------- */}
+      <PianoKeyDivider variant="light" />
+
+      {/* ---------- EXAMS & AFFILIATED BOARDS SECTION ---------- */}
+      <ExamsSection />
+
       {/* ---------- PIANO KEY DIVIDER (TEAL) ---------- */}
       <PianoKeyDivider variant="teal" />
 
-      {/* ---------- CONTACT SECTION ---------- */}
+      {/* ---------- CONTACT & BOOKING CTA SECTION ---------- */}
       <section
-        className="relative py-[70px] sm:py-[90px] px-6 bg-[#17514E] text-[#F8F3E7] overflow-hidden"
+        className="relative py-[80px] sm:py-[100px] px-6 bg-[#17514E] text-[#F8F3E7] text-center overflow-hidden"
         id="contact"
       >
         {/* Background Texture Overlay */}
@@ -488,73 +495,50 @@ export default function HomePage() {
           }}
           aria-hidden="true"
         />
+        {/* Radial Glow */}
+        <div
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(232,163,61,0.18),transparent_70%)] pointer-events-none"
+          aria-hidden="true"
+        />
 
-        <div className="relative z-10 max-w-[1140px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-[60px]">
-          <ScrollReveal direction="up" delay={0.05}>
-            <p className="eyebrow !text-[#a9d8d3]">Get in touch</p>
-            <h2 className="text-3xl sm:text-[40px] font-serif text-[#F8F3E7] mt-3 mb-4">
-              Book your Your Slots
-            </h2>
-            <p className="text-[#d7e4e2] text-base leading-[1.7] mb-6.5">
-              Tell us which instrument you&apos;re interested in and a preferred
-              time — we&apos;ll get back to you within a day to set up your
-              first free trial session.
-            </p>
+        <ScrollReveal
+          direction="up"
+          delay={0.05}
+          className="relative z-10 max-w-[760px] mx-auto flex flex-col items-center"
+        >
+          <p className="eyebrow !text-[#a9d8d3]">Get In Touch</p>
+          <h2 className="text-3xl sm:text-5xl font-serif text-[#F8F3E7] mt-3 mb-4 leading-[1.1]">
+            Book Your Slots
+          </h2>
+          <p className="text-[#d7e4e2] text-base sm:text-lg leading-[1.7] max-w-[620px] mb-7">
+            Tell us which instrument you&apos;re interested in and a preferred
+            time — we&apos;ll get back to you within a day to set up your first
+            trial session.
+          </p>
 
-            <div className="flex flex-col gap-3.5 text-[14.5px]">
-              <div className="flex gap-3 items-start">
-                <span>📍</span>
-                <span>Coimbatore, Tamil Nadu</span>
-              </div>
-              {/* <div className="flex gap-3 items-start">
-                <span>📞</span>
-                <span>+91 98765 43210</span>
-              </div> */}
-              <div className="flex gap-3 items-start">
-                <span>✉️</span>
-                <a href="mailto:albertebini455@gmail.com">
-                  albertebini455@gmail.com
-                </a>
-              </div>
+          <div className="flex flex-wrap items-center justify-center gap-6 text-[14.5px] mb-9 text-[#F8F3E7]/90">
+            <div className="flex items-center gap-2">
+              <span>📍</span>
+              <span>Alby School of Music, College Road, Coimbatore</span>
             </div>
-          </ScrollReveal>
-
-          <ScrollReveal direction="left" delay={0.15}>
-            <form
-              className="bg-white/6 border border-white/15 rounded-[6px] p-7 sm:p-[34px] flex flex-col gap-3.5"
-              action="/contact"
-            >
-              <input
-                type="text"
-                placeholder="Your name"
-                required
-                className="bg-white/8 border border-white/20 text-[#F8F3E7] placeholder-[#b7cbc8] p-3.5 rounded-[3px] font-sans text-sm focus:outline-none focus:border-[#E8A33D]"
-              />
-              <input
-                type="tel"
-                placeholder="Phone number"
-                required
-                className="bg-white/8 border border-white/20 text-[#F8F3E7] placeholder-[#b7cbc8] p-3.5 rounded-[3px] font-sans text-sm focus:outline-none focus:border-[#E8A33D]"
-              />
-              <input
-                type="text"
-                placeholder="Interested in (Piano / Guitar / Keyboard)"
-                className="bg-white/8 border border-white/20 text-[#F8F3E7] placeholder-[#b7cbc8] p-3.5 rounded-[3px] font-sans text-sm focus:outline-none focus:border-[#E8A33D]"
-              />
-              <textarea
-                rows={3}
-                placeholder="Message"
-                className="bg-white/8 border border-white/20 text-[#F8F3E7] placeholder-[#b7cbc8] p-3.5 rounded-[3px] font-sans text-sm focus:outline-none focus:border-[#E8A33D]"
-              />
-              <button
-                type="submit"
-                className="bg-[#E8A33D] text-[#211126] border-none p-3.5 font-semibold text-[15px] rounded-[3px] cursor-pointer transition-all hover:bg-white hover:scale-[1.01]"
+            <div className="flex items-center gap-2">
+              <span>✉️</span>
+              <a
+                href="mailto:albertebini455@gmail.com"
+                className="hover:text-[#E8A33D] transition-colors underline decoration-[#E8A33D]/40"
               >
-                Send Request
-              </button>
-            </form>
-          </ScrollReveal>
-        </div>
+                albertebini455@gmail.com
+              </a>
+            </div>
+          </div>
+
+          <Link
+            href="/contact"
+            className="bg-[#E8A33D] text-[#211126] font-semibold text-base px-9 py-4 rounded-[3px] transition-all hover:bg-white hover:scale-105 inline-flex items-center gap-2.5 shadow-[0_10px_25px_rgba(0,0,0,0.3)]"
+          >
+            Book Your Slots &rarr;
+          </Link>
+        </ScrollReveal>
       </section>
     </main>
   );

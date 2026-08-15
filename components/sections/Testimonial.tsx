@@ -21,13 +21,13 @@ export const Testimonial: React.FC = () => {
           </h2>
           <p className="text-base md:text-lg text-center mt-4">
             Real experiences from students mastering Piano, Guitar, and Keyboard
-            at Alby.sm Music Academy.
+            at Alby School of Music.
           </p>
         </div>
         {/* <SectionHeading
           badge="Student & Parent Voices"
           title="Loved by Music Learners Across Coimbatore"
-          subtitle="Real experiences from students mastering Piano, Guitar, and Keyboard at Alby.sm Music Academy."
+          subtitle="Real experiences from students mastering Piano, Guitar, and Keyboard at Alby School of Music."
         /> */}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
