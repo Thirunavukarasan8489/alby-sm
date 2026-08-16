@@ -93,15 +93,7 @@ const GALLERY_ITEMS = [
     tag: "Keyboard",
     src: "/images/student-keyboard-smiling.jpg",
     size: "",
-  },
-  {
-    id: 12,
-    title: "Home Practice Session",
-    cat: "keyboard",
-    tag: "Keyboard",
-    src: "/images/student-home-practice.jpg",
-    size: "",
-  },
+  }
 ];
 
 export default function GalleryPage() {
@@ -152,7 +144,7 @@ export default function GalleryPage() {
       </section>
 
       {/* ---------- FILTERS BAR ---------- */}
-      <div className="flex justify-center gap-2.5 flex-wrap pt-10 pb-2.5 px-6">
+      {/* <div className="flex justify-center gap-2.5 flex-wrap pt-10 pb-2.5 px-6">
         {[
           { label: "All", value: "all" },
           { label: "Piano", value: "piano" },
@@ -172,7 +164,7 @@ export default function GalleryPage() {
             {btn.label}
           </button>
         ))}
-      </div>
+      </div> */}
 
       {/* ---------- GALLERY GRID ---------- */}
       <div className="max-w-[1180px] mx-auto px-6 pt-7.5 pb-[90px]">
@@ -195,9 +187,9 @@ export default function GalleryPage() {
                   height={400}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
                 />
-                <span className="absolute bottom-2.5 left-2.5 bg-[#211126]/75 text-[#F8F3E7] text-[11px] px-2.5 py-1 rounded-[12px] tracking-wide">
+                {/* <span className="absolute bottom-2.5 left-2.5 bg-[#211126]/75 text-[#F8F3E7] text-[11px] px-2.5 py-1 rounded-[12px] tracking-wide">
                   {item.tag}
-                </span>
+                </span> */}
               </div>
             </ScrollReveal>
           ))}
@@ -233,7 +225,7 @@ export default function GalleryPage() {
           delay={0.05}
           className="max-w-[1140px] mx-auto"
         >
-          <h2 className="text-3xl sm:text-[38px] font-serif">
+          <h2 className="text-3xl sm:text-[38px] mb-6.5 font-serif">
             Want to be in the next batch?
           </h2>
           {/* <p className="mt-3.5 mb-6.5 max-w-[460px] mx-auto text-[#d7e4e2] text-base">

@@ -838,19 +838,19 @@ export default function ContactPage() {
                             value="Piano"
                             className="bg-white/8 text-[#211126]"
                           >
-                            🎹 Piano Class (Ages 6+)
+                            🎹 Piano Class
                           </option>
                           <option
                             value="Guitar"
                             className="bg-white/8 text-[#211126]"
                           >
-                            🎸 Guitar Class (Ages 8+)
+                            🎸 Guitar Class
                           </option>
                           <option
                             value="Keyboard"
                             className="bg-white/8 text-[#211126]"
                           >
-                            🎛 Electronic Keyboard Class (Ages 6+)
+                            🎛 Keyboard Class
                           </option>
                           <option
                             value="Not sure yet"
@@ -881,9 +881,9 @@ export default function ContactPage() {
                           Preferred time{" "}
                           <span className="text-[#E8A33D]">*</span>
                         </span>
-                        <span className="text-[11px] text-[#a9d8d3]/60 font-normal lowercase">
+                        {/* <span className="text-[11px] text-[#a9d8d3]/60 font-normal lowercase">
                           (text, numbers, -, ., ,)
-                        </span>
+                        </span> */}
                       </label>
                       <input
                         type="text"
@@ -914,9 +914,9 @@ export default function ContactPage() {
                         className="text-[12px] font-semibold tracking-wider uppercase text-[#a9d8d3] mb-1.5 flex items-center justify-between"
                       >
                         <span>Message (Optional)</span>
-                        <span className="text-[11px] text-[#a9d8d3]/60 font-normal lowercase">
+                        {/* <span className="text-[11px] text-[#a9d8d3]/60 font-normal lowercase">
                           (text, numbers, -, ., ,)
-                        </span>
+                        </span> */}
                       </label>
                       <textarea
                         id="message"

@@ -141,9 +141,9 @@ export default function HomePage() {
           <ScrollReveal
             direction="right"
             delay={0.1}
-            className="relative order-2 lg:order-1"
+            className="relative z-0 order-2 lg:order-1"
           >
-            <div className="relative rounded-[4px] overflow-hidden">
+            <div className="relative z-10 rounded-[4px] overflow-hidden shadow-md">
               <Image
                 src="/images/alby-founder.jpg"
                 alt="Master Alby - Founder & Lead Instructor of Alby School of Music"
@@ -153,7 +153,7 @@ export default function HomePage() {
               />
             </div>
             {/* Offset Amber Border Box */}
-            <div className="hidden lg:block absolute inset-[18px_-18px_-18px_18px] border-2 border-[#E8A33D] rounded-[4px] -z-10 pointer-events-none" />
+            <div className="hidden lg:block absolute -bottom-4 -right-4 top-4 left-4 border-2 border-[#E8A33D] rounded-[4px] z-0 pointer-events-none" />
           </ScrollReveal>
 
           <ScrollReveal

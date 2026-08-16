@@ -131,19 +131,17 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2.5 text-xs sm:text-sm">
               {[
                 {
-                  label: "Piano Class (Classical & Contemporary)",
+                  label: "Piano Class",
                   href: "/classes/piano",
                 },
                 {
-                  label: "Guitar Class (Acoustic & Electric)",
+                  label: "Guitar Class",
                   href: "/classes/guitar",
                 },
                 {
-                  label: "Electronic Keyboard Class",
+                  label: "Keyboard Class",
                   href: "/classes/keyboard",
                 },
-                { label: "Trinity Exam Prep (Grades 1-8)", href: "/#exams" },
-                { label: "Rockschool RSL Exam Prep", href: "/#exams" },
               ].map((program) => (
                 <li key={program.label}>
                   <Link

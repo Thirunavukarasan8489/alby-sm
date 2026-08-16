@@ -66,19 +66,19 @@ export default function AboutPage() {
           <ScrollReveal
             direction="right"
             delay={0.1}
-            className="relative order-2 lg:order-1"
+            className="relative z-0 order-2 lg:order-1"
           >
-            <div className="relative rounded-[4px] overflow-hidden">
+            <div className="relative z-10 rounded-[4px] overflow-hidden shadow-md">
               <Image
                 src="/images/alby-grand-piano1.jpg"
                 alt="Piano lesson in progress at Alby.sm"
                 width={600}
-                height={400}
-                className="w-full h-[320px] sm:h-[500px] object-top object-cover transition-transform duration-700 hover:scale-105"
+                height={380}
+                className="w-full h-[320px] sm:h-[480px] object-top object-cover transition-transform duration-700 hover:scale-105"
               />
             </div>
             {/* Offset Amber Border Box */}
-            <div className="hidden lg:block absolute inset-[18px_-18px_-18px_18px] border-2 border-[#E8A33D] rounded-[4px] -z-10 pointer-events-none" />
+            <div className="hidden lg:block absolute -bottom-4 -right-4 top-4 left-4 border-2 border-[#E8A33D] rounded-[4px] z-0 pointer-events-none" />
           </ScrollReveal>
 
           <ScrollReveal
@@ -373,12 +373,12 @@ export default function AboutPage() {
           delay={0.05}
           className="max-w-[1140px] mx-auto"
         >
-          <h2 className="text-3xl sm:text-[38px] font-serif">
+          <h2 className="text-3xl sm:text-[38px] mb-6.5 font-serif">
             Come hear it for yourself
           </h2>
-          <p className="mt-3.5 mb-6.5 max-w-[460px] mx-auto text-[#d7e4e2] text-base">
+          {/* <p className="mt-3.5 mb-6.5 max-w-[460px] mx-auto text-[#d7e4e2] text-base">
             Book a free trial class and meet your instructor before you commit.
-          </p>
+          </p> */}
           <Link
             href="/contact"
             className="bg-[#E8A33D] text-[#211126] font-semibold text-[15px] px-7 py-3.5 rounded-[2px] transition-all hover:bg-white hover:-translate-y-0.5 inline-block shadow-md"

@@ -83,8 +83,8 @@ export default function ClassesPage() {
       {/* ---------- PIANO CLASS BLOCK ---------- */}
       <section className="py-[70px] sm:py-[90px] px-6 bg-[#F8F3E7]" id="piano">
         <div className="max-w-[1140px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-[60px] items-center">
-          <ScrollReveal direction="right" delay={0.1} className="relative">
-            <div className="relative rounded-[4px] overflow-hidden">
+          <ScrollReveal direction="right" delay={0.1} className="relative z-0">
+            <div className="relative z-10 rounded-[4px] overflow-hidden shadow-md">
               <Image
                 src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=800&q=80"
                 alt="Piano class at Alby.sm"
@@ -93,7 +93,7 @@ export default function ClassesPage() {
                 className="w-full h-[320px] sm:h-[400px] object-cover transition-transform duration-700 hover:scale-105"
               />
             </div>
-            <div className="hidden lg:block absolute inset-[18px_-18px_-18px_18px] border-2 border-[#E8A33D] rounded-[4px] -z-10 pointer-events-none" />
+            <div className="hidden lg:block absolute -bottom-4 -right-4 top-4 left-4 border-2 border-[#E8A33D] rounded-[4px] z-0 pointer-events-none" />
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={0.15}>
@@ -257,9 +257,9 @@ export default function ClassesPage() {
           <ScrollReveal
             direction="left"
             delay={0.1}
-            className="relative order-1 lg:order-2"
+            className="relative z-0 order-1 lg:order-2"
           >
-            <div className="relative rounded-[4px] overflow-hidden">
+            <div className="relative z-10 rounded-[4px] overflow-hidden shadow-md">
               <Image
                 src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=800&q=80"
                 alt="Guitar class at Alby.sm"
@@ -268,7 +268,7 @@ export default function ClassesPage() {
                 className="w-full h-[320px] sm:h-[400px] object-cover transition-transform duration-700 hover:scale-105"
               />
             </div>
-            <div className="hidden lg:block absolute inset-[18px_18px_-18px_-18px] border-2 border-[#E8A33D] rounded-[4px] -z-10 pointer-events-none" />
+            <div className="hidden lg:block absolute -bottom-4 -left-4 top-4 right-4 border-2 border-[#E8A33D] rounded-[4px] z-0 pointer-events-none" />
           </ScrollReveal>
         </div>
       </section>
@@ -282,8 +282,8 @@ export default function ClassesPage() {
         id="keyboard"
       >
         <div className="max-w-[1140px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-[60px] items-center">
-          <ScrollReveal direction="right" delay={0.1} className="relative">
-            <div className="relative rounded-[4px] overflow-hidden">
+          <ScrollReveal direction="right" delay={0.1} className="relative z-0">
+            <div className="relative z-10 rounded-[4px] overflow-hidden shadow-md">
               <Image
                 src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80"
                 alt="Keyboard class at Alby.sm"
@@ -292,7 +292,7 @@ export default function ClassesPage() {
                 className="w-full h-[320px] sm:h-[400px] object-cover transition-transform duration-700 hover:scale-105"
               />
             </div>
-            <div className="hidden lg:block absolute inset-[18px_-18px_-18px_18px] border-2 border-[#E8A33D] rounded-[4px] -z-10 pointer-events-none" />
+            <div className="hidden lg:block absolute -bottom-4 -right-4 top-4 left-4 border-2 border-[#E8A33D] rounded-[4px] z-0 pointer-events-none" />
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={0.15}>

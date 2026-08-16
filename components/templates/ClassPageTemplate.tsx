@@ -321,7 +321,7 @@ export const ClassPageTemplate: React.FC<ClassPageTemplateProps> = ({
           delay={0.05}
           className="max-w-[1140px] mx-auto"
         >
-          <h2 className="text-3xl sm:text-[38px] font-serif">
+          <h2 className="text-3xl sm:text-[38px] mb-6.5 font-serif">
             Ready to start playing?
           </h2>
           {/* <p className="mt-3.5 mb-6.5 max-w-[460px] mx-auto text-[#cfc3b3] text-base">
