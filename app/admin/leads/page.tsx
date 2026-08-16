@@ -194,11 +194,8 @@ export default function AdminLeadsPage() {
   });
 
   return (
-    <main className="min-h-screen bg-[#211126] text-[#F8F3E7]">
-      <AdminNav />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-        {/* Page Title & Refresh */}
+    <div className="max-w-7xl mx-auto space-y-8">
+      {/* Page Title & Refresh */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <div>
             <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#F8F3E7]">
@@ -512,7 +509,6 @@ export default function AdminLeadsPage() {
             })}
           </div>
         )}
-      </div>
-    </main>
+    </div>
   );
 }

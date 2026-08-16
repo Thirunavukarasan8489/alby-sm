@@ -190,10 +190,8 @@ export default function AdminTestimonialsPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#211126] text-[#F8F3E7]">
-      <AdminNav />
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-        {/* Navigation & Header Bar */}
+    <div className="max-w-6xl mx-auto space-y-8">
+      {/* Navigation & Header Bar */}
         <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-8 mb-8 border-b border-white/10">
           <div>
             <div className="flex items-center gap-3 mb-1">
@@ -478,7 +476,6 @@ export default function AdminTestimonialsPage() {
             </div>
           </div>
         )}
-      </div>
-    </main>
+    </div>
   );
 }

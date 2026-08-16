@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Instrument_Serif } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { FloatingContactBar } from "@/components/ui/FloatingContactBar";
+import { SiteLayoutWrapper } from "@/components/layout/SiteLayoutWrapper";
 import { constructMetadata, generateOrganizationJsonLd } from "@/lib/seo";
 
 const inter = Inter({
@@ -34,14 +32,13 @@ export default function RootLayout({
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd),
+          }}
         />
       </head>
       <body className="bg-[#211126] text-[#F8F3E7] antialiased selection:bg-[#E8A33D] selection:text-[#211126] flex flex-col min-h-screen">
-        <Header />
-        <FloatingContactBar />
-        <div className="flex-1">{children}</div>
-        <Footer />
+        <SiteLayoutWrapper>{children}</SiteLayoutWrapper>
       </body>
     </html>
   );

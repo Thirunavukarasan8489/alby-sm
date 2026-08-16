@@ -18,7 +18,7 @@ export default function AdminLoginPage() {
       .then((res) => res.json())
       .then((data) => {
         if (data.authenticated) {
-          router.push("/admin/testimonials");
+          router.push("/admin");
         }
       })
       .catch(() => {});
@@ -44,7 +44,7 @@ export default function AdminLoginPage() {
       const data = await res.json();
 
       if (res.ok && data.success) {
-        router.push("/admin/testimonials");
+        router.push("/admin");
       } else {
         setErrorMsg(data.message || "Invalid admin password");
       }
