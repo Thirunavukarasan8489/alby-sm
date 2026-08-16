@@ -74,22 +74,33 @@ export const ExamsSection: React.FC = () => {
 
       <div className="relative z-10 max-w-[1140px] mx-auto">
         {/* Section Header */}
-        <ScrollReveal direction="up" delay={0.05} className="text-center max-w-[720px] mx-auto mb-14">
-          <span className="inline-block px-3.5 py-1 mb-3.5 text-xs font-semibold uppercase tracking-wider rounded-full bg-[#E8A33D]/18 text-[#E8A33D] border border-[#E8A33D]/30">
+        <ScrollReveal
+          direction="up"
+          delay={0.05}
+          className="text-center max-w-[720px] mx-auto mb-14"
+        >
+          {/* <span className="inline-block px-3.5 py-1 mb-3.5 text-xs font-semibold uppercase tracking-wider rounded-full bg-[#E8A33D]/18 text-[#E8A33D] border border-[#E8A33D]/30">
             Music Grade Examinations
-          </span>
+          </span> */}
+          <p className="eyebrow py-1 mb-3.5">Music Grade Examinations</p>
           <h2 className="text-3xl sm:text-[44px] font-serif text-[#F8F3E7] leading-[1.1]">
-            Global Music University <i className="italic text-[#E8A33D] not-italic">Certifications</i>
+            Global Music University{" "}
+            <i className="italic text-[#E8A33D] not-italic">Certifications</i>
           </h2>
           <p className="mt-3.5 text-[#cfc3b3] text-base leading-[1.65]">
-            We prepare students for accredited international grade exams (Grade 1 to Grade 8) with world-renowned UK music examination boards.
+            We prepare students for accredited international grade exams (Grade
+            1 to Grade 8) with world-renowned UK music examination boards.
           </p>
         </ScrollReveal>
 
         {/* Exam Boards Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-7 mb-14">
           {EXAM_BOARDS.map((board, idx) => (
-            <ScrollReveal key={board.id} direction="up" delay={0.1 + idx * 0.08}>
+            <ScrollReveal
+              key={board.id}
+              direction="up"
+              delay={0.1 + idx * 0.08}
+            >
               <div className="h-full bg-[#2c1732] border border-[#E8A33D]/20 rounded-[8px] p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-2 hover:border-[#E8A33D] hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)] group">
                 <div>
                   {/* Logo Tile */}
@@ -147,7 +158,10 @@ export const ExamsSection: React.FC = () => {
             {EXAM_HIGHLIGHTS.map((item) => {
               const IconComp = item.icon;
               return (
-                <div key={item.title} className="flex flex-col md:flex-row items-center md:items-start gap-4">
+                <div
+                  key={item.title}
+                  className="flex flex-col md:flex-row items-center md:items-start gap-4"
+                >
                   <div className="w-12 h-12 rounded-full bg-[#E8A33D]/15 text-[#E8A33D] flex items-center justify-center shrink-0 border border-[#E8A33D]/30">
                     <IconComp className="w-6 h-6" />
                   </div>

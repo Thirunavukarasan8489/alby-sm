@@ -90,6 +90,15 @@ alby-sm/
 │   │   └── page.tsx               → Gallery: Filterable photo grid (Piano, Keyboard, Faculty, Events) + Lightbox modal
 │   ├── contact/
 │   │   └── page.tsx               → Contact & Booking: Validated trial form with country code selector & DB submit
+│   ├── privacy-policy/
+│   │   └── page.tsx               → Privacy Policy: Legal data compliance, student privacy rights & contact info
+│   ├── admin/
+│   │   ├── login/
+│   │   │   └── page.tsx           → Admin Login: Password authentication portal
+│   │   ├── leads/
+│   │   │   └── page.tsx           → Admin Leads: Contact enquiries, enrolment metrics & 1-click WhatsApp
+│   │   └── testimonials/
+│   │       └── page.tsx           → Admin Testimonials: Dynamic review CRUD & status management
 │   ├── sitemap.ts                 → Dynamic Next.js sitemap listing all routes with priorities
 │   ├── robots.ts                  → Dynamic robots.txt explicitly allowing search engines and AI crawlers
 │   ├── manifest.ts                → Web App Manifest for PWA metadata & theme styling
@@ -99,10 +108,11 @@ alby-sm/
 ├── components/
 │   ├── layout/
 │   │   ├── Header.tsx             → Sticky header with dropdown submenu and mobile trigger
-│   │   ├── Footer.tsx             → Academy footer with copyright and brand mark
-│   │   └── MobileNav.tsx          → Off-canvas sliding mobile menu with accordion submenu & body scroll-lock
+│   │   ├── Footer.tsx             → Multi-column academy footer with quick nav, program links & social icons
+│   │   ├── MobileNav.tsx          → Off-canvas sliding mobile menu with accordion submenu & body scroll-lock
+│   │   └── AdminNav.tsx           → Unified admin portal top header tab bar (Leads & Testimonials)
 │   ├── ui/
-│   │   ├── PianoKeyDivider.tsx    → Signature alternating piano key divider strip
+│   │   ├── PianoKeyDivider.tsx    → Signature alternating piano key divider strip (dark, light, teal variants)
 │   │   ├── FloatingContactBar.tsx → Fixed floating quick-contact icons (WhatsApp, Email, IG)
 │   │   ├── ScrollReveal.tsx       → Framer motion wrapper with viewport trigger and reduced-motion fallback
 │   │   ├── Button.tsx             → Reusable styled button supporting variants (primary, secondary, outline)
@@ -111,6 +121,7 @@ alby-sm/
 │   │   ├── Hero.tsx               → Alternative hero component with metrics and direct GEO answer
 │   │   ├── ClassCard.tsx          → Course preview card with badge, age limits, schedule, and curriculum points
 │   │   ├── Testimonial.tsx        → Responsive parent & student testimonial grid with 5-star ratings
+│   │   ├── ExamsSection.tsx       → Music Grade Exams showcase featuring Trinity, Rockschool RSL & LCM logos
 │   │   ├── FAQAccordion.tsx       → Accessible FAQ accordion with Framer Motion height animations
 │   │   ├── GalleryGrid.tsx        → Filterable gallery showcase with photo lightbox modal
 │   │   └── ContactForm.tsx        → Controlled interactive trial class booking form with feedback states
@@ -131,6 +142,7 @@ alby-sm/
 │   ├── llms.txt                   → Clean plain-text knowledge summary for AI crawlers & answer engines
 │   ├── logo.jpeg                  → Official Alby.sm academy logo
 │   ├── favicon.ico                → Favicon icon
+│   ├── university_logos/          → High-res exam board logos (Trinity, Rockschool RSL, London College of Music)
 │   └── images/                    → Curated high-res local image assets (founder, studio, student practice)
 │
 ├── package.json                   → Dependencies and build scripts

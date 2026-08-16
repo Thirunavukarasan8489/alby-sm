@@ -112,13 +112,30 @@ h1, h2, h3 {
   background: var(--teal);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  * {
-    transition: none !important;
-  }
+/* Swiper Custom Styling */
+.swiper-testimonial-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 24px;
 }
+
+.swiper-testimonial-pagination .swiper-pagination-bullet {
+  background: rgba(33, 17, 38, 0.3);
+  width: 10px;
+  height: 10px;
+  opacity: 1;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.swiper-testimonial-pagination .swiper-pagination-bullet-active {
+  background: #E8A33D;
+  width: 28px;
+  border-radius: 6px;
+}
+
 
 

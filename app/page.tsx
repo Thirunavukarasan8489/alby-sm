@@ -8,9 +8,9 @@ import { Testimonial } from "@/components/sections/Testimonial";
 import { ExamsSection } from "@/components/sections/ExamsSection";
 
 export const metadata = constructMetadata({
-  title: "Alby.sm Music Academy | Piano, Guitar & Keyboard in Coimbatore",
+  title: "Alby School of Music | Piano, Guitar & Keyboard in Coimbatore",
   description:
-    "Alby.sm Music Academy in Coimbatore offers structured, ear-first music education for Piano, Guitar, and Keyboard across all age groups (ages 6+) and skill levels.",
+    "Alby School of Music in Coimbatore offers structured, ear-first music education for Piano, Guitar, and Keyboard across all age groups (ages 6+) and skill levels.",
   path: "",
 });
 
@@ -70,9 +70,9 @@ export default function HomePage() {
 
             {/* Direct GEO Factual statement for AI Answer Engines */}
             <p className="sr-only">
-              Alby.sm Music Academy in Coimbatore, Tamil Nadu provides
-              individual and small-batch music classes for Piano, Guitar, and
-              Keyboard starting at age 6+.
+              Alby School of Music in Coimbatore, Tamil Nadu provides individual
+              and small-batch music classes for Piano, Guitar, and Keyboard
+              starting at age 6+.
             </p>
 
             <div className="flex flex-wrap gap-4">
@@ -95,7 +95,7 @@ export default function HomePage() {
             <div className="rounded-[4px] overflow-hidden shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)] border border-[#E8A33D]/25">
               <Image
                 src="/images/alby-piano-playing.jpg"
-                alt="Master Alby playing piano at Alby.sm Music Academy"
+                alt="Master Alby playing piano at Alby School of Music"
                 width={700}
                 height={420}
                 priority
@@ -146,7 +146,7 @@ export default function HomePage() {
             <div className="relative rounded-[4px] overflow-hidden">
               <Image
                 src="/images/alby-founder.jpg"
-                alt="Master Alby - Founder & Lead Instructor of Alby.sm Music Academy"
+                alt="Master Alby - Founder & Lead Instructor of Alby School of Music"
                 width={600}
                 height={380}
                 className="w-full h-[320px] sm:h-[480px] object-cover transition-transform duration-700 hover:scale-105"
@@ -238,7 +238,7 @@ export default function HomePage() {
           delay={0.05}
           className="relative z-10 text-center max-w-[600px] mx-auto mb-14"
         >
-          <p className="eyebrow">Our Exams</p>
+          <p className="eyebrow">Our Programs</p>
           <h2 className="text-3xl sm:text-[44px] font-serif mt-3 text-[#F8F3E7]">
             Choose your instrument
           </h2>
@@ -392,7 +392,7 @@ export default function HomePage() {
             >
               <Image
                 src="/images/alby-keyboard-stage.jpg"
-                alt="Master Alby performing live stage keyboard at Alby.sm Music Academy"
+                alt="Master Alby performing live stage keyboard at Alby School of Music"
                 width={700}
                 height={300}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
@@ -422,7 +422,7 @@ export default function HomePage() {
             >
               <Image
                 src="/images/student-digital-piano.jpg"
-                alt="Piano lesson at Alby.sm Music Academy"
+                alt="Piano lesson at Alby School of Music"
                 width={400}
                 height={150}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
