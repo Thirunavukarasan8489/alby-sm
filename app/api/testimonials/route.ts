@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "@/lib/db";
 import { Testimonial } from "@/lib/models/Testimonial";
 import { TESTIMONIALS as INITIAL_TESTIMONIALS } from "@/lib/constants";
+import { uploadToCloudinary } from "@/lib/cloudinary";
 import { ADMIN_COOKIE_NAME, ADMIN_TOKEN_VALUE } from "../admin/login/route";
 
 // Helper to check admin authentication
@@ -32,6 +33,8 @@ export async function GET() {
         rating: item.rating || 5,
         featured: true,
         order: idx,
+        image: item.image || "",
+        publicId: "",
       }));
 
       await Testimonial.insertMany(seedItems);
@@ -64,8 +67,47 @@ export async function POST(request: Request) {
       );
     }
 
-    const body = await request.json();
-    const { name, role, instrument, quote, rating, featured, order } = body;
+    const contentType = request.headers.get("content-type") || "";
+    let name = "";
+    let role = "";
+    let instrument = "Piano";
+    let quote = "";
+    let rating = 5;
+    let featured = true;
+    let order = 0;
+    let imageUrl = "";
+    let publicId = "";
+
+    if (contentType.includes("multipart/form-data")) {
+      const formData = await request.formData();
+      name = (formData.get("name") as string) || "";
+      role = (formData.get("role") as string) || "";
+      instrument = (formData.get("instrument") as string) || "Piano";
+      quote = (formData.get("quote") as string) || "";
+      rating = Number(formData.get("rating")) || 5;
+      featured = formData.get("featured") !== "false";
+      order = Number(formData.get("order")) || 0;
+
+      const file = formData.get("file") as File | null;
+      if (file && file.size > 0) {
+        const arrayBuffer = await file.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
+        const uploadResult = await uploadToCloudinary(buffer, "alby_sm_testimonials");
+        imageUrl = uploadResult.secure_url;
+        publicId = uploadResult.public_id;
+      }
+    } else {
+      const body = await request.json();
+      name = body.name || "";
+      role = body.role || "";
+      instrument = body.instrument || "Piano";
+      quote = body.quote || "";
+      rating = Number(body.rating) || 5;
+      featured = body.featured !== undefined ? Boolean(body.featured) : true;
+      order = Number(body.order) || 0;
+      imageUrl = body.image || "";
+      publicId = body.publicId || "";
+    }
 
     if (!name || !role || !quote) {
       return NextResponse.json(
@@ -79,11 +121,13 @@ export async function POST(request: Request) {
     const newTestimonial = await Testimonial.create({
       name: name.trim(),
       role: role.trim(),
-      instrument: instrument || "Piano",
+      instrument: (instrument || "Piano") as any,
       quote: quote.trim(),
       rating: Number(rating) || 5,
-      featured: featured !== undefined ? Boolean(featured) : true,
+      featured: Boolean(featured),
       order: Number(order) || 0,
+      image: imageUrl,
+      publicId: publicId,
     });
 
     // Revalidate paths so Next.js static pages update automatically

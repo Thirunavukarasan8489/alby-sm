@@ -10,7 +10,6 @@ interface DisplayItem {
   id: string | number;
   title: string;
   src: string;
-  size?: string;
 }
 
 export default function GalleryPage() {
@@ -28,7 +27,6 @@ export default function GalleryPage() {
           id: item._id || idx,
           title: item.title || "Alby School of Music Gallery Photo",
           src: item.image,
-          size: idx % 7 === 0 ? "col-span-2 row-span-2" : idx % 4 === 0 ? "col-span-2" : "",
         }));
         setItems(mapped);
       }
@@ -88,7 +86,7 @@ export default function GalleryPage() {
       </section>
 
       {/* ---------- GALLERY GRID ---------- */}
-      <div className="max-w-[1180px] mx-auto px-6 pt-10 pb-[90px]">
+      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-[90px]">
         {loading ? (
           <div className="py-20 text-center text-[#5c5147]">
             <span className="inline-block w-8 h-8 border-2 border-[#17514E] border-t-transparent rounded-full animate-spin mb-3" />
@@ -105,25 +103,30 @@ export default function GalleryPage() {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[140px] sm:auto-rows-[180px] gap-3.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             {items.map((item, idx) => (
               <ScrollReveal
                 key={item.id}
                 direction="up"
-                delay={0.05 + (idx % 8) * 0.04}
-                className={item.size}
+                delay={0.03 + (idx % 6) * 0.04}
               >
                 <div
                   onClick={() => setActiveLightboxSrc(item.src)}
-                  className="relative overflow-hidden rounded-[4px] cursor-pointer group h-full shadow-sm hover:shadow-xl transition-shadow"
+                  className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden bg-[#211126] border border-[#E8A33D]/20 hover:border-[#E8A33D] shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 group cursor-pointer"
                 >
                   <Image
                     src={item.src}
                     alt={item.title}
-                    width={700}
-                    height={400}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
+                  {/* Subtle Gradient Hover Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#211126]/85 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <p className="text-[#F8F3E7] text-xs font-semibold font-serif leading-tight line-clamp-2">
+                      {item.title}
+                    </p>
+                  </div>
                 </div>
               </ScrollReveal>
             ))}
@@ -134,7 +137,7 @@ export default function GalleryPage() {
       {/* ---------- LIGHTBOX MODAL ---------- */}
       {activeLightboxSrc && (
         <div
-          className="fixed inset-0 bg-[#211126]/92 backdrop-blur-sm flex items-center justify-center z-50 p-7.5"
+          className="fixed inset-0 bg-[#211126]/92 backdrop-blur-sm flex items-center justify-center z-50 p-4 sm:p-8"
           onClick={() => setActiveLightboxSrc(null)}
         >
           <button
@@ -148,7 +151,7 @@ export default function GalleryPage() {
             alt="Gallery Preview"
             width={1200}
             height={800}
-            className="max-w-[90vw] max-h-[85vh] object-contain rounded-[6px] shadow-[0_30px_60px_rgba(0,0,0,0.6)] border border-white/20"
+            className="max-w-[92vw] max-h-[88vh] object-contain rounded-xl shadow-[0_30px_60px_rgba(0,0,0,0.6)] border border-white/20"
           />
         </div>
       )}

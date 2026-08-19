@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
@@ -19,6 +20,7 @@ interface TestimonialItem {
   instrument?: string;
   quote: string;
   rating?: number;
+  image?: string;
 }
 
 export const Testimonial: React.FC = () => {
@@ -69,8 +71,8 @@ export const Testimonial: React.FC = () => {
               Loved by Music Learners Across Coimbatore
             </h2>
             <p className="text-base md:text-lg mt-3 text-[#5c5147]">
-              Real experiences from students mastering Piano, Guitar, and Keyboard
-              at Alby School of Music.
+              Real experiences from students mastering Piano, Guitar, and
+              Keyboard at Alby School of Music.
             </p>
           </div>
 
@@ -124,13 +126,14 @@ export const Testimonial: React.FC = () => {
           className="w-full pb-2"
         >
           {items.map((item, index) => {
+            console.log("item.image :", item.image);
             const displayName = item.name || item.author || "Music Student";
             const starCount = item.rating || 5;
             const key = item._id || item.id || index;
 
             return (
               <SwiperSlide key={key} className="h-auto">
-                <div className="h-full flex flex-col justify-between p-6 sm:p-7 rounded-[6px] bg-[#2c1732] border border-[#E8A33D]/20 relative shadow-xl transition-all duration-300 hover:-translate-y-1.5 hover:border-[#E8A33D] min-h-[290px]">
+                <div className="h-full flex flex-col justify-between p-6 sm:p-7 rounded-[6px] bg-[#2c1732] border border-[#E8A33D]/20 relative shadow-xl transition-all duration-300 hover:-translate-y-1.5 hover:border-[#E8A33D] min-h-[300px]">
                   <Quote className="w-8 h-8 text-[#E8A33D]/20 absolute top-5 right-5 pointer-events-none" />
 
                   <div>
@@ -146,13 +149,33 @@ export const Testimonial: React.FC = () => {
                     </p>
                   </div>
 
-                  <div className="border-t border-[#F8F3E7]/12 pt-3.5 mt-auto">
-                    <h4 className="font-sans text-sm font-semibold text-[#F8F3E7]">
-                      {displayName}
-                    </h4>
-                    <p className="text-[12px] text-[#E8A33D] font-medium mt-0.5">
-                      {item.role}
-                    </p>
+                  {/* Reviewer Profile Avatar & Author Details */}
+                  <div className="border-t border-[#F8F3E7]/12 pt-3.5 mt-auto flex items-center gap-3">
+                    {item.image ? (
+                      <div className="relative w-11 h-11 rounded-full overflow-hidden border-2 border-[#E8A33D] shrink-0 shadow-md">
+                        <Image
+                          src={item.image}
+                          alt={displayName}
+                          fill
+                          unoptimized
+                          sizes="44px"
+                          className="object-cover"
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-11 h-11 rounded-full bg-[#E8A33D]/20 border border-[#E8A33D]/40 text-[#E8A33D] font-serif font-bold text-base flex items-center justify-center shrink-0 shadow-md">
+                        {displayName.charAt(0).toUpperCase()}
+                      </div>
+                    )}
+
+                    <div>
+                      <h4 className="font-sans text-sm font-semibold text-[#F8F3E7] leading-snug">
+                        {displayName}
+                      </h4>
+                      <p className="text-[11.5px] text-[#E8A33D] font-medium leading-snug">
+                        {item.role}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </SwiperSlide>

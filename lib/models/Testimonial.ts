@@ -8,6 +8,8 @@ export interface ITestimonial extends Document {
   rating: number;
   featured: boolean;
   order: number;
+  image?: string;
+  publicId?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -52,6 +54,16 @@ const TestimonialSchema: Schema<ITestimonial> = new Schema(
     order: {
       type: Number,
       default: 0,
+    },
+    image: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    publicId: {
+      type: String,
+      trim: true,
+      default: "",
     },
   },
   {
