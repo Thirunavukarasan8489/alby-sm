@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
-const GALLERY_ITEMS = [
+const FALLBACK_GALLERY_ITEMS = [
   {
     id: 1,
     title: "Live Stage Synthesizer Performance",
@@ -93,19 +93,60 @@ const GALLERY_ITEMS = [
     tag: "Keyboard",
     src: "/images/student-keyboard-smiling.jpg",
     size: "",
-  }
+  },
 ];
 
+interface DisplayItem {
+  id: string | number;
+  title: string;
+  cat: string;
+  tag: string;
+  src: string;
+  size?: string;
+}
+
 export default function GalleryPage() {
+  const [items, setItems] = useState<DisplayItem[]>(FALLBACK_GALLERY_ITEMS);
   const [activeFilter, setActiveFilter] = useState("all");
-  const [activeLightboxSrc, setActiveLightboxSrc] = useState<string | null>(
-    null,
-  );
+  const [activeLightboxSrc, setActiveLightboxSrc] = useState<string | null>(null);
+
+  // Fetch dynamic gallery items from API
+  const fetchGallery = async () => {
+    try {
+      const res = await fetch("/api/gallery", { cache: "no-store" });
+      const data = await res.json();
+      if (data.success && Array.isArray(data.items) && data.items.length > 0) {
+        const mapped = data.items.map((item: any, idx: number) => ({
+          id: item._id || idx,
+          title: item.title,
+          cat: item.category || "piano",
+          tag: item.tag || "Piano",
+          src: item.image,
+          size: idx % 7 === 0 ? "col-span-2 row-span-2" : idx % 4 === 0 ? "col-span-2" : "",
+        }));
+        setItems(mapped);
+      }
+    } catch (err) {
+      console.error("Failed to load dynamic gallery items:", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchGallery();
+    const interval = setInterval(fetchGallery, 12000);
+    const handleFocus = () => fetchGallery();
+    window.addEventListener("focus", handleFocus);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("focus", handleFocus);
+    };
+  }, []);
 
   const filteredItems =
     activeFilter === "all"
-      ? GALLERY_ITEMS
-      : GALLERY_ITEMS.filter((item) => item.cat === activeFilter);
+      ? items
+      : items.filter((item) => item.cat.toLowerCase() === activeFilter.toLowerCase());
 
   return (
     <main className="min-h-screen bg-[#F8F3E7] text-[#2B2420]">
@@ -146,18 +187,18 @@ export default function GalleryPage() {
       {/* ---------- FILTERS BAR ---------- */}
       {/* <div className="flex justify-center gap-2.5 flex-wrap pt-10 pb-2.5 px-6">
         {[
-          { label: "All", value: "all" },
+          { label: "All Photos", value: "all" },
           { label: "Piano", value: "piano" },
-          { label: "Guitar", value: "guitar" },
           { label: "Keyboard", value: "keyboard" },
+          { label: "Faculty", value: "faculty" },
           { label: "Events", value: "events" },
         ].map((btn) => (
           <button
             key={btn.value}
             onClick={() => setActiveFilter(btn.value)}
-            className={`font-sans text-[13.5px] font-semibold px-5 py-2 rounded-full border transition-colors cursor-pointer ${
+            className={`font-sans text-[13.5px] font-semibold px-5 py-2 rounded-full border transition-all cursor-pointer ${
               activeFilter === btn.value
-                ? "bg-[#17514E] text-[#F8F3E7] border-[#17514E]"
+                ? "bg-[#17514E] text-[#F8F3E7] border-[#17514E] shadow-md"
                 : "bg-transparent text-[#17514E] border-[#17514E]/30 hover:bg-[#17514E] hover:text-[#F8F3E7]"
             }`}
           >
@@ -165,7 +206,6 @@ export default function GalleryPage() {
           </button>
         ))}
       </div> */}
-
       {/* ---------- GALLERY GRID ---------- */}
       <div className="max-w-[1180px] mx-auto px-6 pt-7.5 pb-[90px]">
         <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[140px] sm:auto-rows-[180px] gap-3.5">
@@ -173,12 +213,12 @@ export default function GalleryPage() {
             <ScrollReveal
               key={item.id}
               direction="up"
-              delay={0.05 + idx * 0.05}
+              delay={0.05 + (idx % 8) * 0.04}
               className={item.size}
             >
               <div
                 onClick={() => setActiveLightboxSrc(item.src)}
-                className="relative overflow-hidden rounded-[3px] cursor-pointer group h-full"
+                className="relative overflow-hidden rounded-[4px] cursor-pointer group h-full shadow-sm hover:shadow-xl transition-shadow"
               >
                 <Image
                   src={item.src}
@@ -187,9 +227,11 @@ export default function GalleryPage() {
                   height={400}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
                 />
-                {/* <span className="absolute bottom-2.5 left-2.5 bg-[#211126]/75 text-[#F8F3E7] text-[11px] px-2.5 py-1 rounded-[12px] tracking-wide">
-                  {item.tag}
-                </span> */}
+                {/* <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+                  <p className="text-white text-xs font-semibold truncate">
+                    {item.title}
+                  </p>
+                </div> */}
               </div>
             </ScrollReveal>
           ))}
@@ -199,12 +241,12 @@ export default function GalleryPage() {
       {/* ---------- LIGHTBOX MODAL ---------- */}
       {activeLightboxSrc && (
         <div
-          className="fixed inset-0 bg-[#211126]/92 flex items-center justify-center z-50 p-7.5"
+          className="fixed inset-0 bg-[#211126]/92 backdrop-blur-sm flex items-center justify-center z-50 p-7.5"
           onClick={() => setActiveLightboxSrc(null)}
         >
           <button
             onClick={() => setActiveLightboxSrc(null)}
-            className="absolute top-6 right-8 text-[#F8F3E7] text-4xl cursor-pointer font-sans bg-transparent border-none"
+            className="absolute top-6 right-8 text-[#F8F3E7] text-4xl cursor-pointer font-sans bg-transparent border-none hover:text-[#E8A33D] transition-colors"
           >
             &times;
           </button>
@@ -213,7 +255,7 @@ export default function GalleryPage() {
             alt="Gallery Preview"
             width={1200}
             height={800}
-            className="max-w-[90vw] max-h-[85vh] object-contain rounded-[4px] shadow-[0_30px_60px_rgba(0,0,0,0.5)]"
+            className="max-w-[90vw] max-h-[85vh] object-contain rounded-[6px] shadow-[0_30px_60px_rgba(0,0,0,0.6)] border border-white/20"
           />
         </div>
       )}
@@ -228,9 +270,6 @@ export default function GalleryPage() {
           <h2 className="text-3xl sm:text-[38px] mb-6.5 font-serif">
             Want to be in the next batch?
           </h2>
-          {/* <p className="mt-3.5 mb-6.5 max-w-[460px] mx-auto text-[#d7e4e2] text-base">
-            Book a free trial class and start your own Alby.sm story.
-          </p> */}
           <Link
             href="/contact"
             className="bg-[#E8A33D] text-[#211126] font-semibold text-[15px] px-7 py-3.5 rounded-[2px] transition-all hover:bg-white hover:-translate-y-0.5 inline-block shadow-md"

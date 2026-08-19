@@ -60,6 +60,10 @@ export default function AdminOverviewPage() {
         const testimonialsRes = await fetch("/api/testimonials");
         const testimonialsData = await testimonialsRes.json();
 
+        // Fetch gallery data
+        const galleryRes = await fetch("/api/gallery");
+        const galleryData = await galleryRes.json();
+
         let enrolled = 0;
         let totalLeads = 0;
         let latestLeads: LeadItem[] = [];
@@ -78,11 +82,16 @@ export default function AdminOverviewPage() {
           testimonialsTotal = testimonialsData.testimonials.length;
         }
 
+        let galleryTotal = 0;
+        if (galleryData.success && Array.isArray(galleryData.items)) {
+          galleryTotal = galleryData.items.length;
+        }
+
         setStats({
           enrolledCount: enrolled,
           trialCount: totalLeads,
           testimonialCount: testimonialsTotal,
-          galleryCount: 12,
+          galleryCount: galleryTotal,
           examBoardsCount: 3,
         });
 
@@ -194,8 +203,7 @@ export default function AdminOverviewPage() {
 
         {/* Tile 4: Gallery Photos */}
         <Link
-          href="/gallery"
-          target="_blank"
+          href="/admin/gallery"
           className="bg-[#2c1732] border border-blue-500/30 rounded-2xl p-5 shadow-lg hover:border-blue-400 transition-all group flex flex-col justify-between"
         >
           <div className="flex items-center justify-between mb-4">
@@ -285,8 +293,7 @@ export default function AdminOverviewPage() {
             </Link>
 
             <Link
-              href="/gallery"
-              target="_blank"
+              href="/admin/gallery"
               className="bg-[#2c1732] border border-[#E8A33D]/20 rounded-2xl p-6 hover:border-[#E8A33D] transition-all group shadow-xl flex flex-col justify-between"
             >
               <div>

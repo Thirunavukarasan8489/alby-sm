@@ -23,6 +23,7 @@ interface AdminSidebarProps {
   setMobileOpen?: (open: boolean) => void;
   leadCount?: number;
   testimonialCount?: number;
+  galleryCount?: number;
 }
 
 export const AdminSidebar: React.FC<AdminSidebarProps> = ({
@@ -30,6 +31,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
   setMobileOpen,
   leadCount = 0,
   testimonialCount = 0,
+  galleryCount = 0,
 }) => {
   const pathname = usePathname();
   const router = useRouter();
@@ -58,24 +60,12 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
       icon: MessageSquareQuote,
       badge: testimonialCount > 0 ? testimonialCount : null,
     },
-    // {
-    //   label: "Photo Gallery",
-    //   href: "/gallery",
-    //   icon: ImageIcon,
-    //   external: true,
-    // },
-    // {
-    //   label: "Music Grade Exams",
-    //   href: "/#exams",
-    //   icon: Award,
-    //   external: true,
-    // },
-    // {
-    //   label: "Course Programs",
-    //   href: "/classes",
-    //   icon: BookOpen,
-    //   external: true,
-    // },
+    {
+      label: "Photo Gallery",
+      href: "/admin/gallery",
+      icon: ImageIcon,
+      badge: galleryCount > 0 ? galleryCount : null,
+    },
   ];
 
   return (

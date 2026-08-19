@@ -14,6 +14,7 @@ export default function AdminLayout({
   const [mobileOpen, setMobileOpen] = useState(false);
   const [leadCount, setLeadCount] = useState(0);
   const [testimonialCount, setTestimonialCount] = useState(0);
+  const [galleryCount, setGalleryCount] = useState(0);
 
   // If login route, don't wrap with layout shell
   const isLoginPage = pathname === "/admin/login";
@@ -39,6 +40,15 @@ export default function AdminLayout({
         }
       })
       .catch(() => {});
+
+    fetch("/api/gallery")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && Array.isArray(data.items)) {
+          setGalleryCount(data.items.length);
+        }
+      })
+      .catch(() => {});
   }, [pathname, isLoginPage]);
 
   if (isLoginPage) {
@@ -53,6 +63,7 @@ export default function AdminLayout({
         setMobileOpen={setMobileOpen}
         leadCount={leadCount}
         testimonialCount={testimonialCount}
+        galleryCount={galleryCount}
       />
 
       {/* Main Content Area */}

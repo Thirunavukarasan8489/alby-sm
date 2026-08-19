@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "alby2026";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "";
 export const ADMIN_COOKIE_NAME = "alby_admin_token";
-export const ADMIN_TOKEN_VALUE = "authenticated_admin_session_alby2026";
+export const ADMIN_TOKEN_VALUE = "authenticated_admin_session";
 
 export async function POST(request: Request) {
   try {
@@ -13,7 +13,7 @@ export async function POST(request: Request) {
     if (!password || password.trim() !== ADMIN_PASSWORD.trim()) {
       return NextResponse.json(
         { success: false, message: "Invalid admin password" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -34,7 +34,7 @@ export async function POST(request: Request) {
     console.error("Admin login error:", error);
     return NextResponse.json(
       { success: false, message: "Server authentication error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
