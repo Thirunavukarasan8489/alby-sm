@@ -14,17 +14,13 @@ import {
   AlertCircle,
   Sparkles,
   CloudUpload,
-  Filter,
 } from "lucide-react";
 
 interface GalleryPhotoItem {
   _id: string;
   title: string;
-  category: "piano" | "keyboard" | "faculty" | "events";
-  tag: "Piano" | "Keyboard" | "Faculty" | "Events";
   image: string;
   publicId?: string;
-  caption?: string;
   createdAt: string;
 }
 
@@ -33,19 +29,14 @@ export default function AdminGalleryPage() {
   const [items, setItems] = useState<GalleryPhotoItem[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Filter state
-  const [activeCategory, setActiveCategory] = useState<string>("all");
-
   // Modal State
   const [modalOpen, setModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<GalleryPhotoItem | null>(null);
 
   // Form State
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState<"piano" | "keyboard" | "faculty" | "events">("piano");
-  const [caption, setCaption] = useState("");
-  const [file, setFile] = useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [previews, setPreviews] = useState<string[]>([]);
 
   const [saving, setSaving] = useState(false);
   const [feedback, setFeedback] = useState<{
@@ -84,42 +75,59 @@ export default function AdminGalleryPage() {
   const openCreateModal = () => {
     setEditingItem(null);
     setTitle("");
-    setCategory("piano");
-    setCaption("");
-    setFile(null);
-    setPreviewUrl(null);
+    setSelectedFiles([]);
+    setPreviews([]);
     setModalOpen(true);
   };
 
   const openEditModal = (item: GalleryPhotoItem) => {
     setEditingItem(item);
     setTitle(item.title);
-    setCategory(item.category);
-    setCaption(item.caption || "");
-    setFile(null);
-    setPreviewUrl(item.image);
+    setSelectedFiles([]);
+    setPreviews([item.image]);
     setModalOpen(true);
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0];
-    if (selectedFile) {
-      setFile(selectedFile);
+  const handleMultipleFilesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    const fileArray = Array.from(files);
+    setSelectedFiles(fileArray);
+
+    // Generate previews
+    const previewArray: string[] = [];
+    let loadedCount = 0;
+
+    fileArray.forEach((file) => {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setPreviewUrl(reader.result as string);
+        if (reader.result) {
+          previewArray.push(reader.result as string);
+        }
+        loadedCount++;
+        if (loadedCount === fileArray.length) {
+          setPreviews(previewArray);
+        }
       };
-      reader.readAsDataURL(selectedFile);
-    }
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const removeSelectedFile = (index: number) => {
+    const updatedFiles = selectedFiles.filter((_, i) => i !== index);
+    const updatedPreviews = previews.filter((_, i) => i !== index);
+    setSelectedFiles(updatedFiles);
+    setPreviews(updatedPreviews);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!editingItem && !file && !previewUrl) {
+    if (!editingItem && selectedFiles.length === 0) {
       setFeedback({
         type: "error",
-        message: "Please select an image file to upload to Cloudinary",
+        message: "Please select at least one image file to upload to Cloudinary",
       });
       return;
     }
@@ -128,49 +136,63 @@ export default function AdminGalleryPage() {
     setFeedback(null);
 
     try {
-      const formData = new FormData();
-      formData.append("title", title);
-      formData.append("category", category);
-      formData.append("caption", caption);
-
-      if (file) {
-        formData.append("file", file);
-      } else if (previewUrl && !previewUrl.startsWith("data:")) {
-        formData.append("imageUrl", previewUrl);
-      }
-
-      const url = editingItem
-        ? `/api/admin/gallery/${editingItem._id}`
-        : "/api/admin/gallery";
-      const method = editingItem ? "PUT" : "POST";
-
-      const res = await fetch(url, {
-        method,
-        body: formData,
-      });
-
-      const data = await res.json();
-
-      if (res.ok && data.success) {
-        setFeedback({
-          type: "success",
-          message: editingItem
-            ? "Gallery photo updated successfully!"
-            : "New photo uploaded to Cloudinary & saved successfully!",
+      if (editingItem) {
+        // Edit single photo title
+        const res = await fetch(`/api/admin/gallery/${editingItem._id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ title }),
         });
-        setModalOpen(false);
-        loadGallery();
+
+        const data = await res.json();
+        if (res.ok && data.success) {
+          setFeedback({
+            type: "success",
+            message: "Photo title / alt text updated successfully!",
+          });
+          setModalOpen(false);
+          loadGallery();
+        } else {
+          setFeedback({
+            type: "error",
+            message: data.message || "Failed to update title",
+          });
+        }
       } else {
-        setFeedback({
-          type: "error",
-          message: data.message || "Failed to save photo",
+        // Bulk Upload
+        const formData = new FormData();
+        formData.append("title", title || "Alby School of Music Gallery Photo");
+
+        selectedFiles.forEach((file) => {
+          formData.append("files", file);
         });
+
+        const res = await fetch("/api/admin/gallery", {
+          method: "POST",
+          body: formData,
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          setFeedback({
+            type: "success",
+            message: `Successfully uploaded ${data.count || selectedFiles.length} photo(s) to Cloudinary & saved!`,
+          });
+          setModalOpen(false);
+          loadGallery();
+        } else {
+          setFeedback({
+            type: "error",
+            message: data.message || "Failed to upload photos",
+          });
+        }
       }
     } catch (err) {
       console.error("Save gallery error:", err);
       setFeedback({
         type: "error",
-        message: "Failed to upload photo. Please check your connection.",
+        message: "Failed to process photo upload. Please check your connection.",
       });
     } finally {
       setSaving(false);
@@ -178,7 +200,7 @@ export default function AdminGalleryPage() {
   };
 
   const handleDelete = async (id: string, photoTitle: string) => {
-    if (!confirm(`Are you sure you want to delete "${photoTitle}" from Cloudinary and MongoDB?`)) {
+    if (!confirm(`Are you sure you want to delete "${photoTitle}" from Cloudinary and database?`)) {
       return;
     }
 
@@ -210,12 +232,6 @@ export default function AdminGalleryPage() {
     }
   };
 
-  // Filter items
-  const filteredItems = items.filter((item) => {
-    if (activeCategory === "all") return true;
-    return item.category === activeCategory;
-  });
-
   return (
     <div className="max-w-7xl mx-auto space-y-8 pb-16">
       {/* Header Bar */}
@@ -228,7 +244,7 @@ export default function AdminGalleryPage() {
             </span>
           </h1>
           <p className="text-xs text-[#cfc3b3] mt-1">
-            Upload, manage, and serve academy photos via Cloudinary.
+            Bulk upload photos to Cloudinary and manage website gallery images.
           </p>
         </div>
 
@@ -237,7 +253,7 @@ export default function AdminGalleryPage() {
           className="px-5 py-2.5 rounded-xl bg-[#E8A33D] text-[#211126] font-bold text-xs uppercase tracking-wider hover:bg-white transition-all shadow-lg flex items-center gap-2 cursor-pointer self-start sm:self-auto min-h-[44px]"
         >
           <CloudUpload className="w-4 h-4" />
-          <span>Upload New Photo</span>
+          <span>Bulk Upload Photos</span>
         </button>
       </div>
 
@@ -267,89 +283,55 @@ export default function AdminGalleryPage() {
         </div>
       )}
 
-      {/* Category Filter Pills */}
-      <div className="bg-[#2c1732] border border-white/10 rounded-2xl p-3 flex flex-wrap items-center gap-2">
-        <span className="text-xs text-[#a89b8c] font-semibold px-2 flex items-center gap-1">
-          <Filter className="w-3.5 h-3.5 text-[#E8A33D]" /> Filter:
-        </span>
-        {[
-          { label: "All Photos", value: "all" },
-          { label: "Piano", value: "piano" },
-          { label: "Keyboard", value: "keyboard" },
-          { label: "Faculty", value: "faculty" },
-          { label: "Events", value: "events" },
-        ].map((tab) => (
-          <button
-            key={tab.value}
-            onClick={() => setActiveCategory(tab.value)}
-            className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-              activeCategory === tab.value
-                ? "bg-[#E8A33D] text-[#211126] shadow-md"
-                : "bg-[#211126] text-[#cfc3b3] hover:text-[#F8F3E7] hover:bg-white/5"
-            }`}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
-
       {/* Photo Grid */}
       {loading ? (
         <div className="py-20 text-center text-[#cfc3b3]">
           <span className="inline-block w-8 h-8 border-2 border-[#E8A33D] border-t-transparent rounded-full animate-spin mb-3" />
           <p className="text-xs">Loading photos from database...</p>
         </div>
-      ) : filteredItems.length === 0 ? (
+      ) : items.length === 0 ? (
         <div className="bg-[#2c1732] border border-white/10 rounded-2xl p-12 text-center text-[#cfc3b3]">
           <ImageIcon className="w-12 h-12 text-[#E8A33D] mx-auto mb-3 opacity-50" />
-          <p className="text-base font-semibold mb-1">No Photos Found</p>
+          <p className="text-base font-semibold mb-1">No Photos Uploaded Yet</p>
           <p className="text-xs text-[#a89b8c] mb-6">
-            Click the button below to upload your first academy image to Cloudinary.
+            Click below to select and bulk upload images directly to Cloudinary.
           </p>
           <button
             onClick={openCreateModal}
             className="px-5 py-2.5 rounded-xl bg-[#E8A33D] text-[#211126] font-bold text-xs uppercase tracking-wider hover:bg-white transition-all shadow-md inline-flex items-center gap-2 cursor-pointer"
           >
-            <CloudUpload className="w-4 h-4" /> Upload Photo
+            <CloudUpload className="w-4 h-4" /> Bulk Upload Photos
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredItems.map((item) => (
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+          {items.map((item) => (
             <div
               key={item._id}
               className="bg-[#2c1732] border border-white/10 rounded-2xl overflow-hidden hover:border-[#E8A33D] transition-all shadow-xl flex flex-col justify-between group"
             >
               <div>
                 {/* Photo Thumbnail Container */}
-                <div className="relative h-48 w-full bg-[#180b1d] overflow-hidden">
+                <div className="relative h-44 w-full bg-[#180b1d] overflow-hidden">
                   <Image
                     src={item.image}
                     alt={item.title}
                     fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <span className="absolute top-3 right-3 px-3 py-1 rounded-full bg-[#211126]/85 backdrop-blur-md text-[#E8A33D] text-[11px] font-bold border border-[#E8A33D]/30 shadow-md">
-                    {item.tag || item.category.toUpperCase()}
-                  </span>
                 </div>
 
-                {/* Info Container */}
-                <div className="p-4">
-                  <h3 className="font-serif font-bold text-base text-[#F8F3E7] line-clamp-1 mb-1">
+                {/* Title / Alt Text */}
+                <div className="p-3.5">
+                  <h3 className="font-serif font-bold text-sm text-[#F8F3E7] line-clamp-2" title={item.title}>
                     {item.title}
                   </h3>
-                  {item.caption && (
-                    <p className="text-xs text-[#cfc3b3] line-clamp-2 italic">
-                      &ldquo;{item.caption}&rdquo;
-                    </p>
-                  )}
                 </div>
               </div>
 
               {/* Bottom Actions Bar */}
-              <div className="p-4 pt-0 flex items-center justify-between border-t border-white/10 mt-2 pt-3">
+              <div className="p-3.5 pt-0 flex items-center justify-between border-t border-white/10 mt-1 pt-3">
                 <span className="text-[10.5px] text-[#a89b8c]">
                   {new Date(item.createdAt).toLocaleDateString("en-IN", {
                     day: "numeric",
@@ -358,11 +340,12 @@ export default function AdminGalleryPage() {
                   })}
                 </span>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1.5">
                   <button
                     onClick={() => openEditModal(item)}
-                    aria-label="Edit photo"
+                    aria-label="Edit title"
                     className="p-2 rounded-lg bg-white/10 text-[#F8F3E7] hover:bg-[#E8A33D] hover:text-[#211126] transition-colors cursor-pointer"
+                    title="Edit Title / Alt Text"
                   >
                     <Pencil className="w-3.5 h-3.5" />
                   </button>
@@ -370,6 +353,7 @@ export default function AdminGalleryPage() {
                     onClick={() => handleDelete(item._id, item.title)}
                     aria-label="Delete photo"
                     className="p-2 rounded-lg bg-white/10 text-[#F8F3E7] hover:bg-red-500 hover:text-white transition-colors cursor-pointer"
+                    title="Delete Photo"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
@@ -380,10 +364,10 @@ export default function AdminGalleryPage() {
         </div>
       )}
 
-      {/* Modal Dialog for Upload / Edit */}
+      {/* Bulk Upload / Edit Modal Dialog */}
       {modalOpen && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-[#2c1732] border border-[#E8A33D]/40 rounded-3xl p-6 sm:p-8 max-w-lg w-full text-[#F8F3E7] shadow-2xl relative max-h-[90vh] overflow-y-auto">
+          <div className="bg-[#2c1732] border border-[#E8A33D]/40 rounded-3xl p-6 sm:p-8 max-w-xl w-full text-[#F8F3E7] shadow-2xl relative max-h-[90vh] overflow-y-auto">
             <button
               onClick={() => setModalOpen(false)}
               className="absolute top-5 right-5 text-white/60 hover:text-white"
@@ -393,101 +377,97 @@ export default function AdminGalleryPage() {
 
             <h2 className="font-serif text-2xl font-bold mb-1 text-[#F8F3E7] flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-[#E8A33D]" />
-              {editingItem ? "Edit Photo Metadata" : "Upload Photo to Cloudinary"}
+              {editingItem ? "Edit Photo Alt Text" : "Bulk Upload Photos to Cloudinary"}
             </h2>
             <p className="text-xs text-[#cfc3b3] mb-6">
-              Images are processed & stored in Cloudinary for high-speed serving.
+              {editingItem
+                ? "Update the title/alt text used for SEO and accessibility."
+                : "Select multiple image files to upload to Cloudinary simultaneously."}
             </p>
 
-            <form onSubmit={handleSubmit} className="space-y-4 text-xs">
-              {/* File Selector & Preview */}
-              <div>
-                <label className="block font-semibold text-[#E8A33D] mb-1.5">
-                  Select Image File *
-                </label>
+            <form onSubmit={handleSubmit} className="space-y-5 text-xs">
+              {/* Multi-File Input (only for new upload) */}
+              {!editingItem && (
+                <div>
+                  <label className="block font-semibold text-[#E8A33D] mb-1.5">
+                    Select Photo Files (Multiple allowed) *
+                  </label>
 
-                {previewUrl ? (
-                  <div className="relative h-44 w-full rounded-2xl overflow-hidden border border-white/20 mb-2">
-                    <Image
-                      src={previewUrl}
-                      alt="Upload preview"
-                      fill
-                      className="object-cover"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setFile(null);
-                        setPreviewUrl(null);
-                      }}
-                      className="absolute top-2 right-2 p-1.5 rounded-full bg-black/75 text-white hover:bg-red-500 transition-colors"
-                    >
-                      <X className="w-4 h-4" />
-                    </button>
-                  </div>
-                ) : (
                   <label className="border-2 border-dashed border-white/20 hover:border-[#E8A33D] rounded-2xl p-6 flex flex-col items-center justify-center cursor-pointer bg-[#211126]/60 transition-colors">
-                    <Upload className="w-8 h-8 text-[#E8A33D] mb-2" />
+                    <CloudUpload className="w-9 h-9 text-[#E8A33D] mb-2" />
                     <span className="text-xs font-semibold text-[#F8F3E7]">
-                      Click to choose photo from computer
+                      {selectedFiles.length > 0
+                        ? `${selectedFiles.length} photo(s) selected — Click to change`
+                        : "Click to select photos from computer"}
                     </span>
                     <span className="text-[10.5px] text-[#a89b8c] mt-1">
-                      Supports WebP, JPG, PNG up to 10MB
+                      Hold Ctrl / Shift to pick multiple images at once (WebP, JPG, PNG)
                     </span>
                     <input
                       type="file"
+                      multiple
                       accept="image/*"
-                      onChange={handleFileChange}
+                      onChange={handleMultipleFilesChange}
                       className="hidden"
                     />
                   </label>
-                )}
-              </div>
 
-              {/* Title */}
+                  {/* Previews Grid */}
+                  {previews.length > 0 && (
+                    <div className="mt-3">
+                      <div className="flex items-center justify-between mb-2 text-[11px] text-[#cfc3b3]">
+                        <span>Selected Photos ({previews.length}):</span>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setSelectedFiles([]);
+                            setPreviews([]);
+                          }}
+                          className="text-red-400 hover:underline"
+                        >
+                          Clear all
+                        </button>
+                      </div>
+                      <div className="grid grid-cols-4 sm:grid-cols-5 gap-2 max-h-40 overflow-y-auto p-2 bg-[#211126] rounded-xl border border-white/10">
+                        {previews.map((src, idx) => (
+                          <div key={idx} className="relative h-16 w-full rounded-lg overflow-hidden border border-white/20 group">
+                            <Image
+                              src={src}
+                              alt={`Preview ${idx + 1}`}
+                              fill
+                              className="object-cover"
+                            />
+                            <button
+                              type="button"
+                              onClick={() => removeSelectedFile(idx)}
+                              className="absolute top-0.5 right-0.5 p-0.5 rounded-full bg-black/80 text-white hover:bg-red-500"
+                            >
+                              <X className="w-3 h-3" />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Single Title / Alt Text Field */}
               <div>
                 <label className="block font-semibold text-[#E8A33D] mb-1">
-                  Photo Title *
+                  Title / Alt Text {editingItem ? "*" : "(Optional base title)"}
                 </label>
                 <input
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  placeholder="e.g. Grand Piano Classical Recital"
-                  required
+                  placeholder="e.g. Alby School of Music Recital"
+                  required={!!editingItem}
                   className="w-full bg-[#211126] border border-white/20 rounded-xl px-4 py-3 text-sm text-[#F8F3E7] focus:outline-none focus:border-[#E8A33D]"
                 />
-              </div>
-
-              {/* Category */}
-              <div>
-                <label className="block font-semibold text-[#E8A33D] mb-1">
-                  Category Tag *
-                </label>
-                <select
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value as any)}
-                  className="w-full bg-[#211126] border border-white/20 rounded-xl px-3 py-3 text-sm text-[#F8F3E7] focus:outline-none focus:border-[#E8A33D]"
-                >
-                  <option value="piano">Piano</option>
-                  <option value="keyboard">Keyboard</option>
-                  <option value="faculty">Faculty</option>
-                  <option value="events">Events</option>
-                </select>
-              </div>
-
-              {/* Caption */}
-              <div>
-                <label className="block font-semibold text-[#E8A33D] mb-1">
-                  Caption (Optional)
-                </label>
-                <textarea
-                  rows={3}
-                  value={caption}
-                  onChange={(e) => setCaption(e.target.value)}
-                  placeholder="Short description of the photo..."
-                  className="w-full bg-[#211126] border border-white/20 rounded-xl px-4 py-3 text-sm text-[#F8F3E7] focus:outline-none focus:border-[#E8A33D]"
-                />
+                <p className="text-[10.5px] text-[#a89b8c] mt-1">
+                  This string will be used as the alt attribute for images on the gallery page.
+                </p>
               </div>
 
               <div className="pt-3 flex items-center justify-between">
@@ -506,10 +486,20 @@ export default function AdminGalleryPage() {
                   {saving ? (
                     <>
                       <span className="w-4 h-4 border-2 border-[#211126] border-t-transparent rounded-full animate-spin" />
-                      <span>Uploading to Cloudinary...</span>
+                      <span>
+                        {selectedFiles.length > 1
+                          ? `Uploading ${selectedFiles.length} photos...`
+                          : "Uploading to Cloudinary..."}
+                      </span>
                     </>
                   ) : (
-                    <span>{editingItem ? "Update Photo" : "Upload to Cloudinary"}</span>
+                    <span>
+                      {editingItem
+                        ? "Update Alt Text"
+                        : selectedFiles.length > 1
+                        ? `Upload ${selectedFiles.length} Photos`
+                        : "Upload Photos"}
+                    </span>
                   )}
                 </button>
               </div>

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "alby2026";
 export const ADMIN_COOKIE_NAME = "alby_admin_token";
 export const ADMIN_TOKEN_VALUE = "authenticated_admin_session";
 

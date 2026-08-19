@@ -4,136 +4,44 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-
-const FALLBACK_GALLERY_ITEMS = [
-  {
-    id: 1,
-    title: "Live Stage Synthesizer Performance",
-    cat: "keyboard",
-    tag: "Keyboard",
-    src: "/images/alby-keyboard-stage.jpg",
-    size: "col-span-2 row-span-2",
-  },
-  {
-    id: 2,
-    title: "Master Alby — Founder & Lead Instructor",
-    cat: "faculty",
-    tag: "Faculty",
-    src: "/images/alby-founder.jpg",
-    size: "",
-  },
-  {
-    id: 3,
-    title: "Upright Piano Lesson",
-    cat: "piano",
-    tag: "Piano",
-    src: "/images/alby-piano-playing.jpg",
-    size: "",
-  },
-  {
-    id: 4,
-    title: "Grand Piano Studio Session",
-    cat: "piano",
-    tag: "Piano",
-    src: "/images/alby-grand-piano.jpg",
-    size: "col-span-2",
-  },
-  {
-    id: 5,
-    title: "Arranger Keyboard Practice",
-    cat: "keyboard",
-    tag: "Keyboard",
-    src: "/images/student-keyboard-yamaha.jpg",
-    size: "",
-  },
-  {
-    id: 6,
-    title: "Digital Piano Lesson",
-    cat: "piano",
-    tag: "Piano",
-    src: "/images/student-digital-piano.jpg",
-    size: "",
-  },
-  {
-    id: 7,
-    title: "Teenage Piano & Theory",
-    cat: "piano",
-    tag: "Piano",
-    src: "/images/student-piano-practice.jpg",
-    size: "",
-  },
-  {
-    id: 8,
-    title: "Piano Hand Technique",
-    cat: "piano",
-    tag: "Piano",
-    src: "/images/student-piano-hands.jpg",
-    size: "col-span-2",
-  },
-  {
-    id: 9,
-    title: "Keyboard Sheet Music Class",
-    cat: "keyboard",
-    tag: "Keyboard",
-    src: "/images/student-keyboard-lesson.jpg",
-    size: "",
-  },
-  {
-    id: 10,
-    title: "PSR Synthesizer Control",
-    cat: "keyboard",
-    tag: "Keyboard",
-    src: "/images/student-arranger-keyboard.jpg",
-    size: "",
-  },
-  {
-    id: 11,
-    title: "Workstation Keyboard Studio",
-    cat: "keyboard",
-    tag: "Keyboard",
-    src: "/images/student-keyboard-smiling.jpg",
-    size: "",
-  },
-];
+import { ImageIcon } from "lucide-react";
 
 interface DisplayItem {
   id: string | number;
   title: string;
-  cat: string;
-  tag: string;
   src: string;
   size?: string;
 }
 
 export default function GalleryPage() {
-  const [items, setItems] = useState<DisplayItem[]>(FALLBACK_GALLERY_ITEMS);
-  const [activeFilter, setActiveFilter] = useState("all");
+  const [items, setItems] = useState<DisplayItem[]>([]);
+  const [loading, setLoading] = useState(true);
   const [activeLightboxSrc, setActiveLightboxSrc] = useState<string | null>(null);
 
-  // Fetch dynamic gallery items from API
+  // Fetch dynamic gallery items from MongoDB backend
   const fetchGallery = async () => {
     try {
       const res = await fetch("/api/gallery", { cache: "no-store" });
       const data = await res.json();
-      if (data.success && Array.isArray(data.items) && data.items.length > 0) {
+      if (data.success && Array.isArray(data.items)) {
         const mapped = data.items.map((item: any, idx: number) => ({
           id: item._id || idx,
-          title: item.title,
-          cat: item.category || "piano",
-          tag: item.tag || "Piano",
+          title: item.title || "Alby School of Music Gallery Photo",
           src: item.image,
           size: idx % 7 === 0 ? "col-span-2 row-span-2" : idx % 4 === 0 ? "col-span-2" : "",
         }));
         setItems(mapped);
       }
     } catch (err) {
-      console.error("Failed to load dynamic gallery items:", err);
+      console.error("Failed to load backend gallery items:", err);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     fetchGallery();
-    const interval = setInterval(fetchGallery, 12000);
+    const interval = setInterval(fetchGallery, 10000);
     const handleFocus = () => fetchGallery();
     window.addEventListener("focus", handleFocus);
 
@@ -142,11 +50,6 @@ export default function GalleryPage() {
       window.removeEventListener("focus", handleFocus);
     };
   }, []);
-
-  const filteredItems =
-    activeFilter === "all"
-      ? items
-      : items.filter((item) => item.cat.toLowerCase() === activeFilter.toLowerCase());
 
   return (
     <main className="min-h-screen bg-[#F8F3E7] text-[#2B2420]">
@@ -184,58 +87,48 @@ export default function GalleryPage() {
         </ScrollReveal>
       </section>
 
-      {/* ---------- FILTERS BAR ---------- */}
-      {/* <div className="flex justify-center gap-2.5 flex-wrap pt-10 pb-2.5 px-6">
-        {[
-          { label: "All Photos", value: "all" },
-          { label: "Piano", value: "piano" },
-          { label: "Keyboard", value: "keyboard" },
-          { label: "Faculty", value: "faculty" },
-          { label: "Events", value: "events" },
-        ].map((btn) => (
-          <button
-            key={btn.value}
-            onClick={() => setActiveFilter(btn.value)}
-            className={`font-sans text-[13.5px] font-semibold px-5 py-2 rounded-full border transition-all cursor-pointer ${
-              activeFilter === btn.value
-                ? "bg-[#17514E] text-[#F8F3E7] border-[#17514E] shadow-md"
-                : "bg-transparent text-[#17514E] border-[#17514E]/30 hover:bg-[#17514E] hover:text-[#F8F3E7]"
-            }`}
-          >
-            {btn.label}
-          </button>
-        ))}
-      </div> */}
       {/* ---------- GALLERY GRID ---------- */}
-      <div className="max-w-[1180px] mx-auto px-6 pt-7.5 pb-[90px]">
-        <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[140px] sm:auto-rows-[180px] gap-3.5">
-          {filteredItems.map((item, idx) => (
-            <ScrollReveal
-              key={item.id}
-              direction="up"
-              delay={0.05 + (idx % 8) * 0.04}
-              className={item.size}
-            >
-              <div
-                onClick={() => setActiveLightboxSrc(item.src)}
-                className="relative overflow-hidden rounded-[4px] cursor-pointer group h-full shadow-sm hover:shadow-xl transition-shadow"
+      <div className="max-w-[1180px] mx-auto px-6 pt-10 pb-[90px]">
+        {loading ? (
+          <div className="py-20 text-center text-[#5c5147]">
+            <span className="inline-block w-8 h-8 border-2 border-[#17514E] border-t-transparent rounded-full animate-spin mb-3" />
+            <p className="text-xs">Loading academy photos...</p>
+          </div>
+        ) : items.length === 0 ? (
+          <div className="py-20 text-center text-[#5c5147] bg-white rounded-2xl border border-[#E8A33D]/20 p-12 max-w-lg mx-auto shadow-sm">
+            <ImageIcon className="w-12 h-12 text-[#E8A33D] mx-auto mb-3 opacity-60" />
+            <h3 className="font-serif text-2xl font-bold text-[#211126] mb-1">
+              No Gallery Photos Yet
+            </h3>
+            <p className="text-xs text-[#6e6359] leading-relaxed">
+              Academy photos uploaded by Master Alby via the Admin Portal will automatically appear here.
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[140px] sm:auto-rows-[180px] gap-3.5">
+            {items.map((item, idx) => (
+              <ScrollReveal
+                key={item.id}
+                direction="up"
+                delay={0.05 + (idx % 8) * 0.04}
+                className={item.size}
               >
-                <Image
-                  src={item.src}
-                  alt={item.title}
-                  width={700}
-                  height={400}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
-                />
-                {/* <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
-                  <p className="text-white text-xs font-semibold truncate">
-                    {item.title}
-                  </p>
-                </div> */}
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
+                <div
+                  onClick={() => setActiveLightboxSrc(item.src)}
+                  className="relative overflow-hidden rounded-[4px] cursor-pointer group h-full shadow-sm hover:shadow-xl transition-shadow"
+                >
+                  <Image
+                    src={item.src}
+                    alt={item.title}
+                    width={700}
+                    height={400}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
+                  />
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* ---------- LIGHTBOX MODAL ---------- */}

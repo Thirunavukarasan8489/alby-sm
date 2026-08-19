@@ -25,85 +25,84 @@ export async function POST(request: NextRequest) {
     await connectToDatabase();
 
     const contentType = request.headers.get("content-type") || "";
-    let title = "";
-    let category = "piano";
-    let caption = "";
-    let imageUrl = "";
-    let publicId = "";
+    let baseTitle = "";
+    const uploadPayloads: { buffer: Buffer; filename: string }[] = [];
+    const directUrls: string[] = [];
 
     if (contentType.includes("multipart/form-data")) {
       const formData = await request.formData();
-      title = (formData.get("title") as string) || "";
-      category = (formData.get("category") as string) || "piano";
-      caption = (formData.get("caption") as string) || "";
+      baseTitle = (formData.get("title") as string) || "";
 
-      const file = formData.get("file") as File | null;
-      const directImageUrl = formData.get("imageUrl") as string | null;
+      // Extract all uploaded files (supports single or multiple file input)
+      const rawFiles = formData.getAll("files");
+      const singleFile = formData.get("file") as File | null;
 
-      if (file && file.size > 0) {
+      const fileList: File[] = [];
+      if (rawFiles && rawFiles.length > 0) {
+        rawFiles.forEach((f) => {
+          if (f instanceof File && f.size > 0) fileList.push(f);
+        });
+      } else if (singleFile && singleFile instanceof File && singleFile.size > 0) {
+        fileList.push(singleFile);
+      }
+
+      // Convert files to buffers
+      for (const file of fileList) {
         const arrayBuffer = await file.arrayBuffer();
-        const buffer = Buffer.from(arrayBuffer);
-        const uploadResult = await uploadToCloudinary(buffer, "alby_sm_gallery");
-        imageUrl = uploadResult.secure_url;
-        publicId = uploadResult.public_id;
-      } else if (directImageUrl) {
-        imageUrl = directImageUrl;
-      } else {
-        return NextResponse.json(
-          { success: false, message: "Please select an image file to upload" },
-          { status: 400 }
-        );
+        uploadPayloads.push({
+          buffer: Buffer.from(arrayBuffer),
+          filename: file.name,
+        });
       }
     } else {
       const body = await request.json();
-      title = body.title || "";
-      category = body.category || "piano";
-      caption = body.caption || "";
-      imageUrl = body.image || "";
-      publicId = body.publicId || "";
-
-      if (body.fileDataUri) {
-        const uploadResult = await uploadToCloudinary(
-          body.fileDataUri,
-          "alby_sm_gallery"
-        );
-        imageUrl = uploadResult.secure_url;
-        publicId = uploadResult.public_id;
+      baseTitle = body.title || "";
+      if (Array.isArray(body.images)) {
+        directUrls.push(...body.images);
+      } else if (body.image) {
+        directUrls.push(body.image);
       }
     }
 
-    if (!title.trim()) {
+    const titleToUse = baseTitle.trim() || "Alby School of Music Gallery Photo";
+
+    if (uploadPayloads.length === 0 && directUrls.length === 0) {
       return NextResponse.json(
-        { success: false, message: "Photo title is required" },
+        { success: false, message: "Please select at least one photo file to upload" },
         { status: 400 }
       );
     }
 
-    if (!imageUrl) {
-      return NextResponse.json(
-        { success: false, message: "Image upload failed or image URL missing" },
-        { status: 400 }
-      );
+    const createdItems = [];
+
+    // 1. Process file buffers & upload to Cloudinary in parallel
+    if (uploadPayloads.length > 0) {
+      const uploadPromises = uploadPayloads.map(async (payload, idx) => {
+        const uploadResult = await uploadToCloudinary(payload.buffer, "alby_sm_gallery");
+        return {
+          title: titleToUse,
+          image: uploadResult.secure_url,
+          publicId: uploadResult.public_id,
+          order: Date.now() + idx,
+        };
+      });
+
+      const itemsToCreate = await Promise.all(uploadPromises);
+      const inserted = await GalleryItem.insertMany(itemsToCreate);
+      createdItems.push(...inserted);
     }
 
-    // Determine display tag
-    const tagMap: Record<string, "Piano" | "Keyboard" | "Faculty" | "Events"> = {
-      piano: "Piano",
-      keyboard: "Keyboard",
-      faculty: "Faculty",
-      events: "Events",
-    };
-    const tag = tagMap[category.toLowerCase()] || "Piano";
-
-    const newItem = await GalleryItem.create({
-      title: title.trim(),
-      category: category.toLowerCase() as any,
-      tag,
-      image: imageUrl,
-      publicId,
-      caption: caption.trim(),
-      order: Date.now(),
-    });
+    // 2. Process direct URLs if provided
+    if (directUrls.length > 0) {
+      const itemsToCreate = directUrls.map((url, idx) => ({
+        title: titleToUse,
+        image: url,
+        publicId: "",
+        order: Date.now() + idx,
+      }));
+      const inserted = await GalleryItem.insertMany(itemsToCreate);
+      createdItems.push(...inserted);
+    }
 
     // Revalidate frontend paths
     revalidatePath("/gallery");
@@ -112,15 +111,16 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         success: true,
-        message: "Gallery photo uploaded successfully!",
-        item: newItem,
+        message: `Successfully uploaded ${createdItems.length} photo(s) to Cloudinary!`,
+        count: createdItems.length,
+        items: createdItems,
       },
       { status: 201 }
     );
   } catch (error) {
     console.error("POST /api/admin/gallery error:", error);
     return NextResponse.json(
-      { success: false, message: "Failed to upload gallery photo" },
+      { success: false, message: "Failed to upload gallery photos" },
       { status: 500 }
     );
   }

@@ -2,11 +2,8 @@ import mongoose, { Schema, Document, Model } from "mongoose";
 
 export interface IGalleryItem extends Document {
   title: string;
-  category: "piano" | "keyboard" | "faculty" | "events";
-  tag: "Piano" | "Keyboard" | "Faculty" | "Events";
   image: string;
   publicId?: string;
-  caption?: string;
   order: number;
   createdAt: Date;
   updatedAt: Date;
@@ -16,21 +13,10 @@ const GalleryItemSchema: Schema<IGalleryItem> = new Schema(
   {
     title: {
       type: String,
-      required: [true, "Title is required"],
+      required: [true, "Title / Alt Text is required"],
       trim: true,
-      maxlength: [120, "Title cannot exceed 120 characters"],
-    },
-    category: {
-      type: String,
-      required: [true, "Category is required"],
-      enum: ["piano", "keyboard", "faculty", "events"],
-      default: "piano",
-    },
-    tag: {
-      type: String,
-      required: [true, "Tag is required"],
-      enum: ["Piano", "Keyboard", "Faculty", "Events"],
-      default: "Piano",
+      maxlength: [150, "Title cannot exceed 150 characters"],
+      default: "Alby School of Music Gallery Photo",
     },
     image: {
       type: String,
@@ -40,12 +26,6 @@ const GalleryItemSchema: Schema<IGalleryItem> = new Schema(
     publicId: {
       type: String,
       trim: true,
-      default: "",
-    },
-    caption: {
-      type: String,
-      trim: true,
-      maxlength: [500, "Caption cannot exceed 500 characters"],
       default: "",
     },
     order: {
