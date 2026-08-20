@@ -131,7 +131,7 @@ export default function AdminOverviewPage() {
       </div>
 
       {/* ---------- SUMMARY STAT TILES ROW (5 TILES) ---------- */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-5">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
         {/* Tile 1: Enrolled Students */}
         <Link
           href="/admin/leads?status=enrolled"
@@ -155,7 +155,7 @@ export default function AdminOverviewPage() {
           </div>
         </Link>
 
-        {/* Tile 2: Trial Inquiries */}
+        {/* Tile 2: Trial Enquiries */}
         <Link
           href="/admin/leads"
           className="bg-[#2c1732] border border-[#E8A33D]/25 rounded-2xl p-5 shadow-lg hover:border-[#E8A33D] transition-all group flex flex-col justify-between"
@@ -165,7 +165,7 @@ export default function AdminOverviewPage() {
               <Users className="w-5 h-5" />
             </div>
             <span className="text-xs font-semibold text-[#E8A33D] group-hover:translate-x-0.5 transition-transform flex items-center gap-1">
-              Inquiries <ArrowRight className="w-3 h-3" />
+              Enquiries <ArrowRight className="w-3 h-3" />
             </span>
           </div>
           <div>
@@ -173,7 +173,7 @@ export default function AdminOverviewPage() {
               {stats.trialCount}
             </div>
             <div className="text-xs text-[#cfc3b3] font-medium mt-1">
-              Trial Inquiries
+              Trial Enquiries
             </div>
           </div>
         </Link>
@@ -225,7 +225,7 @@ export default function AdminOverviewPage() {
         </Link>
 
         {/* Tile 5: Exam Boards */}
-        <Link
+        {/* <Link
           href="/#exams"
           target="_blank"
           className="bg-[#2c1732] border border-rose-500/30 rounded-2xl p-5 shadow-lg hover:border-rose-400 transition-all group flex flex-col justify-between"
@@ -246,7 +246,7 @@ export default function AdminOverviewPage() {
               Affiliated Boards
             </div>
           </div>
-        </Link>
+        </Link> */}
       </div>
 
       {/* ---------- QUICK MANAGEMENT ACTIONS & RECENT ACTIVITY ---------- */}

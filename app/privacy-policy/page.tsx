@@ -118,7 +118,7 @@ export default function PrivacyPolicyPage() {
                     prep consultation.
                   </li>
                   <li>
-                    To respond to your inquiries via WhatsApp, email, or direct
+                    To respond to your Enquiries via WhatsApp, email, or direct
                     phone calls.
                   </li>
                   <li>

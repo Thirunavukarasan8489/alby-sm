@@ -319,7 +319,7 @@ export default function AboutPage() {
           <ScrollReveal direction="up" delay={0.2}>
             <div className="h-full bg-[#2c1732] rounded-[4px] overflow-hidden border border-[#E8A33D]/15 transition-all duration-300 hover:-translate-y-1.5">
               <Image
-                src="/images/sharmin1.jpeg"
+                src="/images/sharmin.jpeg"
                 alt="Guitar instructor"
                 width={760}
                 height={1245}
