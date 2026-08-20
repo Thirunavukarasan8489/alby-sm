@@ -24,24 +24,24 @@ export async function GET() {
       .lean();
 
     // Auto-seed initial testimonials if DB is empty
-    if (!testimonials || testimonials.length === 0) {
-      const seedItems = INITIAL_TESTIMONIALS.map((item: any, idx) => ({
-        name: item.author,
-        role: item.role,
-        instrument: item.instrument || "Piano",
-        quote: item.quote,
-        rating: item.rating || 5,
-        featured: true,
-        order: idx,
-        image: item.image || "",
-        publicId: "",
-      }));
+    // if (!testimonials || testimonials.length === 0) {
+    //   const seedItems = INITIAL_TESTIMONIALS.map((item: any, idx) => ({
+    //     name: item.author,
+    //     role: item.role,
+    //     instrument: item.instrument || "Piano",
+    //     quote: item.quote,
+    //     rating: item.rating || 5,
+    //     featured: true,
+    //     order: idx,
+    //     image: item.image || "",
+    //     publicId: "",
+    //   }));
 
-      await Testimonial.insertMany(seedItems);
-      testimonials = await Testimonial.find({})
-        .sort({ order: 1, createdAt: -1 })
-        .lean();
-    }
+    //   await Testimonial.insertMany(seedItems);
+    //   testimonials = await Testimonial.find({})
+    //     .sort({ order: 1, createdAt: -1 })
+    //     .lean();
+    // }
 
     return NextResponse.json({
       success: true,
