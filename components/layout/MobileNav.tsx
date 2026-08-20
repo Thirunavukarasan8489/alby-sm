@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import PianoIcon from "../icons/PianoIcon";
 
 interface MobileNavProps {
   isOpen: boolean;
@@ -34,10 +35,26 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
       href: "/classes",
       hasSub: true,
       subItems: [
-        { name: "🎹 Piano", href: "/classes/piano" },
-        { name: "🎸 Guitar", href: "/classes/guitar" },
-        { name: "🎛 Keyboard", href: "/classes/keyboard" },
-        { name: "🎼 Theory of Music", href: "/classes" },
+        {
+          name: "Piano",
+          href: "/classes/piano",
+          icon: <PianoIcon size={24} />,
+        },
+        {
+          name: "Guitar",
+          href: "/classes/guitar",
+          icon: "🎸",
+        },
+        {
+          name: "Keyboard",
+          href: "/classes/keyboard",
+          icon: "🎹",
+        },
+        {
+          name: "Theory of Music",
+          href: "/classes",
+          icon: "🎼",
+        },
       ],
     },
     { name: "Gallery", href: "/gallery" },
@@ -166,13 +183,20 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
                                     <Link
                                       href={sub.href}
                                       onClick={onClose}
-                                      className={`text-sm uppercase font-medium transition-all px-3 py-2 rounded-[4px] block ${
+                                      className={`text-sm uppercase font-medium transition-all px-3 py-2 rounded-[4px] flex items-center gap-3 ${
                                         isSubActive
                                           ? "text-[#E8A33D] font-semibold bg-white/8"
                                           : "text-[#F8F3E7]/80 hover:text-[#E8A33D]"
                                       }`}
                                     >
-                                      {sub.name}
+                                      <span className="text-xl shrink-0 mt-0.5">
+                                        {sub.icon}
+                                      </span>
+                                      <div>
+                                        <strong className="block text-[14px] leading-snug">
+                                          {sub.name}
+                                        </strong>
+                                      </div>
                                     </Link>
                                   </li>
                                 );
