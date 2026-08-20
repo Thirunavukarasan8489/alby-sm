@@ -94,13 +94,13 @@ export const ClassPageTemplate: React.FC<ClassPageTemplateProps> = ({
             <div className="flex flex-wrap gap-3.5">
               <Link
                 href="/contact"
-                className="bg-[#E8A33D] text-[#211126] font-semibold text-[15px] px-7 py-3.5 rounded-[2px] transition-all hover:bg-white hover:-translate-y-0.5 inline-block shadow-md"
+                className="bg-[#E8A33D] text-[#211126] font-semibold text-[15px] px-8 py-3.5 rounded-full transition-all duration-300 hover:bg-white hover:shadow-[0_8px_25px_rgba(232,163,61,0.45)] hover:-translate-y-0.5 inline-block shadow-md active:scale-95"
               >
-                Enroll in {classItem.name}
+                Book Your Slots
               </Link>
               <a
                 href="#curriculum"
-                className="border border-[#F8F3E7]/40 text-[#F8F3E7] font-medium text-[15px] px-7 py-3.5 rounded-[2px] transition-all hover:border-[#E8A33D] hover:bg-[#E8A33D]/10 inline-block"
+                className="border-2 border-[#F8F3E7]/40 text-[#F8F3E7] font-semibold text-[15px] px-8 py-3.5 rounded-full transition-all duration-300 hover:border-[#E8A33D] hover:bg-[#E8A33D]/10 hover:-translate-y-0.5 inline-block active:scale-95"
               >
                 View Curriculum
               </a>
@@ -251,9 +251,9 @@ export const ClassPageTemplate: React.FC<ClassPageTemplateProps> = ({
                   <td className="p-4 sm:px-5 sm:py-3.5 font-medium">
                     {row.batch}
                   </td>
-                  {/* <td className="p-4 sm:px-5 sm:py-3.5">{row.level}</td> */}
-                  {/* <td className="p-4 sm:px-5 sm:py-3.5">{row.days}</td> */}
-                  {/* <td className="p-4 sm:px-5 sm:py-3.5">{row.time}</td> */}
+                  <td className="p-4 sm:px-5 sm:py-3.5">{row.level}</td>
+                  <td className="p-4 sm:px-5 sm:py-3.5">{row.days}</td>
+                  <td className="p-4 sm:px-5 sm:py-3.5">{row.time}</td>
                 </tr>
               ))}
             </tbody>
@@ -324,14 +324,11 @@ export const ClassPageTemplate: React.FC<ClassPageTemplateProps> = ({
           <h2 className="text-3xl sm:text-[38px] mb-6.5 font-serif">
             Ready to start playing?
           </h2>
-          {/* <p className="mt-3.5 mb-6.5 max-w-[460px] mx-auto text-[#cfc3b3] text-base">
-            Book a free trial class and meet your instructor first.
-          </p> */}
           <Link
             href="/contact"
-            className="bg-[#E8A33D] text-[#211126] font-semibold text-[15px] px-7 py-3.5 rounded-[2px] transition-all hover:bg-white hover:-translate-y-0.5 inline-block shadow-md"
+            className="bg-[#E8A33D] text-[#211126] font-semibold text-[15px] px-8 py-3.5 rounded-full transition-all duration-300 hover:bg-white hover:shadow-[0_8px_25px_rgba(232,163,61,0.45)] hover:-translate-y-0.5 inline-block shadow-md active:scale-95"
           >
-            Join Now
+            Book Your Slots
           </Link>
         </ScrollReveal>
       </section>

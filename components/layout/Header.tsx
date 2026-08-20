@@ -197,9 +197,9 @@ export const Header: React.FC = () => {
           {/* Desktop CTA */}
           <Link
             href="/contact"
-            className="hidden md:inline-block bg-[#E8A33D] text-[#211126] font-semibold text-sm px-5 py-2.5 rounded-[2px] transition-all hover:bg-white hover:-translate-y-0.5 shadow-md"
+            className="hidden md:inline-block bg-[#E8A33D] text-[#211126] font-semibold text-sm px-6 py-2.5 rounded-full transition-all duration-300 hover:bg-white hover:-translate-y-0.5 shadow-[0_4px_20px_rgba(232,163,61,0.35)] hover:shadow-[0_8px_25px_rgba(232,163,61,0.5)] active:scale-95"
           >
-            Join Now
+            Book Your Slots
           </Link>
 
           {/* Burger Button */}

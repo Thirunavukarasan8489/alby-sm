@@ -168,9 +168,9 @@ export default function GalleryPage() {
           </h2>
           <Link
             href="/contact"
-            className="bg-[#E8A33D] text-[#211126] font-semibold text-[15px] px-7 py-3.5 rounded-[2px] transition-all hover:bg-white hover:-translate-y-0.5 inline-block shadow-md"
+            className="bg-[#E8A33D] text-[#211126] font-semibold text-[15px] px-8 py-3.5 rounded-full transition-all duration-300 hover:bg-white hover:shadow-[0_8px_25px_rgba(232,163,61,0.45)] hover:-translate-y-0.5 inline-block shadow-md active:scale-95"
           >
-            Join Now
+            Book Your Slots
           </Link>
         </ScrollReveal>
       </section>

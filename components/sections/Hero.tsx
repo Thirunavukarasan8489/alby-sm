@@ -62,7 +62,7 @@ export const Hero: React.FC = () => {
                 size="lg"
                 className="w-full sm:w-auto"
               >
-                <span>Book Free Trial Class</span>
+                <span>Book Your Slots</span>
                 <ChevronRight className="w-5 h-5 ml-1" />
               </Button>
               <Button

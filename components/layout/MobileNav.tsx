@@ -214,9 +214,9 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
               <Link
                 href="/contact"
                 onClick={onClose}
-                className="w-full text-center bg-[#E8A33D] text-[#211126] font-semibold text-base py-3.5 px-6 rounded-[3px] transition-all hover:bg-white inline-block shadow-lg"
+                className="w-full text-center bg-[#E8A33D] text-[#211126] font-semibold text-base py-3.5 px-6 rounded-full transition-all duration-300 hover:bg-white hover:shadow-[0_8px_25px_rgba(232,163,61,0.45)] inline-block shadow-lg active:scale-95"
               >
-                Book a Free Trial Class
+                Book Your Slots
               </Link>
             </div>
           </motion.div>

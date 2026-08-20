@@ -54,7 +54,7 @@ export default function ClassesPage() {
       </section>
 
       {/* ---------- JUMPNAV BAR ---------- */}
-      <div className="bg-[#F8F3E7] border-b border-[#17514E]/15 sticky top-[64px] z-40">
+      <div className="bg-[#F8F3E7] border-b border-[#17514E]/15 sticky top-[85px] z-40">
         <div className="max-w-[1140px] mx-auto flex gap-2 py-3.5 px-6 overflow-x-auto justify-center">
           <a
             href="#piano"
@@ -86,7 +86,7 @@ export default function ClassesPage() {
           <ScrollReveal direction="right" delay={0.1} className="relative z-0">
             <div className="relative z-10 rounded-[4px] overflow-hidden shadow-md">
               <Image
-                src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=800&q=80"
+                src="/images/piano.jpeg"
                 alt="Piano class at Alby.sm"
                 width={600}
                 height={400}
@@ -165,9 +165,9 @@ export default function ClassesPage() {
 
             <Link
               href="/classes/piano"
-              className="bg-[#E8A33D] text-[#211126] font-semibold text-[15px] px-7 py-3.5 rounded-[2px] transition-all hover:bg-white hover:-translate-y-0.5 inline-block shadow-md"
+              className="bg-[#E8A33D] text-[#211126] font-semibold text-[15px] px-8 py-3.5 rounded-full transition-all duration-300 hover:bg-white hover:shadow-[0_8px_25px_rgba(232,163,61,0.45)] hover:-translate-y-0.5 inline-block shadow-md active:scale-95"
             >
-              Enroll in Piano Class
+              Book Your Slots
             </Link>
           </ScrollReveal>
         </div>
@@ -248,9 +248,9 @@ export default function ClassesPage() {
 
             <Link
               href="/classes/guitar"
-              className="bg-[#E8A33D] text-[#211126] font-semibold text-[15px] px-7 py-3.5 rounded-[2px] transition-all hover:bg-white hover:-translate-y-0.5 inline-block shadow-md"
+              className="bg-[#E8A33D] text-[#211126] font-semibold text-[15px] px-8 py-3.5 rounded-full transition-all duration-300 hover:bg-white hover:shadow-[0_8px_25px_rgba(232,163,61,0.45)] hover:-translate-y-0.5 inline-block shadow-md active:scale-95"
             >
-              Enroll in Guitar Class
+              Book Your Slots
             </Link>
           </ScrollReveal>
 
@@ -261,7 +261,7 @@ export default function ClassesPage() {
           >
             <div className="relative z-10 rounded-[4px] overflow-hidden shadow-md">
               <Image
-                src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=800&q=80"
+                src="/images/guitar.jpeg"
                 alt="Guitar class at Alby.sm"
                 width={600}
                 height={400}
@@ -285,7 +285,7 @@ export default function ClassesPage() {
           <ScrollReveal direction="right" delay={0.1} className="relative z-0">
             <div className="relative z-10 rounded-[4px] overflow-hidden shadow-md">
               <Image
-                src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80"
+                src="/images/keyboard.jpeg"
                 alt="Keyboard class at Alby.sm"
                 width={600}
                 height={400}
@@ -360,9 +360,9 @@ export default function ClassesPage() {
 
             <Link
               href="/classes/keyboard"
-              className="bg-[#E8A33D] text-[#211126] font-semibold text-[15px] px-7 py-3.5 rounded-[2px] transition-all hover:bg-white hover:-translate-y-0.5 inline-block shadow-md"
+              className="bg-[#E8A33D] text-[#211126] font-semibold text-[15px] px-8 py-3.5 rounded-full transition-all duration-300 hover:bg-white hover:shadow-[0_8px_25px_rgba(232,163,61,0.45)] hover:-translate-y-0.5 inline-block shadow-md active:scale-95"
             >
-              Enroll in Keyboard Class
+              Book Your Slots
             </Link>
           </ScrollReveal>
         </div>
@@ -379,14 +379,14 @@ export default function ClassesPage() {
             Not sure which instrument is right?
           </h2>
           <p className="mt-3.5 mb-6.5 max-w-[460px] mx-auto text-[#d7e4e2] text-base">
-            Book a free trial across any class and decide after you&apos;ve
-            tried it.
+            Book your slot across any class and decide after you&apos;ve tried
+            it.
           </p>
           <Link
             href="/contact"
-            className="bg-[#E8A33D] text-[#211126] font-semibold text-[15px] px-7 py-3.5 rounded-[2px] transition-all hover:bg-white hover:-translate-y-0.5 inline-block shadow-md"
+            className="bg-[#E8A33D] text-[#211126] font-semibold text-[15px] px-8 py-3.5 rounded-full transition-all duration-300 hover:bg-white hover:shadow-[0_8px_25px_rgba(232,163,61,0.45)] hover:-translate-y-0.5 inline-block shadow-md active:scale-95"
           >
-            Join Now
+            Book Your Slots
           </Link>
         </ScrollReveal>
       </section>

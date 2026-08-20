@@ -626,7 +626,7 @@ export default function ContactPage() {
                     </div>
 
                     <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#F8F3E7] mb-2">
-                      Trial Request Received!
+                      Your Request Received!
                     </h3>
 
                     <p className="text-sm text-[#d7e4e2] max-w-md leading-relaxed mb-6">
@@ -634,7 +634,7 @@ export default function ContactPage() {
                       <strong className="text-[#E8A33D]">
                         {submittedReceipt.name}
                       </strong>
-                      ! Your trial registration for{" "}
+                      ! Your registration for{" "}
                       <span className="px-2 py-0.5 rounded bg-white/10 text-white font-semibold">
                         {submittedReceipt.instrument}
                       </span>{" "}
@@ -650,7 +650,7 @@ export default function ContactPage() {
                       onClick={() => setSubmitSuccess(false)}
                       className="bg-[#E8A33D] text-[#211126] font-semibold text-sm px-6 py-3 rounded-[3px] transition-all hover:bg-white cursor-pointer shadow-md"
                     >
-                      Book Another Trial Session
+                      Send Another Enquiry
                     </button>
                   </motion.div>
                 ) : (
@@ -944,7 +944,7 @@ export default function ContactPage() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="bg-[#E8A33D] text-[#211126] border-none p-3.5 font-semibold text-[15.5px] rounded-[3px] cursor-pointer transition-all hover:bg-white hover:scale-[1.01] mt-2 flex items-center justify-center gap-2 shadow-lg disabled:opacity-75 disabled:cursor-not-allowed min-h-[48px]"
+                      className="bg-[#E8A33D] text-[#211126] border-none p-4 font-bold text-[15.5px] rounded-full cursor-pointer transition-all duration-300 hover:bg-white hover:shadow-[0_8px_25px_rgba(232,163,61,0.45)] hover:-translate-y-0.5 mt-2 flex items-center justify-center gap-2 shadow-lg disabled:opacity-75 disabled:cursor-not-allowed min-h-[48px] active:scale-[0.98]"
                     >
                       {isSubmitting ? (
                         <>
@@ -972,7 +972,7 @@ export default function ContactPage() {
                           <span>Submitting Booking Request...</span>
                         </>
                       ) : (
-                        <span>Join Now &rarr;</span>
+                        <span>Book Your Slots &rarr;</span>
                       )}
                     </button>
                   </motion.form>

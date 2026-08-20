@@ -534,7 +534,7 @@ export default function HomePage() {
 
           <Link
             href="/contact"
-            className="bg-[#E8A33D] text-[#211126] font-semibold text-base px-9 py-4 rounded-[3px] transition-all hover:bg-white hover:scale-105 inline-flex items-center gap-2.5 shadow-[0_10px_25px_rgba(0,0,0,0.3)]"
+            className="bg-[#E8A33D] text-[#211126] font-semibold text-base px-9 py-4 rounded-full transition-all duration-300 hover:bg-white hover:shadow-[0_8px_30px_rgba(232,163,61,0.45)] hover:-translate-y-0.5 inline-flex items-center gap-2.5 shadow-lg active:scale-95"
           >
             Book Your Slots &rarr;
           </Link>

@@ -7,7 +7,7 @@ This document is the master specification and operational guide for AI coding as
 ## 1. Project Overview & Mission
 
 - **Client**: Alby School of Music (Founder: Master Alby)
-- **Location**: 123 Harmony Lane, College Road, Coimbatore, Tamil Nadu 641030, India
+- **Location**:Coimbatore, Tamil Nadu 641030, India
 - **Core Offerings**: Structured, ear-first music lessons for **Piano**, **Guitar**, and **Electronic Keyboard** for all ages (6+ to adults) and skill levels (Beginner to Advanced / Trinity College London grade exam prep).
 - **Core Goal**: A blazing-fast, mobile-first, animated marketing website that achieves top search rankings in Google, provides frictionless trial enrollment, and is highly optimized for AI answer engines (ChatGPT, Gemini, Perplexity, Claude) through structured JSON-LD and clean factual citation formatting.
 - **Design Theme**: _"Golden Hour Recital"_ — deep plum/ink backgrounds, warm ivory contrasts, luminous amber accents, subtle teal sections, and the signature piano-key divider motif.
@@ -162,7 +162,7 @@ All business data, addresses, course syllabi, testimonials, and FAQs **must rema
 1. `ACADEMY_INFO`:
    - `name`: `"Alby School of Music"`
    - `legalName`: `"Alby School of Music Coimbatore"`
-   - `formattedAddress`: `"123 Harmony Lane, College Road, Coimbatore, Tamil Nadu 641030, India"`
+   - `formattedAddress`: `"Coimbatore, Tamil Nadu 641030, India"`
    - `phone`: `"+91 90435 61694 "`
    - `email`: `"albertebini455@gmail.com"`
    - `whatsappUrl`: Direct WhatsApp API link with prefilled enquiry text.

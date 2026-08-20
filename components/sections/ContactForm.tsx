@@ -37,7 +37,9 @@ export const ContactForm: React.FC = () => {
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "submitting" | "success" | "error"
+  >("idle");
   const [submittedData, setSubmittedData] = useState<{
     name: string;
     fullPhone: string;
@@ -152,7 +154,10 @@ export const ContactForm: React.FC = () => {
       .slice(0, currentCountry.maxLength);
     setFormData((prev) => ({ ...prev, phone: digitsOnly }));
     if (touched.phone) {
-      setErrors((prev) => ({ ...prev, phone: validateField("phone", digitsOnly) }));
+      setErrors((prev) => ({
+        ...prev,
+        phone: validateField("phone", digitsOnly),
+      }));
     }
   };
 
@@ -168,15 +173,23 @@ export const ContactForm: React.FC = () => {
     const val = e.target.value;
     setFormData((prev) => ({ ...prev, instrument: val }));
     if (touched.instrument) {
-      setErrors((prev) => ({ ...prev, instrument: validateField("instrument", val) }));
+      setErrors((prev) => ({
+        ...prev,
+        instrument: validateField("instrument", val),
+      }));
     }
   };
 
-  const handlePreferredTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePreferredTimeChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const filtered = e.target.value.replace(/[^a-zA-Z0-9\s\-.,]/g, "");
     setFormData((prev) => ({ ...prev, preferredTime: filtered }));
     if (touched.preferredTime) {
-      setErrors((prev) => ({ ...prev, preferredTime: validateField("preferredTime", filtered) }));
+      setErrors((prev) => ({
+        ...prev,
+        preferredTime: validateField("preferredTime", filtered),
+      }));
     }
   };
 
@@ -184,7 +197,10 @@ export const ContactForm: React.FC = () => {
     const filtered = e.target.value.replace(/[^a-zA-Z0-9\s\-.,\n\r]/g, "");
     setFormData((prev) => ({ ...prev, message: filtered }));
     if (touched.message) {
-      setErrors((prev) => ({ ...prev, message: validateField("message", filtered) }));
+      setErrors((prev) => ({
+        ...prev,
+        message: validateField("message", filtered),
+      }));
     }
   };
 
@@ -262,9 +278,13 @@ export const ContactForm: React.FC = () => {
             Trial Booking Received!
           </h4>
           <p className="text-sm text-[#F8F3E7]/90 leading-relaxed">
-            Thank you, <strong className="text-[#E8A33D]">{submittedData.name}</strong>!
-            Your trial request for <span className="font-semibold text-white">{submittedData.instrument}</span> has been saved.
-            Our admissions coordinator will call you shortly at{" "}
+            Thank you,{" "}
+            <strong className="text-[#E8A33D]">{submittedData.name}</strong>!
+            Your trial request for{" "}
+            <span className="font-semibold text-white">
+              {submittedData.instrument}
+            </span>{" "}
+            has been saved. Our admissions coordinator will call you shortly at{" "}
             <span className="font-semibold text-[#E8A33D]">
               {submittedData.fullPhone}
             </span>{" "}
@@ -314,7 +334,9 @@ export const ContactForm: React.FC = () => {
               onBlur={() => handleBlur("name")}
               placeholder="e.g. Anand Kumar"
               className={`w-full px-4 py-3 rounded-xl bg-[#211126] border text-[#F8F3E7] placeholder-[#F8F3E7]/40 focus:outline-none focus:ring-2 focus:ring-[#E8A33D] transition-colors min-h-[44px] ${
-                touched.name && errors.name ? "border-rose-400" : "border-[#F8F3E7]/15"
+                touched.name && errors.name
+                  ? "border-rose-400"
+                  : "border-[#F8F3E7]/15"
               }`}
             />
             {touched.name && errors.name && (
@@ -354,7 +376,9 @@ export const ContactForm: React.FC = () => {
                   maxLength={currentCountry.maxLength}
                   placeholder={currentCountry.placeholder}
                   className={`flex-1 px-4 py-3 rounded-xl bg-[#211126] border text-[#F8F3E7] placeholder-[#F8F3E7]/40 focus:outline-none focus:ring-2 focus:ring-[#E8A33D] transition-colors min-h-[44px] ${
-                    touched.phone && errors.phone ? "border-rose-400" : "border-[#F8F3E7]/15"
+                    touched.phone && errors.phone
+                      ? "border-rose-400"
+                      : "border-[#F8F3E7]/15"
                   }`}
                 />
               </div>
@@ -379,7 +403,9 @@ export const ContactForm: React.FC = () => {
                 onBlur={() => handleBlur("email")}
                 placeholder="e.g. anand@example.com"
                 className={`w-full px-4 py-3 rounded-xl bg-[#211126] border text-[#F8F3E7] placeholder-[#F8F3E7]/40 focus:outline-none focus:ring-2 focus:ring-[#E8A33D] transition-colors min-h-[44px] ${
-                  touched.email && errors.email ? "border-rose-400" : "border-[#F8F3E7]/15"
+                  touched.email && errors.email
+                    ? "border-rose-400"
+                    : "border-[#F8F3E7]/15"
                 }`}
               />
               {touched.email && errors.email && (
@@ -433,7 +459,9 @@ export const ContactForm: React.FC = () => {
                 }`}
               />
               {touched.preferredTime && errors.preferredTime && (
-                <p className="text-xs text-rose-300 mt-1">{errors.preferredTime}</p>
+                <p className="text-xs text-rose-300 mt-1">
+                  {errors.preferredTime}
+                </p>
               )}
             </div>
           </div>
@@ -455,7 +483,9 @@ export const ContactForm: React.FC = () => {
               onBlur={() => handleBlur("message")}
               placeholder="Tell us about your learning goals..."
               className={`w-full px-4 py-3 rounded-xl bg-[#211126] border text-[#F8F3E7] placeholder-[#F8F3E7]/40 focus:outline-none focus:ring-2 focus:ring-[#E8A33D] transition-colors min-h-[44px] ${
-                touched.message && errors.message ? "border-rose-400" : "border-[#F8F3E7]/15"
+                touched.message && errors.message
+                  ? "border-rose-400"
+                  : "border-[#F8F3E7]/15"
               }`}
             />
             {touched.message && errors.message && (
@@ -467,7 +497,7 @@ export const ContactForm: React.FC = () => {
           <button
             type="submit"
             disabled={status === "submitting"}
-            className="w-full flex items-center justify-center gap-2 py-4 px-6 rounded-xl bg-[#E8A33D] text-[#211126] font-bold text-base hover:bg-[#f0b04c] active:scale-[0.98] transition-all min-h-[48px] shadow-lg disabled:opacity-75 disabled:cursor-not-allowed cursor-pointer"
+            className="w-full flex items-center justify-center gap-2 py-4 px-6 rounded-full bg-[#E8A33D] text-[#211126] font-bold text-base hover:bg-white hover:shadow-[0_8px_25px_rgba(232,163,61,0.45)] hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 min-h-[48px] shadow-lg disabled:opacity-75 disabled:cursor-not-allowed cursor-pointer"
           >
             {status === "submitting" ? (
               <div className="flex items-center gap-2">
@@ -496,7 +526,7 @@ export const ContactForm: React.FC = () => {
             ) : (
               <>
                 <Send className="w-5 h-5" />
-                <span>Join Now</span>
+                <span>Book Your Slots</span>
               </>
             )}
           </button>

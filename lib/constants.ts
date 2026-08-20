@@ -6,7 +6,7 @@ export const ACADEMY_INFO = {
   description:
     "Alby School of Music in Coimbatore, Tamil Nadu offers structured, ear-first music education for Piano, Guitar, and Keyboard across all age groups (ages 6+) and skill levels from beginner to advanced.",
   address: {
-    street: "123 Harmony Lane, College Road",
+    street: "Coimbatore",
     city: "Coimbatore",
     state: "Tamil Nadu",
     postalCode: "641030",
@@ -18,7 +18,7 @@ export const ACADEMY_INFO = {
   whatsappUrl:
     "https://wa.me/9043561694?text=Hi%20Alby.sm%20Music%20Academy%2C%20I%20would%20like%20to%20enquire%20about%20music%20classes.",
   email: "albertebini455@gmail.com",
-  openingHours: "Mon-Fri: 3AM - 10PM, Sun: 4AM - 6AM and 1PM - 8PM",
+  openingHours: "Mon-Sat: 3AM - 10PM, Sun: 4AM - 6AM and 1PM - 8PM",
   openingHoursSpecification: [
     {
       dayOfWeek: [
@@ -92,7 +92,7 @@ export const CLASSES_DATA: Record<string, ClassData> = {
       "Repertoire from Classical, Pop & Indian Film scores",
     ],
     instructorName: "Master Alby & Senior Faculty",
-    heroImage: "/images/alby-piano-playing.jpg",
+    heroImage: "/images/piano.jpeg",
     badge: "Most Popular",
   },
   guitar: {
@@ -119,8 +119,7 @@ export const CLASSES_DATA: Record<string, ClassData> = {
       "Tablature reading & sheet music fundamentals",
     ],
     instructorName: "Lead Instructor Sharmin",
-    heroImage:
-      "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=800&q=80",
+    heroImage: "/images/guitar.jpeg",
     badge: "High Demand",
   },
   keyboard: {
@@ -147,7 +146,7 @@ export const CLASSES_DATA: Record<string, ClassData> = {
       "Performance piece arrangement & stage presence",
     ],
     instructorName: "Faculty S. Priya",
-    heroImage: "/images/alby-keyboard-stage.jpg",
+    heroImage: "/images/keyboard.jpeg",
     badge: "Versatile & Fun",
   },
 };
@@ -171,7 +170,8 @@ export const TESTIMONIALS = [
     author: "S. Meenakshi",
     role: "Parent of Piano Student (Age 9)",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80",
+    image:
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80",
   },
   {
     id: 2,
@@ -180,7 +180,8 @@ export const TESTIMONIALS = [
     author: "Arun Kumar",
     role: "Adult Guitar Student",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
+    image:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
   },
   {
     id: 3,
@@ -189,7 +190,8 @@ export const TESTIMONIALS = [
     author: "K. Nithya",
     role: "Keyboard Student (Age 14)",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+    image:
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
   },
   {
     id: 4,
@@ -198,7 +200,8 @@ export const TESTIMONIALS = [
     author: "R. Rajeshwari",
     role: "Parent of Music Academy Students",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80",
+    image:
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80",
   },
 ];
 
@@ -211,7 +214,7 @@ export const FAQS = [
   {
     question: "Where is Alby School of Music located in Coimbatore?",
     answer:
-      "Alby School of Music is located at 123 Harmony Lane, College Road, Coimbatore, Tamil Nadu 641030. It is easily accessible from all major parts of Coimbatore city.",
+      "Alby School of Music is located at Coimbatore, Tamil Nadu 641030. It is easily accessible from all major parts of Coimbatore city.",
   },
   {
     question: "What makes the 'ear-first' teaching methodology different?",
