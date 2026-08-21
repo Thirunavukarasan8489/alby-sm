@@ -211,23 +211,23 @@ export default function AboutPage() {
         </ScrollReveal>
 
         <div className="max-w-[760px] mx-auto relative pl-[32px] border-l-2 border-[#17514E]/25 space-y-10">
-          <ScrollReveal direction="up" delay={0.1} className="relative">
+          {/* <ScrollReveal direction="up" delay={0.1} className="relative">
             <div className="absolute -left-[39px] top-1 w-[13px] h-[13px] rounded-full bg-[#17514E] border-[3px] border-[#F8F3E7] shadow-[0_0_0_2px_#17514E]" />
             <div className="font-serif text-[24px] text-[#17514E]">2007</div>
             <p className="text-[#5c5147] mt-1.5 leading-[1.6] text-[15px]">
               Alby.sm opens with a single piano room and 12 students in
               Coimbatore.
             </p>
-          </ScrollReveal>
+          </ScrollReveal> */}
 
-          <ScrollReveal direction="up" delay={0.15} className="relative">
+          {/* <ScrollReveal direction="up" delay={0.15} className="relative">
             <div className="absolute -left-[39px] top-1 w-[13px] h-[13px] rounded-full bg-[#17514E] border-[3px] border-[#F8F3E7] shadow-[0_0_0_2px_#17514E]" />
             <div className="font-serif text-[24px] text-[#17514E]">2013</div>
             <p className="text-[#5c5147] mt-1.5 leading-[1.6] text-[15px]">
               Guitar classes introduced, followed by our first public student
               recital.
             </p>
-          </ScrollReveal>
+          </ScrollReveal> */}
 
           <ScrollReveal direction="up" delay={0.2} className="relative">
             <div className="absolute -left-[39px] top-1 w-[13px] h-[13px] rounded-full bg-[#17514E] border-[3px] border-[#F8F3E7] shadow-[0_0_0_2px_#17514E]" />
@@ -282,7 +282,7 @@ export default function AboutPage() {
                   Albert Ebinraj
                 </h3>
                 <span className="block text-[#E8A33D] text-[13px] my-1.5 font-semibold">
-                  Piano · 12 yrs experience
+                  Piano · 10 yrs experience
                 </span>
                 <p className="text-[14px] text-[#cfc3b3] leading-[1.6]">
                   Trained in classical piano performance, specialising in
@@ -306,7 +306,7 @@ export default function AboutPage() {
                   Albert Ebinraj
                 </h3>
                 <span className="block text-[#E8A33D] text-[13px] my-1.5 font-semibold">
-                  Keyboard · 7 yrs experience
+                  Keyboard · 10 yrs experience
                 </span>
                 <p className="text-[14px] text-[#cfc3b3] leading-[1.6]">
                   Performance keyboardist teaching modern arrangement and
